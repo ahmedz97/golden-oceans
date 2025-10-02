@@ -19,6 +19,11 @@
     width: 200px;
     height: 90px;
   }
+  @media screen and (max-width:586px) {
+    .navbar-brand{
+      width: 150px;
+    }
+  }
 }
 
 .whiteNav {
@@ -107,7 +112,7 @@
 
     .dropdown-menu {
       top: 0;
-      left: 50%; 
+      left: 50%;
       margin-top: 0;
       margin-left: 0.1rem;
       display: none;

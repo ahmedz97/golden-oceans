@@ -1,78 +1,17 @@
 <div class="fixed-top bg-transparent">
-  <!-- top nav -->
-  <div class="topNav py-2 d-none d-md-block" [class.scroll]="scrolled">
-    <div class="container-fluid">
-      <div class="flexBetween">
-        <div class="d-flex align-items-center">
-          <app-social></app-social>
-          <a class="mx-2" href="tel:{{ phoneNunmber }}">
-            <i class="fa fa-phone-volume me-2"></i>
-            {{ phoneNunmber }}
-          </a>
-          <a class="mx-2" href="mailto:{{ phoneNunmber }}">
-            <i class="fa fa-envelope me-2"></i>
-            {{ phoneNunmber }}
-          </a>
-        </div>
-
-        <div class="d-flex align-items-center">
-          <div>
-            <i
-              routerLink="/signup"
-              routerLinkActive="textSecondColor"
-              class="fa fa-circle-user textMainColor me-2 fw-bold cPointer"
-              title="Sign up now"
-            ></i>
-
-            <i
-              routerLink="/cart"
-              routerLinkActive="textSecondColor"
-              class="fa fa-cart-plus textMainColor me-2 fw-bold cPointer"
-              title="Tours cart"
-            ></i>
-
-            <i
-              routerLink="/profile"
-              routerLinkActive="textSecondColor"
-              class="fa fa-address-book textMainColor me-2 fw-bold cPointer"
-              title="My profile"
-            ></i>
-          </div>
-
-          <!-- select language -->
-          <select
-            name="language"
-            id="language"
-            (change)="onLangChange($event)"
-            class="p-1 py-2 rounded-2 text-capitalize border-0 text-white cPointer bg-transparent"
-          >
-            <!-- <option readonly disabled>Select Language</option> -->
-            <option class="text-dark" selected value="en">english</option>
-            <option class="text-dark" value="it">italy</option>
-            <option class="text-dark" value="fr">france</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Navbar -->
-  <nav
-    class="navbar navbar-expand-lg"
-    [class.whiteNav]="scrolled"
-    [class.sidebar-open]="isSidebarOpen"
-  >
+  <nav class="navbar navbar-expand-lg whiteNav">
     <div class="container-fluid">
       <!-- Logo Section -->
       <div routerLink="/" class="navbar-brand cPointer">
-        @if (scrolled) {
-
         <img
           src="../../../assets/image/heaven sky logos/Artboard 2.png"
           [alt]="siteTitle"
           [title]="siteTitle"
           class="me-2 w-100 h-100"
         />
+        <!-- @if (scrolled) {
+
         }@else {
 
         <img
@@ -81,7 +20,7 @@
           [title]="siteTitle"
           class="me-2 w-100 h-100"
         />
-        }
+        } -->
       </div>
 
       <!-- Navigation Links (Desktop) -->
@@ -183,6 +122,44 @@
 
       <!-- Right Section -->
       <div class="d-flex align-items-center g-1">
+        <div class="d-flex align-items-center">
+          <div class="d-none d-lg-flex">
+            <i
+              routerLink="/signup"
+              routerLinkActive="textSecondColor"
+              class="fa fa-circle-user textMainColor me-2 fw-bold cPointer"
+              title="Sign up now"
+            ></i>
+
+            <i
+              routerLink="/cart"
+              routerLinkActive="textSecondColor"
+              class="fa fa-cart-plus textMainColor me-2 fw-bold cPointer"
+              title="Tours cart"
+            ></i>
+
+            <i
+              routerLink="/profile"
+              routerLinkActive="textSecondColor"
+              class="fa fa-address-book textMainColor me-2 fw-bold cPointer"
+              title="My profile"
+            ></i>
+          </div>
+
+          <!-- select language -->
+          <select
+            name="language"
+            id="language"
+            (change)="onLangChange($event)"
+            class="p-1 py-2 rounded-2 text-capitalize border-0 text-dark cPointer bg-transparent"
+          >
+            <!-- <option readonly disabled>Select Language</option> -->
+            <option class="text-dark" selected value="en">english</option>
+            <option class="text-dark" value="it">italy</option>
+            <option class="text-dark" value="fr">france</option>
+          </select>
+        </div>
+
         <!-- make trip Button -->
         <button
           routerLink="/makeTrip"

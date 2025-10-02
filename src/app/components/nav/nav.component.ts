@@ -10,18 +10,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { DataService } from '../../core/services/data.service';
-import { SocialComponent } from '../social/social.component';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterLinkActive,
-    TranslateModule,
-    SocialComponent,
-  ],
+  imports: [CommonModule, RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })
@@ -66,12 +59,6 @@ export class NavComponent implements OnInit {
     this.getSettings();
     this.getCategories();
     this.getEgyptCategory();
-    // بعد ما تجيب الـdestinations والـcategories
-    // this.categoriesByDest = this.allCategories.reduce((acc, c) => {
-    //   const key = c.destinationId; // أو c.destinationId
-    //   (acc[key] ??= []).push(c);
-    //   return acc;
-    // }, {} as Record<string, any[]>);
   }
 
   isEgypt(dest: any) {

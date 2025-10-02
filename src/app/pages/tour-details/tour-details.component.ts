@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { DataService } from '../../core/services/data.service';
@@ -34,7 +34,6 @@ import { MatInputModule } from '@angular/material/input';
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterLink,
   ],
   templateUrl: './tour-details.component.html',
   styleUrl: './tour-details.component.scss',
@@ -45,8 +44,27 @@ export class TourDetailsComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _Router: Router,
     private toaster: ToastrService,
-    private _BookingService: BookingService
+    private _BookingService: BookingService,
+    @Inject(DOCUMENT) private document: Document //  controls nav scroll
   ) {}
+
+  // start controls nav scroll
+  private offsetTop = 330;
+
+  scrollTo(id: string) {
+    const el = this.document.getElementById(id);
+    if (!el) return;
+
+    const y =
+      el.getBoundingClientRect().top + window.pageYOffset - this.offsetTop;
+
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth',
+    });
+  }
+
+  // end controls nav scroll
 
   panelOpenState = false;
 
@@ -235,7 +253,7 @@ export class TourDetailsComponent implements OnInit {
         error: (err) => {
           this.toaster.error(err.error.message || 'Error submitting review');
           this.isLoading = false;
-        }
+        },
       });
     }
   }
@@ -312,21 +330,22 @@ export class TourDetailsComponent implements OnInit {
         error: (err) => {
           console.error('Error fetching reviews:', err);
           this.tourReviews = [];
-        }
+        },
       });
     }
   }
 
   getReviewQualityText(): string {
-    const reviewCount = this.tourReviews.length || this.tourData?.reviews_number || 0;
-    
+    const reviewCount =
+      this.tourReviews.length || this.tourData?.reviews_number || 0;
+
     if (reviewCount === 0) {
       return 'New Tour';
     }
-    
+
     // Calculate average rating from actual reviews if available
     const averageRating = this.getAverageRating();
-    
+
     if (averageRating >= 4.5) {
       return 'Excellent Quality';
     } else if (averageRating >= 4.0) {
@@ -346,8 +365,11 @@ export class TourDetailsComponent implements OnInit {
     if (this.tourReviews.length === 0) {
       return this.tourData?.rate || 0;
     }
-    
-    const totalRating = this.tourReviews.reduce((sum, review) => sum + (review.rate || 0), 0);
+
+    const totalRating = this.tourReviews.reduce(
+      (sum, review) => sum + (review.rate || 0),
+      0
+    );
     return totalRating / this.tourReviews.length;
   }
 

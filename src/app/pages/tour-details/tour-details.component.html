@@ -1,121 +1,141 @@
-<section
-  style="
-    background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.7)
-      ),
-      url('../../../assets/image/banner\ bg.jpg') center/cover no-repeat;
-  "
-  class="pageBanner mb-5"
->
-  <div
-    class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
-  >
-    <h2 class="fw-bold">tour details</h2>
-    <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
-          >
-        </li>
-        <li class="breadcrumb-item active text-white" aria-current="page">
-          tour details
-        </li>
-      </ol>
-    </nav>
-  </div>
-</section>
-
 <section class="my-5">
   <div class="container">
+    <!-- sections nav -->
+    <div
+      #controlsBar
+      class="p-3 border rounded-3 my-4 d-flex flex-wrap gap-2 controls"
+    >
+      <button class="text-capitalize p-2" (click)="scrollTo('gallery')">
+        gallery
+      </button>
+      <button class="text-capitalize p-2" (click)="scrollTo('description')">
+        description
+      </button>
+      <button class="text-capitalize p-2" (click)="scrollTo('inclusive')">
+        inclusive
+      </button>
+      <button class="text-capitalize p-2" (click)="scrollTo('itinerary')">
+        itinerary
+      </button>
+      <button class="text-capitalize p-2" (click)="scrollTo('map')">map</button>
+      <button class="text-capitalize p-2" (click)="scrollTo('faq')">faq</button>
+      <button class="text-capitalize p-2" (click)="scrollTo('reviews')">
+        reviews
+      </button>
+      <button class="text-capitalize p-2" (click)="scrollTo('book-now')">
+        book now
+      </button>
+    </div>
+
     <div class="row g-3">
       <div class="col-lg-8">
         <div>
-          <owl-carousel-o [options]="galleryOptions">
-            <ng-container *ngFor="let slide of tourGallery">
-              <ng-template carouselSlide>
-                <figure class="rounded-3 overflow-hidden imgHover">
-                  <img
-                    loading="lazy"
-                    height="400px"
-                    class="w-100"
-                    [src]="slide"
-                    [alt]="tourData?.title"
-                    [title]="tourData?.title"
-                  />
-                </figure>
-              </ng-template>
-            </ng-container>
-          </owl-carousel-o>
+          <!-- gallery -->
+          <div class="anchor-section" id="gallery">
+            <owl-carousel-o [options]="galleryOptions">
+              <ng-container *ngFor="let slide of tourGallery">
+                <ng-template carouselSlide>
+                  <figure class="rounded-3 overflow-hidden imgHover">
+                    <img
+                      loading="lazy"
+                      height="400px"
+                      class="w-100"
+                      [src]="slide"
+                      [alt]="tourData?.title"
+                      [title]="tourData?.title"
+                    />
+                  </figure>
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+            <!-- tour title  , rate -->
+            <div class="flexBetween flex-wrap textSecondColor mb-4">
+              <div>
+                <h2 class="fw-bold text-capitalize mb-2">
+                  {{ tourData?.title }}
+                </h2>
+                <span>
+                  <i class="fa fa-location-dot me-2 textMainColor"></i>
+                  <span>{{ tourData?.destinationsTitle }}</span>
+                </span>
+              </div>
+              <div>
+                <span class="specialBorder text-warning px-2 py-1">
+                  @for (star of [0,1,2,3,4]; track $index) {
 
-          <div class="flexBetween flex-wrap textSecondColor mb-4">
-            <div>
-              <h4 class="h3 text-capitalize mb-2">{{ tourData?.title }}</h4>
-              <span>
-                <i class="fa fa-location-dot me-2 textMainColor"></i>
-                <span>{{ tourData?.destinationsTitle }}</span>
-              </span>
-            </div>
-            <div>
-              <span class="bgSecondColor specialBorder text-white px-2 py-1">
-                <i class="fa fa-star me-2"></i>
-                <span class="">{{ getAverageRating() | number:'1.1-1' }}</span>
-              </span>
-              <span class="mx-2">({{ tourReviews.length || tourData?.reviews_number || 0 }} reviews)</span>
-            </div>
-          </div>
+                  <i
+                    [ngClass]="
+                      star <= getAverageRating()
+                        ? 'fa fa-star'
+                        : 'fa-regular fa-star'
+                    "
+                    class="fa fa-star me-1"
+                  ></i>
+                  }
 
-          <div class="row g-3 py-3 border-top border-bottom mb-4">
-            <div class="col-lg-3 col-md-6">
-              <div class="d-flex text-capitalize">
-                <div class="iconBox specialBorder flex-shrink-0">
-                  <i class="fa fa-clock-four text-white"></i>
-                </div>
-                <div>
-                  <h5 class="textSecondColor h6 fw-bold">duration</h5>
-                  <span>{{ tourData?.duration }}</span>
-                </div>
+                  <span class="">{{
+                    getAverageRating() | number : "1.1-1"
+                  }}</span>
+                </span>
+                <span class="mx-2"
+                  >({{
+                    tourReviews.length || tourData?.reviews_number || 0
+                  }}
+                  reviews)</span
+                >
               </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="d-flex text-capitalize">
-                <div class="iconBox specialBorder flex-shrink-0">
-                  <i class="fa fa-calendar-days text-white"></i>
-                </div>
-                <div>
-                  <h5 class="textSecondColor h6 fw-bold">time</h5>
-                  <span>{{ tourData?.pickup_time }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="d-flex text-capitalize">
-                <div class="iconBox specialBorder flex-shrink-0">
-                  <i class="fa fa-user-group text-white"></i>
-                </div>
-                <div>
-                  <h5 class="textSecondColor h6 fw-bold">avability</h5>
-                  <span>{{ tourData?.run }}</span>
+            <!-- icons -->
+            <div class="row g-3 py-3 border-top border-bottom mb-4">
+              <div class="col-lg-3 col-md-6">
+                <div class="d-flex text-capitalize">
+                  <div class="iconBox specialBorder flex-shrink-0">
+                    <i class="fa fa-clock-four text-white"></i>
+                  </div>
+                  <div>
+                    <h5 class="textSecondColor h6 fw-bold">duration</h5>
+                    <span>{{ tourData?.duration }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="d-flex text-capitalize">
-                <div class="iconBox specialBorder flex-shrink-0">
-                  <i class="fa fa-grid-horizontal text-white"></i>
+              <div class="col-lg-3 col-md-6">
+                <div class="d-flex text-capitalize">
+                  <div class="iconBox specialBorder flex-shrink-0">
+                    <i class="fa fa-calendar-days text-white"></i>
+                  </div>
+                  <div>
+                    <h5 class="textSecondColor h6 fw-bold">time</h5>
+                    <span>{{ tourData?.pickup_time }}</span>
+                  </div>
                 </div>
-                <div>
-                  <h5 class="textSecondColor h6 fw-bold">Tour Type</h5>
-                  <span>{{ tourData?.type }}</span>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="d-flex text-capitalize">
+                  <div class="iconBox specialBorder flex-shrink-0">
+                    <i class="fa fa-user-group text-white"></i>
+                  </div>
+                  <div>
+                    <h5 class="textSecondColor h6 fw-bold">avability</h5>
+                    <span>{{ tourData?.run }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="d-flex text-capitalize">
+                  <div class="iconBox specialBorder flex-shrink-0">
+                    <i class="fa fa-grid-horizontal text-white"></i>
+                  </div>
+                  <div>
+                    <h5 class="textSecondColor h6 fw-bold">Tour Type</h5>
+                    <span>{{ tourData?.type }}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- description & highlights -->
-          <div>
+          <div class="anchor-section" id="description">
             <h5 class="fw-bold textSecondColor text-capitalize">description</h5>
             <p [innerHTML]="tourData?.overview"></p>
 
@@ -127,38 +147,54 @@
             </div>
           </div>
 
-          <!-- included & not included   -->
-          <div class="row g-3 my-4 pb-3 border-bottom">
+          <!-- inclusive=> included & not included   -->
+          <div
+            class="anchor-section"
+            id="inclusive"
+            class="row g-3 my-4 pb-3 border-bottom"
+          >
             <div class="col-md-6">
               <h5
-                class="fw-bold pb-3 border-bottom textSecondColor text-capitalize"
+                class="fw-bold pb-3 border-bottom text-success text-capitalize"
               >
                 included
               </h5>
-              <div class="" *ngFor="let item of tourIncluded">
-                <div class="text-capitalize d-flex">
-                  <i class="fa fa-check me-2 textMainColor"></i>
-                  <span>{{ item }}</span>
+              <div class="p-3 rounded-3 bgPrimaryWhiteColor">
+                <div *ngFor="let item of tourIncluded">
+                  <div class="text-capitalize d-flex mb-3">
+                    <i
+                      class="fa fa-check-circle me-2 text-success mt-1 flex-shrink-0"
+                    ></i>
+                    <span>{{ item }}</span>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <h5
-                class="fw-bold pb-3 border-bottom textSecondColor text-capitalize"
+                class="fw-bold pb-3 border-bottom text-danger text-capitalize"
               >
                 not included
               </h5>
-              <div class="" *ngFor="let item of tourExcluded">
-                <div class="text-capitalize d-flex">
-                  <i class="fa fa-xmark me-2 text-danger"></i>
-                  <span>{{ item }}</span>
+              <div class="p-3 rounded-3 bgPrimaryWhiteColor">
+                <div *ngFor="let item of tourExcluded">
+                  <div class="text-capitalize d-flex mb-3">
+                    <i
+                      class="fa fa-xmark-circle me-2 text-danger mt-1 flex-shrink-0"
+                    ></i>
+                    <span>{{ item }}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- itinerary -->
-          <div class="mb-4 pb-3 border-bottom">
+          <div
+            class="anchor-section"
+            id="itinerary"
+            class="mb-4 pb-3 border-bottom"
+          >
             <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
               itinerary
             </h5>
@@ -195,27 +231,29 @@
           </div>
 
           <!-- location map -->
-          <div class="mb-4 pb-3 border-bottom">
+          <div class="anchor-section" id="map" class="mb-4 pb-3 border-bottom">
             <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
               location map
             </h5>
           </div>
 
           <!-- faqs -->
-          <div class="mb-4 pb-3 border-bottom">
+          <div class="anchor-section" id="faq" class="mb-4 pb-3 border-bottom">
             <h5 class="fw-bold textSecondColor text-capitalize mb-3a">faq's</h5>
 
             <app-faq-content></app-faq-content>
           </div>
 
           <!-- reviews -->
-          <div class="pb-3 border-bottom">
+          <div class="anchor-section" id="reviews" class="pb-3 border-bottom">
             <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
               reviews
             </h5>
 
             <div class="text-center">
-              <p class="rateText text-black fw-bolder">{{ getAverageRating() | number:'1.1-1' }}</p>
+              <p class="rateText text-black fw-bolder">
+                {{ getAverageRating() | number : "1.1-1" }}
+              </p>
               <span>
                 <i
                   *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
@@ -225,10 +263,13 @@
               </span>
 
               <h6 class="fw-bold textSecondColor h4 mt-3">
-                {{ getReviewQualityText() }} {{ tourData?.run }} {{ tourData?.type }}
+                {{ getReviewQualityText() }} {{ tourData?.run }}
+                {{ tourData?.type }}
               </h6>
               <p class="">
-                Base On {{ tourReviews.length || tourData?.reviews_number || 0 }} Verified Reviews
+                Base On
+                {{ tourReviews.length || tourData?.reviews_number || 0 }}
+                Verified Reviews
               </p>
             </div>
 
@@ -238,13 +279,18 @@
                 <i class="fa fa-comments me-2 textSecondColor"></i>
                 <span>Clients Reviews ({{ tourReviews.length }})</span>
               </h5>
-              
+
               <!-- No reviews message -->
               <div *ngIf="tourReviews.length === 0" class="text-center py-4">
-                <i class="fa fa-comment-slash text-muted" style="font-size: 3rem;"></i>
-                <p class="text-muted mt-3">No reviews yet. Be the first to review this tour!</p>
+                <i
+                  class="fa fa-comment-slash text-muted"
+                  style="font-size: 3rem"
+                ></i>
+                <p class="text-muted mt-3">
+                  No reviews yet. Be the first to review this tour!
+                </p>
               </div>
-              
+
               <!-- Reviews list -->
               <div
                 class="row justify-content-between g-3 my-3"
@@ -253,7 +299,9 @@
                 <div class="col-lg-2 col-sm-3 col-4">
                   <figure class="rounded-circle overflow-hidden">
                     <img
-                      [src]="item.user_avatar || '../../../assets/image/blog2.jpg'"
+                      [src]="
+                        item.user_avatar || '../../../assets/image/blog2.jpg'
+                      "
                       class="w-100 h-100 object-fit-cover"
                       [alt]="item.reviewer_name"
                       [title]="item.reviewer_name"
@@ -271,7 +319,7 @@
                           {{ item.reviewer_name }}
                         </h6>
                         <p class="fw-light text-secondary mb-2">
-                          {{ item.created_at | date:'MMMM d, y' }}
+                          {{ item.created_at | date : "MMMM d, y" }}
                         </p>
                       </div>
                       <div class="font-sm">
@@ -370,7 +418,8 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="AsideBar">
+        <!-- book now -->
+        <div class="anchor-section" id="book-now" class="AsideBar">
           <div class="border p-3 rounded-3 mb-4">
             <h4 class="text-capitalize textSecondColor fw-bold mb-3">
               book this tour

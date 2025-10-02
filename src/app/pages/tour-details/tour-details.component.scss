@@ -8,15 +8,15 @@
 
 ::ng-deep .itinerary-info  {
   p.lead.text-justify{
-    font-family: $body-font;
+    font-family: $text-font;
     font-size: 16px !important;
   }
 }
 ::ng-deep .mat-content {
-    flex-direction: row-reverse !important; 
+    flex-direction: row-reverse !important;
 }
 ::ng-deep .mat-expansion-panel.mat-expansion-panel {
-    box-shadow: none !important; 
+    box-shadow: none !important;
     border: 1px solid #eee;
 }
 
@@ -57,13 +57,13 @@
     border: 1px solid $primary-color;
     color: $primary-color;
     transition: all 1s;
-    
+
     &:hover{
         color: #fff;
         border: 1px solid #fff;
         background-color: $primary-color;
     }
-    
+
   }
 }
 
@@ -71,5 +71,17 @@
   display: flex !important;
     justify-content: space-between !important;
     transform: translateY(-580%) !important;
-    
+
+}
+
+/* كل سيكشن نضيف له scroll-margin-top ديناميكي */
+.anchor-section {
+  scroll-margin-top: 500px;
+}
+
+.controls{
+  z-index: 1030;
+  position: sticky;
+  top: 110px;
+  background: $primary-black-color;
 }
