@@ -1,0 +1,164 @@
+<footer class="pt-5 bgSecondColor position-relative z-1">
+  <div class="container">
+    <div class="row g-3 text-white py-5">
+      <div class="col-xl-3 col-md-6">
+        <div class="logoSide">
+          <img
+            src="../../../assets/image/heaven sky logos/Artboard 10.png"
+            width="200px"
+            height="90px"
+            alt="logo name"
+          />
+          <p class="my-4">
+            We are many variations of passages available but the majority have
+            suffer alteration in some form by injected.
+          </p>
+
+          <div class="mb-3 d-flex">
+            <i
+              class="fa fa-headphones-alt me-3 text-white bgMainColor flexCenter"
+            ></i>
+            <a
+              href="tel:{{ phoneNumber }}"
+              class="text-white fw-bold fs-4 text-decoration-none"
+              >{{ phoneNumber }}</a
+            >
+          </div>
+          <div class="mb-3 d-flex">
+            <i
+              class="fa fa-location-dot me-3 text-white bgMainColor flexCenter"
+            ></i>
+            <a href="{{ userLocation }}" target="_blank" class="text-white">{{
+              userAddress
+            }}</a>
+          </div>
+          <div class="mb-3 d-flex">
+            <i
+              class="fa fa-envelopes-bulk me-3 text-white bgMainColor flexCenter"
+            ></i>
+            <a href="mailTo:{{ userEmail }}" class="text-white">{{
+              userEmail
+            }}</a>
+          </div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-6">
+        <div>
+          <div class="footerTitle">
+            <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
+              our company
+            </h4>
+          </div>
+          <ul class="list-unstyled">
+            <li
+              routerLink="/about"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>about us </span>
+            </li>
+            <li
+              routerLink="/contact"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>contact us </span>
+            </li>
+            <li
+              routerLink="/blog"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>our blog </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-6">
+        <div>
+          <div class="footerTitle">
+            <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
+              other services
+            </h4>
+          </div>
+          <ul class="list-unstyled">
+            <li
+              routerLink="/"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>rewards program </span>
+            </li>
+            <li
+              routerLink="/"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>partners </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-6">
+        <div>
+          <div class="footerTitle">
+            <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
+              help center
+            </h4>
+          </div>
+          <ul class="list-unstyled">
+            <li
+              routerLink="/"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>acount </span>
+            </li>
+            <li
+              routerLink="/faq"
+              class="text-capitalize mb-2 text-white transition"
+            >
+              <i class="fa fa-angle-double-right me-2 textMainColor"></i>
+              <span>FAQ's </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div>
+          <div class="footerTitle">
+            <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
+              newsletter
+            </h4>
+          </div>
+          <p class="my-3">
+            Subscribe Our Newsletter To Get Latest Update And News
+          </p>
+          <form>
+            <input
+              type="email"
+              placeholder="Your Email"
+              class="form-control rounded-3 mb-3 p-2"
+            />
+            <button class="mainBtn Btn w-100 rounded-3">
+              subscribe now
+              <i class="fa-regular fa-paper-plane ms-2 rounded-circle"></i>
+            </button>
+            <p class="my-1">
+              <i class="fa fa-lock"></i> Your information is safe with us.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="flexBetween flex-wrap py-3 border-top">
+      <h6 class="text-white text-capitalize">
+        © Copyright 2025
+        <a href="" class="fw-bold textMainColor">perfect soluations 4u</a>
+        All Rights Reserved.
+      </h6>
+      <app-social></app-social>
+    </div>
+  </div>
+</footer>

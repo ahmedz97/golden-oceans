@@ -1,0 +1,49 @@
+<div class="row g-3 mt-4">
+  @for (blog of blogs; track $index) {
+
+  <div class="col-lg-4 col-md-6">
+    <div
+      role="button"
+      [routerLink]="['/blog', blog.slug]"
+      class="sideBar p-3 overflow-hidden"
+    >
+      <figure class="mb-0 position-relative">
+        <img
+          [src]="blog.featured_image"
+          class="w-100"
+          height="250px"
+          [alt]="blog.title"
+          [title]="blog.title"
+        />
+        <!-- August 25, 2025 -->
+        <span
+          class="bg-white textMainColor px-2 py-1 rounded-pill border position-absolute top-0 start-50"
+          >{{ blog.updated_at | date : " MMMM dd yyyy" }}</span
+        >
+      </figure>
+      <figcaption>
+        <div class="py-2 border-bottom flexBetween flex-wrap">
+          <span class="me-3 textSecondColor">
+            <i class="fa-regular fa-user-circle me-1 textMainColor"></i>
+            By Alicia Davis
+          </span>
+          <span class="me-3 textSecondColor">
+            <i class="fa-regular fa-comments me-1 textMainColor"></i>
+            {{ blog.display_order }} Comments
+          </span>
+        </div>
+        <h5
+          [routerLink]="['/blog', blog.slug]"
+          class="textSecondColor text-capitalize fw-bold my-2"
+        >
+          {{ blog.title }}
+        </h5>
+        <button [routerLink]="['/blog', blog.slug]" class="mainBtn Btn">
+          read more <i class="fa fa-arrow-right ms-1 rounded-circle"></i>
+        </button>
+      </figcaption>
+    </div>
+  </div>
+
+  }
+</div>

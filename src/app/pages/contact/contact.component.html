@@ -1,0 +1,193 @@
+<section class="pageBanner mb-5">
+  <div
+    class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
+  >
+    <h2 class="fw-bold">contact us</h2>
+    <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']" class="text-decoration-none text-white"
+            >Home</a
+          >
+        </li>
+        <li class="breadcrumb-item active text-white" aria-current="page">
+          contact us
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="my-5">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-lg-4">
+        <div>
+          <ul
+            class="list-unstyled bg-white sideBar p-3 rounded-3 position-relative"
+          >
+            <li class="d-flex align-items-center mb-4">
+              <i
+                class="fa fa-location-dot bgMainColor text-white fs-4 flexCenter flex-shrink-0 me-3"
+              ></i>
+              <div>
+                <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
+                  Office Address
+                </h6>
+                <p class="mb-1">{{ userAddress }}</p>
+              </div>
+            </li>
+
+            <li class="d-flex align-items-center mb-4">
+              <i
+                class="fa fa-phone-volume bgMainColor text-white fs-4 flexCenter flex-shrink-0 me-3"
+              ></i>
+              <div>
+                <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
+                  call us
+                </h6>
+                <a href="tel:{{ phoneNumber }}" class="mb-1">{{
+                  phoneNumber
+                }}</a>
+              </div>
+            </li>
+
+            <li class="d-flex align-items-center mb-4">
+              <i
+                class="fa fa-envelope bgMainColor text-white fs-4 flexCenter flex-shrink-0 me-3"
+              ></i>
+              <div>
+                <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
+                  email us
+                </h6>
+                <a href="mailTo:{{ userEmail }}" class="mb-1">{{
+                  userEmail
+                }}</a>
+              </div>
+            </li>
+
+            <li class="d-flex align-items-center mb-4">
+              <i
+                class="fa fa-clock-four bgMainColor text-white fs-4 flexCenter flex-shrink-0 me-3"
+              ></i>
+              <div>
+                <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
+                  open time
+                </h6>
+                <p class="mb-1">Mon - Sat (10.00AM - 05.30PM)</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-8 align-self-center">
+        <div class="bg-white rounded-3 p-3 sideBar">
+          <h5 class="text-capitalize textSecondColor fw-bold">get in touch</h5>
+          <p>
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page randomised words which don't look
+            even slightly when looking at its layout.
+          </p>
+
+          <form
+            [formGroup]="contactForm"
+            (ngSubmit)="getContactData()"
+            class="row g-3"
+          >
+            <div class="col-md-6">
+              <div>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control p-2 rounded-3"
+                  placeholder="Your Name"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control p-2 rounded-3"
+                  placeholder="Your Email"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <input
+                  type="tel"
+                  formControlName="phone"
+                  class="form-control p-2 rounded-3"
+                  placeholder="Your Phone"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <input
+                  type="text"
+                  formControlName="subject"
+                  class="form-control p-2 rounded-3"
+                  placeholder="Your Sebject"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div>
+                <select
+                  formControlName="country"
+                  class="form-control p-2 rounded-3"
+                >
+                  <option value="" class="bg-dark" disabled>
+                    Select Your Country
+                  </option>
+                  <option *ngFor="let item of countryList" [value]="item.name">
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12">
+              <div>
+                <textarea
+                  rows="5"
+                  formControlName="message"
+                  class="form-control p-2 rounded-3"
+                  placeholder="Write Your Message"
+                ></textarea>
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="mainBtn Btn">
+                send message
+                <i
+                  class="fa fa-paper-plane fa-rotate-by rounded-circle ms-2"
+                ></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="my-5 pt-5">
+  <div class="container-fluid">
+    <iframe
+      *ngIf="userLocation"
+      [src]="userLocation | safeUrl"
+      class="w-100 rounded-3"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</section>
+
+<app-partner-slider></app-partner-slider>

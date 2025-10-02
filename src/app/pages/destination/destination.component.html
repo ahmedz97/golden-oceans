@@ -1,0 +1,54 @@
+<section class="pageBanner mb-5">
+  <div
+    class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
+  >
+    <h2 class="fw-bold">destinations</h2>
+    <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']" class="text-decoration-none text-white"
+            >Home</a
+          >
+        </li>
+        <li class="breadcrumb-item active text-white" aria-current="page">
+          destinations
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="destinations my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        travel deal
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">
+        Our Most Popular Travel Deals
+      </h2>
+    </div>
+
+    <div class="mt-5">
+      <owl-carousel-o
+        *ngIf="allDestinations.length > 0"
+        [options]="destinationOptions"
+      >
+        @for (des of allDestinations; track $index) {
+        <ng-template carouselSlide>
+          <app-destination-cart [destination]="des"></app-destination-cart>
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
+
+<app-partner-slider></app-partner-slider>

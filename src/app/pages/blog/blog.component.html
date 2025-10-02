@@ -1,0 +1,69 @@
+<section class="pageBanner mb-5">
+  <div
+    class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
+  >
+    <h2 class="fw-bold">blog</h2>
+    <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']" class="text-decoration-none text-white"
+            >Home</a
+          >
+        </li>
+        <li class="breadcrumb-item active text-white" aria-current="page">
+          blog
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="blogs my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        our blog
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">Our Latest Blog & News</h2>
+    </div>
+
+    <!-- This fetches blogs and stores them -->
+    <!-- <app-blog-cart (blogsLoaded)="onBlogsLoaded($event)"></app-blog-cart> -->
+
+    <div *ngIf="totalItems; else noData">
+      <app-blog-cart
+        [blogs]="
+          allBlogs
+            | paginate
+              : {
+                  id: 'blog-pagination',
+                  currentPage: currentPage,
+                  itemsPerPage: itemsPerPage
+                }
+        "
+      >
+      </app-blog-cart>
+
+      <app-pagination
+        [currentPage]="currentPage"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="totalItems"
+        (pageChanged)="onPageChange($event)"
+      >
+      </app-pagination>
+    </div>
+
+    <ng-template #noData>
+      <p class="text-capitalize text-danger fs-2 text-center">
+        no data matched
+      </p>
+    </ng-template>
+  </div>
+</section>

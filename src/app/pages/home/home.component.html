@@ -1,0 +1,538 @@
+<div class="topsec">
+  <owl-carousel-o *ngIf="mainSecSlider.length > 0" [options]="mainSecOptions">
+    <ng-container *ngFor="let data of mainSecSlider">
+      <ng-template carouselSlide>
+        <section
+          [ngStyle]="{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0)), url(' +
+              data.src +
+              ') center no-repeat',
+            'background-size': 'cover'
+          }"
+          class="mainSec pb-5 position-relative z-1"
+        >
+          <div
+            class="container-fluid d-flex align-items-center justify-content-center"
+          >
+            <div class="content mt-5 text-capitalize text-center text-white">
+              <h2 class="fw-bold mb-4">find your next place to visit</h2>
+              <p>
+                discover amazing places at exclusive deals and enjoy your
+                holiday
+              </p>
+            </div>
+          </div>
+        </section>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+  <div class="container">
+    <!-- form search -->
+    <div class="formBox bg-white rounded-5 p-3 pb-0 sideBar mb-md-0">
+      <form
+        [formGroup]="searchForm"
+        (ngSubmit)="onSubmit()"
+        class="row g-3 p-3 align-items-center justify-content-center"
+      >
+        <div class="col-md-4">
+          <div
+            class="text-capitalize bg-secondary bg-opacity-10 textMainColor rounded-3 p-3 text-start"
+          >
+            <label><i class="fa fa-plane me-2 mb-2"></i>destinations</label>
+            <select
+              formControlName="location"
+              class="p-2 rounded-1 text-secondary border-0"
+            >
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-secondary text-white"
+              >
+                Where would you like to go?
+              </option>
+              @for (des of allDestinations; track $index) {
+              <option [value]="des.id">{{ des.title }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="text-capitalize bg-secondary bg-opacity-10 textMainColor rounded-3 p-3 text-start"
+          >
+            <label><i class="fa fa-layer-group me-2 mb-2"></i>categories</label>
+            <select
+              formControlName="type"
+              class="p-2 rounded-1 text-secondary border-0"
+            >
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-secondary text-white"
+              >
+                Trip Type
+              </option>
+              @for (cat of allCategories; track $index) {
+
+              <option [value]="cat.id">{{ cat.title }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="text-capitalize bg-secondary bg-opacity-10 textMainColor rounded-3 p-3 text-start"
+          >
+            <label><i class="fa fa-alarm-clock me-2 mb-2"></i>duration</label>
+            <select
+              formControlName="duration"
+              class="p-2 rounded-1 text-secondary border-0"
+            >
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-secondary text-white"
+              >
+                when you go to?
+              </option>
+              @for (time of allDurations; track $index) {
+
+              <option [value]="time.id">{{ time.title }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="text-capitalize flexCenter">
+            <button type="submit" class="mainBtn Btn flexBetween gap-2 w-100">
+              Search<i
+                class="fa fa-magnifying-glass-plus bgPrimaryWhiteColor textMainColor rounded-circle"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-aboutsection></app-aboutsection>
+
+<section class="carts py-5 my-5">
+  <div class="container">
+    <div class="row g-3 my-4">
+      <div class="col-xl-4 col-lg-6">
+        <div class="sideBar position-relative p-2 rounded-4 d-flex">
+          <div
+            class="iconBox rou overflow-hidden bgMainColor border flex-shrink-0"
+          >
+            <img src="../../../assets/image/world.svg" alt="icon image" />
+          </div>
+          <div>
+            <h6 class="textSecondColor text-capitalize fw-bold h5">
+              🌍 Worldwide Coverage
+            </h6>
+            <p class="mb-0">
+              We proudly arrange unforgettable journeys from Egypt to
+              destinations all over the world. Whether you’re dreaming of
+              Europe’s rich history, Asia’s vibrant culture, or Africa’s
+              breathtaking safaris, our team ensures seamless travel experiences
+              from start to finish.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-6">
+        <div class="sideBar position-relative p-2 rounded-4 d-flex">
+          <div
+            class="iconBox rou overflow-hidden bgMainColor border flex-shrink-0"
+          >
+            <img src="../../../assets/image/deal.svg" alt="icon image" />
+          </div>
+          <div>
+            <h6 class="textSecondColor text-capitalize fw-bold h5">
+              🤝 Best Quality Services
+            </h6>
+            <p class="mb-0">
+              Our agency offers top-tier travel packages, including flights,
+              luxury accommodations, guided tours, and visa assistance. With
+              partnerships across airlines and hotels, we deliver exceptional
+              value and comfort for every traveler.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-6">
+        <div class="sideBar position-relative p-2 rounded-4 d-flex">
+          <div
+            class="iconBox rou overflow-hidden bgMainColor border flex-shrink-0"
+          >
+            <img src="../../../assets/image/support.svg" alt="icon image" />
+          </div>
+          <div>
+            <h6 class="textSecondColor text-capitalize fw-bold h5">
+              📞 24/7 Customer Service
+            </h6>
+            <p class="mb-0">
+              We’re here for you around the clock! Our dedicated support team
+              assists travelers before, during, and after their trips—ensuring
+              peace of mind and quick solutions for any travel need, anytime,
+              anywhere.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="popTours">
+  <div class="container">
+    <div class="flexBetween flex-wrap">
+      <div class="secTitle">
+        <span
+          class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+        >
+          <span
+            class="bg-white textMainColor rounded-circle transition d-inline-block"
+            ><i class="fa fa-plane me-2 ps-1"></i
+          ></span>
+
+          tours
+        </span>
+        <h2 class="my-3 textSecondColor fw-bold">Our Most Popular Tours</h2>
+      </div>
+
+      <div class="controls p-2 px-3">
+        <button
+          [class.active]="!activeCategoryTitle"
+          (click)="getTours()"
+          class="text-capitalize me-2 mb-2 p-2"
+        >
+          all tours
+        </button>
+        @for (cat of allCategories; track $index) {
+        <button
+          (click)="getTours(cat.title)"
+          [class.active]="activeCategoryTitle === cat.title"
+          class="text-capitalize me-2 mb-2 p-2"
+        >
+          {{ cat.title }}
+        </button>
+        }
+      </div>
+    </div>
+
+    <div class="row g-3 my-5">
+      @if (alltours.length) { @for (tour of alltours.slice(0,8); track $index) {
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="px-2"><app-tour-cart [tour]="tour"></app-tour-cart></div>
+      </div>
+      } }@else {
+      <h1 class="text-capitalize text-danger">no tours in this category</h1>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="video my-5 pt-5">
+  <div class="container-fluid">
+    <div class="col-lg-10 ms-lg-auto">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5">
+          <div class="secTitle">
+            <span
+              class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+            >
+              <span
+                class="bg-white textMainColor rounded-circle transition d-inline-block"
+                ><i class="fa fa-plane me-2 ps-1"></i
+              ></span>
+
+              our video
+            </span>
+            <h2 class="my-3 textSecondColor fw-bold">
+              Let's Check Our
+              <b class="textMainColor fw-bold">Latest Update</b> And Video
+            </h2>
+            <p class="my-3">
+              There are many variations of passages available but the majority
+              have suffered alteration in some form injected humour if you are
+              going to use passage you need sure there isn't anything look even
+              slightly believable.
+            </p>
+            <button class="mainBtn Btn">
+              learn more <i class="fa fa-arrow-right ms-2 rounded-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-7 pe-lg-0">
+          <div class="videoBox position-relative flexCenter rounded-start-pill">
+            <div class="ripple-wrapper">
+              <button
+                class="play-btn"
+                (click)="openVideo()"
+                data-bs-toggle="modal"
+                data-bs-target="#videoModal"
+                aria-label="Play Video"
+              >
+                ▶
+              </button>
+              <span class="ripple"></span>
+              <span class="ripple"></span>
+              <span class="ripple"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="videoModal"
+        tabindex="-1"
+        aria-labelledby="videoModalLabel"
+        aria-hidden="true"
+        (hidden.bs.modal)="closeVideo()"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg position-relative"
+        >
+          <div class="modal-content border-0 shadow-lg">
+            <div class="modal-body p-0">
+              <button
+                type="button"
+                class="btn-close bg-white position-absolute m-3 z-3"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+
+              <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+                <iframe
+                  *ngIf="isVideoPlaying"
+                  [src]="sanitizedVideoUrl"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offers my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        Offers
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">Let's Check Exclusive Offers</h2>
+    </div>
+
+    <div class="row g-3 mt-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="sideBar p-1 rounded-5 overflow-hidden d-flex">
+          <figure class="mb-0 overflow-hidden me-3 flex-shrink-0">
+            <img
+              src="../../../assets/image/about 01.jpg"
+              class="w-100"
+              height="180px"
+              alt=""
+            />
+          </figure>
+          <figcaption>
+            <h5 class="textSecondColor text-capitalize">
+              get upto <span class="textMainColor">70%</span> discount!
+            </h5>
+            <p class="my-2 my-lg-3">
+              It is a long established fact that reader distracted.
+            </p>
+            <button routerLink="/tour" class="mainBtn Btn">
+              learn more <i class="fa fa-arrow-right ms-2 rounded-circle"></i>
+            </button>
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="travelDeal my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        travel deal
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">
+        Our Most Popular Travel Deals
+      </h2>
+    </div>
+
+    <div class="row g-3 mt-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="sideBar p-2 overflow-hidden">
+          <figure class="overflow-hidden">
+            <img
+              src="../../../assets/image/about 01.jpg"
+              class="w-100"
+              height="250px"
+              alt=""
+            />
+          </figure>
+          <figcaption>
+            <h5 routerLink="" class="textSecondColor text-capitalize">
+              Explore The Beauty Of Sea
+            </h5>
+            <p class="my-2 text-capitalize">
+              from <b class="textThirdColor">$777</b>
+            </p>
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="destinations my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        travel deal
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">
+        Our Most Popular Travel Deals
+      </h2>
+    </div>
+
+    <div class="mt-5">
+      <owl-carousel-o
+        *ngIf="allDestinations.length > 0"
+        [options]="destinationOptions"
+      >
+        @for (des of allDestinations; track $index) {
+        <ng-template carouselSlide>
+          <app-destination-cart [destination]="des"></app-destination-cart>
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
+
+<section class="team my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        our team
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">Meet With Our Experts Team</h2>
+    </div>
+
+    <app-team-cart></app-team-cart>
+  </div>
+</section>
+
+<section class="testimonial my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center pt-5">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        testmonials
+      </span>
+      <h2 class="my-3 text-white fw-bold">
+        What Our Customers Are Saying About Us?
+      </h2>
+    </div>
+
+    <div class="mt-5">
+      <owl-carousel-o
+        *ngIf="allReviews.length > 0"
+        [options]="testimonialOptions"
+      >
+        @for (review of allReviews; track $index) {
+        <ng-template carouselSlide>
+          <app-testimonial-cart [testimonial]="review"></app-testimonial-cart>
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+
+    <h1 class="projectName text-white text-uppercase pb-3">h&s</h1>
+  </div>
+</section>
+
+<section class="blogs my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-plane me-2 ps-1"></i
+        ></span>
+
+        our blog
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">Our Latest Blog & News</h2>
+    </div>
+
+    <!-- This fetches blogs and stores them -->
+    <app-blog-cart (blogsLoaded)="onBlogsLoaded($event)"></app-blog-cart>
+
+    <!-- Once blogs are loaded, display sliced blogs -->
+    <!-- <div *ngIf="allBlogs.length">
+      <app-blog-cart [blogs]="allBlogs.slice(0, 3)"></app-blog-cart>
+    </div> -->
+  </div>
+</section>
+
+<app-booknow></app-booknow>
+
+<app-partner-slider></app-partner-slider>

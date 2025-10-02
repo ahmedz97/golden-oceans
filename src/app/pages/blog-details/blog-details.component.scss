@@ -1,0 +1,32 @@
+@import '../../../styles/variables';
+
+.headTitle{
+    position: relative;
+    &::after , &::before{
+        content: '';
+        position: absolute;
+        z-index: -1;
+        height: 2.5px;
+        background-color: $primary-color;
+        bottom: 0;
+    }
+    &::after{
+        width: 10px;
+        left: 35px;
+    }
+    &::before{
+        width: 30px;
+        left: 0;
+    }
+    
+}
+ul.categoryList{
+    li{
+        color: $secondary-color;
+        transition: all 1s;
+    }
+    li:hover{
+        color: $primary-color;
+        transform: translateX(10px);
+    }
+}

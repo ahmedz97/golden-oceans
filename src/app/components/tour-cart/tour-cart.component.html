@@ -1,0 +1,88 @@
+<div
+  [routerLink]="['/tour', tour.slug]"
+  role="button"
+  [ngClass]="
+    layoutType === 'grid' ? 'row gx-3 flex-column' : 'row gx-3 flex-wrap'
+  "
+  class="item overflow-hidden sideBar transition"
+>
+  <div [ngClass]="layoutType === 'grid' ? '' : ' col-md-5'" class="px-0">
+    <figure class="mb-0 overflow-hidden position-relative">
+      <img
+        [src]="tour.featured_image"
+        class="w-100"
+        height="200px"
+        [alt]="tour.title"
+        [title]="tour.title"
+        loading="lazy"
+      />
+      <button
+        (click)="addFav(tour.id, $event)"
+        class="mainBtn Btn position-absolute bottom-0 start-0 p-2"
+      >
+        <i
+          [ngClass]="{
+            'fa-heart': true,
+            'text-danger': favouriteIds.includes(tour.id),
+            'fa-regular': !favouriteIds.includes(tour.id),
+            'fa-solid': favouriteIds.includes(tour.id)
+          }"
+          class="fa fa-heart text-white bg-transparent border-0"
+        ></i>
+      </button>
+
+      @if (tour.featured) {
+      <span
+        class="text-uppercase text-white py-0 px-2 m-1 me-3 mainBtn Btn position-absolute top-0 end-0"
+        >featured</span
+      >
+      }
+    </figure>
+  </div>
+
+  <div [ngClass]="layoutType === 'grid' ? '' : ' col-md-7'" class="">
+    <figcaption class="p-2">
+      <div class="flexBetween text-capitalize">
+        <div>
+          <i class="fa fa-tag me-1 textMainColor"></i>
+          <span class="textSecondColor">{{ tour.type }}</span>
+        </div>
+        
+      </div>
+      <h3
+        [routerLink]="['/tour', tour.slug]"
+        class="h4 text-capitalize transition cPointer"
+      >
+        {{ tour.title }}
+      </h3>
+      <a href="" class="">
+        <i class="fa fa-location-dot me-1 textMainColor"></i>
+        <span class="textSecondColor">{{ getDestinationText() }}</span>
+      </a>
+      <div class="my-2">
+        <span class="rateBox text-white p-1">
+          <i class="fa-regular fa-star me-1"></i>
+          {{ getAverageRating() | number:'1.1-1' }}
+        </span>
+        <span class="textMainColor text-capitalize mx-2">{{ getReviewQualityText() }}</span>
+        <span class="textSecondColor">
+          ({{ getReviewCount() }} Reviews)</span
+        >
+      </div>
+      <div class="mb-3">
+        <i class="fa fa-clock-four me-1 textMainColor"></i>
+        <span class="textSecondColor">{{ tour.duration }}</span>
+      </div>
+
+      <div class="textSecondColor py-2 border-top flexBetween text-capitalize">
+        <span
+          >from
+          <b class="textThirdColor">{{ tour.start_from | currency }}</b></span
+        >
+        <span [routerLink]="['/tour', tour.slug]"
+          >see more <i class="fa fa-arrow-right ms-1"></i
+        ></span>
+      </div>
+    </figcaption>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+@import '../../../styles/variables';
+footer{
+    &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .1;
+        z-index: -1;
+        background: url('../../../assets/image/footer bg.png') center no-repeat;
+        background-size: cover;
+    }
+    .logoSide{
+        i{
+            width: 35px;
+            height: 35px;
+            border-radius: 50px 50px 50px 0px;
+    
+        }
+    }
+
+    .footerTitle h4{
+        &::after , &::before{
+            content: '';
+            position: absolute;
+            z-index: -1;
+            height: 2.5px;
+            background-color: $primary-color;
+            bottom: 0;
+        }
+        &::after{
+            width: 10px;
+            left: 35px;
+        }
+        &::before{
+            width: 30px;
+            left: 0;
+        }
+    }
+
+    ul{
+        li:hover{
+            color: $primary-color;
+            transform: translateX(10px);
+        }
+    }
+}

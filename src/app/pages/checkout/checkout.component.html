@@ -1,0 +1,307 @@
+<section
+  style="
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.7)
+      ),
+      url('../../../assets/image/shopping-cart.jpg') center/cover no-repeat;
+  "
+  class="pageBanner mb-5"
+>
+  <div
+    class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
+  >
+    <h2 class="fw-bold">my checkout</h2>
+    <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']" class="text-decoration-none text-white"
+            >Home</a
+          >
+        </li>
+        <li class="breadcrumb-item active text-white" aria-current="page">
+          my checkout
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="my-5">
+  <div class="container">
+    <!--  -->
+    <form
+      [formGroup]="checkoutForm"
+      (ngSubmit)="(checkoutForm)"
+      class="row g-3"
+    >
+      <div class="col-lg-8">
+        <div class="sideBar p-3 rounded-3">
+          <h2 class="text-capitalize textMainColor mb-3 fw-bold h4">
+            Booking Personal Info
+          </h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div>
+                <label
+                  for="first_name"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >first name</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="text"
+                    id="first_name"
+                    formControlName="first_name"
+                    placeholder="Your First Name "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa-regular fa-user textMainColor"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label
+                  for="last_name"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >last name</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="text"
+                    id="last_name"
+                    formControlName="last_name"
+                    placeholder="Your Last Name "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa-regular fa-user textMainColor"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label
+                  for="phone"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >phone</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="tel"
+                    id="phone"
+                    formControlName="phone"
+                    placeholder="Your Phone "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa fa-phone textMainColor"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label
+                  for="email"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >email</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    placeholder="Your Email "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa-regular fa-envelope textMainColor"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div>
+                <label
+                  for="country"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >country</label
+                >
+                <div class="item position-relative">
+                  <select
+                    id="country"
+                    formControlName="country"
+                    class="form-control p-2 ps-5 rounded-3"
+                  >
+                    @for (item of countries; track $index) {
+
+                    <option disabled selected>Select Country</option>
+                    <option [value]="item.name">{{ item.name }}</option>
+                    }
+                  </select>
+                  <i class="fa fa-globe textMainColor"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div>
+                <label
+                  for="state"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >state</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="text"
+                    id="state"
+                    formControlName="state"
+                    placeholder="Your state "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa fa-location-dot textMainColor"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div>
+                <label
+                  for="coupon_id"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >coupon code</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="text"
+                    id="coupon_id"
+                    formControlName="coupon_id"
+                    placeholder="Your coupon code "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa fa-code textMainColor"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div>
+                <label
+                  for="notes"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >additional info</label
+                >
+                <div class="item position-relative">
+                  <textarea
+                    id="notes"
+                    rows="5"
+                    formControlName="notes"
+                    placeholder="Additional info "
+                    class="form-control p-2 ps-5 rounded-3"
+                  ></textarea>
+                  <i class="fa fa-pen textMainColor"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- payment choose -->
+          <div class="my-4 text-capitalize">
+            <h2 class="textMainColor mb-3 fw-bold h4">payment method</h2>
+            <mat-radio-group
+              aria-label="payment_method"
+              formControlName="payment_method"
+            >
+              <mat-radio-button value="cash">cash </mat-radio-button>
+              <mat-radio-button value="visa master">
+                visa master</mat-radio-button
+              >
+              <mat-radio-button value="paypal">paypal </mat-radio-button>
+            </mat-radio-group>
+            <!-- -->
+            <button
+              (click)="getCheckoutData()"
+              type="submit"
+              class="mainBtn Btn w-100 mt-2"
+            >
+              place order
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <!-- your order -->
+        <div class="text-capitalize pb-4 border-bottom">
+          <h2 class="text-capitalize textSecondColor mb-3 fw-bold h4">
+            booking summary
+          </h2>
+
+          @if (tourCart.length>0) {
+          <owl-carousel-o [options]="ordersOptions">
+            @for (cart of tourCart; track $index) {
+            <ng-template carouselSlide>
+              <div class="p-2 order rounded-3">
+                <figure class="specialBorder overflow-hidden mb-2">
+                  <img
+                    [src]="cart.tour.featured_image"
+                    height="250px"
+                    class="w-100"
+                    [alt]="cart.tour.title"
+                  />
+                </figure>
+                <h3 class="h6 fw-bold pe-2 textSecondColor">
+                  {{ cart.tour.title }}
+                </h3>
+                <div>
+                  <span
+                    class="bgSecondColor specialBorder text-white px-2 py-1"
+                  >
+                    <i class="fa fa-star me-2"></i>
+                    {{ cart.tour.rate }}
+                  </span>
+                  <span class="mx-2"
+                    >({{ cart.tour.reviews_number }} reviews)</span
+                  >
+                </div>
+
+                <div class="text-capitalize mt-3">
+                  <p class="mb-1 flexBetween">
+                    <span class="textSecondColor">check in:</span>
+                    {{ cart.start_date.slice(0, 10) }}
+                  </p>
+                  <p class="mb-1 flexBetween">
+                    <span class="textSecondColor">guests:</span>
+                    @if (cart.adults>0) {
+                    {{ cart.adults }} Adults } @if (cart.children>0) {
+                    {{ cart.children }} Children } @if (cart.infants>0) {
+                    {{ cart.infants }} infants }
+                  </p>
+                  <p class="mb-1 flexBetween">
+                    <span class="textSecondColor">stay:</span>
+                    {{ cart.tour.duration }}
+                  </p>
+
+                  <h4 class="h6 fw-bolder flexBetween">
+                    <span class="textSecondColor">total price:</span>
+                    {{ cart.totalPrice | currency }}
+                  </h4>
+                </div>
+              </div>
+            </ng-template>
+
+            }
+          </owl-carousel-o>
+          }@else {
+          <h5 class="text-capitalize text-danger">cart is empty</h5>
+          }
+        </div>
+
+        <!-- price -->
+        <div class="fw-bolder flexBetween textMainColor text-uppercase mt-3">
+          <span>TOTAL:</span>
+          <span> {{ getTotalPrice() | currency }}</span>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

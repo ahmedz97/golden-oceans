@@ -1,0 +1,25 @@
+<mat-accordion multi>
+  @for (item of faqs; track $index) {
+  <mat-expansion-panel class="my-4 rounded-4" #panel>
+    <mat-expansion-panel-header class="">
+      <mat-panel-title class="h5 mb-0 fw-bold">
+        {{ item.question }}
+      </mat-panel-title>
+
+      <!-- Custom Icon -->
+      <mat-panel-description>
+        <i
+          *ngIf="!panel.expanded"
+          class="fa fa-plus border flexCenter textMainColor rounded-circle p-1 px-0"
+        ></i>
+        <i
+          *ngIf="panel.expanded"
+          class="fa fa-minus border flexCenter textSecondColor rounded-circle p-1 px-0"
+        ></i>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <h6 [innerHTML]="item.answer"></h6>
+  </mat-expansion-panel>
+  }
+</mat-accordion>

@@ -1,0 +1,16 @@
+<div class="mt-5 sideBar bg-secondary bg-opacity-10 py-5">
+  <div class="container">
+    <owl-carousel-o *ngIf="partnerImg.length > 0" [options]="partnersOptions">
+      @for (image of partnerImg; track $index) {
+      <ng-template carouselSlide>
+        <img
+          [src]="image.src"
+          width="150px"
+          height="80px"
+          alt="partners image"
+        />
+      </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+</div>

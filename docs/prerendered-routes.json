@@ -1,0 +1,19 @@
+{
+  "routes": [
+    "/",
+    "/about",
+    "/blog",
+    "/blogDetails",
+    "/cart",
+    "/checkout",
+    "/contact",
+    "/destination",
+    "/faq",
+    "/forgetPassword",
+    "/login",
+    "/makeTrip",
+    "/profile",
+    "/signup",
+    "/tour"
+  ]
+}

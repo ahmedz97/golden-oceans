@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.sideBar{
+        border-radius: 50px 50px 50px 0px;
+        figure{
+            span{transform: translate(-50%, -50%); }
+            img{border-radius: 40px 40px 40px 0px;}
+        }
+    
+        figcaption h5{
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            height: 60px;
+        }
+    }

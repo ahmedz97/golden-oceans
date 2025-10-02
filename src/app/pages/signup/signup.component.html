@@ -1,0 +1,300 @@
+<section
+  style="
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.7)
+      ),
+      url('../../../assets/image/auth\ bg.avif') center/cover no-repeat;
+  "
+  class="pageBanner mb-5"
+>
+  <div
+    class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
+  >
+    <h2 class="fw-bold">sign up</h2>
+    <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']" class="text-decoration-none text-white"
+            >Home</a
+          >
+        </li>
+        <li class="breadcrumb-item active text-white" aria-current="page">
+          sign up
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="my-5 py-5">
+  <div class="container">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="specialBorder bg-white p-4 sideBar">
+        <div class="text-center">
+          <img
+            [src]="logo"
+            [alt]="siteTitle"
+            [title]="siteTitle"
+            width="200px"
+            height="70px"
+          />
+          <p class="fs-5">Create your H&S account</p>
+        </div>
+
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="handleRegisterForm()"
+          class=""
+        >
+          <div class="mb-3">
+            <label
+              for="name"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >full name</label
+            >
+            <div class="item position-relative">
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                placeholder="Your Name "
+                class="form-control p-2 ps-5 rounded-3"
+              />
+              <i class="fa-regular fa-user textMainColor"></i>
+            </div>
+
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('name')?.errors &&
+                registerForm.get('name')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span *ngIf="registerForm.get('name')?.getError('required')"
+                >name required</span
+              >
+            </div>
+          </div>
+          <div class="mb-3">
+            <label
+              for="email"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >email address</label
+            >
+            <div class="item position-relative">
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="Your Email "
+                class="form-control p-2 ps-5 rounded-3"
+              />
+              <i class="fa-regular fa-envelope textMainColor"></i>
+            </div>
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('email')?.errors &&
+                registerForm.get('email')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span *ngIf="registerForm.get('email')?.getError('required')"
+                >email required</span
+              >
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="password"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >password</label
+            >
+            <div class="item position-relative">
+              <input
+                type="password"
+                id="password"
+                formControlName="password"
+                placeholder="Your Password "
+                class="form-control p-2 ps-5 rounded-3"
+              />
+              <i class="fa fa-lock textMainColor"></i>
+            </div>
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('password')?.errors &&
+                registerForm.get('password')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span *ngIf="registerForm.get('password')?.getError('required')"
+                >password required</span
+              >
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="password_confirmation"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >password_confirmation</label
+            >
+            <div class="item position-relative">
+              <input
+                type="password"
+                id="password_confirmation"
+                formControlName="password_confirmation"
+                placeholder="Your Password Confirmation "
+                class="form-control p-2 ps-5 rounded-3"
+              />
+              <i class="fa fa-lock textMainColor"></i>
+            </div>
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('password_confirmation')?.errors &&
+                registerForm.get('password_confirmation')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span
+                *ngIf="
+                  registerForm
+                    .get('password_confirmation')
+                    ?.getError('required')
+                "
+                >password_confirmation not matched
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="phone"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >phone number</label
+            >
+            <div class="item position-relative">
+              <input
+                type="tel"
+                id="phone"
+                formControlName="phone"
+                placeholder="Your Phone "
+                class="form-control p-2 ps-5 rounded-3"
+              />
+              <i class="fa fa-phone textMainColor"></i>
+            </div>
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('phone')?.errors &&
+                registerForm.get('phone')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span *ngIf="registerForm.get('phone')?.getError('required')"
+                >phone required</span
+              >
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="birthdate"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >birth date</label
+            >
+            <div class="item position-relative">
+              <input
+                type="date"
+                id="birthdate"
+                formControlName="birthdate"
+                class="form-control p-2 ps-5 rounded-3"
+                [class.filled]="!!registerForm.get('birthdate')?.value"
+                [attr.data-placeholder]="'Birth date'"
+              />
+
+              <i class="fa-regular fa-calendar-alt textMainColor"></i>
+            </div>
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('birthDate')?.errors &&
+                registerForm.get('birthDate')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span *ngIf="registerForm.get('birthDate')?.getError('required')"
+                >birthDate required</span
+              >
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="nationality"
+              class="textSecondColor text-capitalize fw-bold mb-2"
+              >nationality</label
+            >
+
+            <div class="item">
+              <select
+                formControlName="nationality"
+                id="nationality"
+                formControlName="nationality"
+                class="form-control text-capitalize"
+              >
+                <option value="" class="bg-body-secondary" selected disabled>
+                  select your nationality
+                </option>
+                @for (city of countryList; track $index) {
+                <option [value]="city.name">{{ city.name }}</option>
+                }
+              </select>
+            </div>
+            <!-- show validators -->
+            <div
+              *ngIf="
+                registerForm.get('nationality')?.errors &&
+                registerForm.get('nationality')?.touched
+              "
+              class="alert alert-danger mt-2"
+            >
+              <span
+                *ngIf="registerForm.get('nationality')?.getError('required')"
+                >nationality required</span
+              >
+            </div>
+          </div>
+
+          <button
+            [disabled]="registerForm.invalid"
+            type="submit"
+            class="mainBtn Btn mb-3 w-100"
+          >
+            <i
+              *ngIf="isLoading"
+              class="fa-solid fa-spinner fa-spin me-1 border-0 bg-transparent text-white"
+            ></i>
+            <i
+              class="fa fa-paper-plane mx-2 border-0 bg-transparent text-white"
+            ></i>
+            sign up
+          </button>
+        </form>
+        <p class="my-2 text-center">
+          Already have an account?
+          <span routerLink="/login" class="textMainColor fw-bold cPointer"
+            >Login</span
+          >
+          .
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
