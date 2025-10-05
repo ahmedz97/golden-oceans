@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tour-details',
@@ -45,12 +46,16 @@ export class TourDetailsComponent implements OnInit {
     private _Router: Router,
     private toaster: ToastrService,
     private _BookingService: BookingService,
+    private sanitizer: DomSanitizer,
     @Inject(DOCUMENT) private document: Document //  controls nav scroll
-  ) {}
+  ) { }
 
   // start controls nav scroll
   private offsetTop = 330;
 
+  getSanitizedHtml(content: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
+  }
   scrollTo(id: string) {
     const el = this.document.getElementById(id);
     if (!el) return;
