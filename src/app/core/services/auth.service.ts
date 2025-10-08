@@ -21,7 +21,7 @@ export class AuthService extends BaseService {
   }
 
   loginSuccess(response: any): void {
-    const token = response?.data;
+    const token = response?.data.accessToken;
     console.log(token);
 
     if (typeof token === 'string' && token.length > 0) {

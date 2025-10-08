@@ -119,7 +119,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div>
                 <label
                   for="country"
@@ -134,7 +134,9 @@
                   >
                     @for (item of countries; track $index) {
 
-                    <option disabled selected>Select Country</option>
+                    <option value="" hidden disabled selected>
+                      Select Country
+                    </option>
                     <option [value]="item.name">{{ item.name }}</option>
                     }
                   </select>
@@ -159,26 +161,6 @@
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-location-dot textMainColor"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div>
-                <label
-                  for="coupon_id"
-                  class="textSecondColor text-capitalize fw-bold mb-2"
-                  >coupon code</label
-                >
-                <div class="item position-relative">
-                  <input
-                    type="text"
-                    id="coupon_id"
-                    formControlName="coupon_id"
-                    placeholder="Your coupon code "
-                    class="form-control p-2 ps-5 rounded-3"
-                  />
-                  <i class="fa fa-code textMainColor"></i>
                 </div>
               </div>
             </div>
@@ -295,6 +277,87 @@
           <h5 class="text-capitalize text-danger">cart is empty</h5>
           }
         </div>
+
+        <!-- coupon -->
+        <div class="mt-4 mb-2">
+          <label
+            for="coupon_id"
+            class="textSecondColor text-capitalize fw-bold mb-2"
+            >coupon code</label
+          >
+          <div class="item position-relative">
+            <input
+              type="text"
+              id="coupon_id"
+              formControlName="coupon_id"
+              placeholder="Your coupon code "
+              class="form-control p-2 ps-5 rounded-3"
+            />
+            <i class="fa fa-code textMainColor"></i>
+          </div>
+        </div>
+
+        <div>
+          <input
+            hidden
+            type="text"
+            id="loyalty_credit_used"
+            formControlName="loyalty_credit_used"
+            placeholder="loyalty_credit_used "
+            class="form-control p-2 ps-5 rounded-3"
+          />
+        </div>
+
+        @if (haveData) {
+        <div class="my-4 text-black text-capitalize">
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">original amount:</span>
+            <span>{{ checkoutPreview.original_amount }} </span>
+          </div>
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">available credit:</span>
+            <span>{{ checkoutPreview.available_credit }}</span>
+          </div>
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">discount amount:</span>
+            <span>{{ checkoutPreview.discount_amount }}</span>
+          </div>
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">final amount:</span>
+            <span>{{ checkoutPreview.final_amount }}</span>
+          </div>
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">remaining credit:</span>
+            <span>{{ checkoutPreview.remaining_credit }}</span>
+          </div>
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">savings:</span>
+            <span>{{ checkoutPreview.savings }}</span>
+          </div>
+          <div
+            class="flexBetween py-1 border-bottom border-opacity-50 fw-bold mb-2"
+          >
+            <span class="">points to earn:</span>
+            <span>{{ checkoutPreview.points_to_earn }}</span>
+          </div>
+        </div>
+
+        <button (click)="handleDiscount()" class="secBtn Btn w-100">
+          discount
+        </button>
+        }
 
         <!-- price -->
         <div class="fw-bolder flexBetween textMainColor text-uppercase mt-3">

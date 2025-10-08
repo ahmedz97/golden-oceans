@@ -39,4 +39,24 @@ export class BookingService extends BaseService {
   getCountries(): Observable<any> {
     return this.HttpClient.get(`${this.baseUrl}/countries`);
   }
+
+  // loyalty
+  getLoyaltyCredit(): Observable<any> {
+    return this.HttpClient.get(`${this.baseUrl}/loyalty/account`);
+  }
+
+  sendLoyaltyTransferCredit(loyaltyData: object): Observable<any> {
+    return this.HttpClient.post(
+      `${this.baseUrl}/loyalty/transfer-points`,
+      loyaltyData
+    );
+  }
+
+  loyaltyCheckPreview(checkoutPreviewData: object): Observable<any> {
+    return this.HttpClient.post(
+      `${this.baseUrl}/loyalty/checkout-preview`,
+      checkoutPreviewData
+    );
+  }
+  // ----
 }

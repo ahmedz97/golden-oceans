@@ -48,8 +48,11 @@
           </div>
           <!-- user name and email -->
           <div class="textSecondColor text-center mt-2 pb-3 bs-popover-bottom">
-            <h5 class="text-capitalize mb-0 fw-bold">Antoni Jonson</h5>
-            <p class="">jonsonexample.com</p>
+            <h5 class="text-capitalize mb-0 fw-bold">
+              {{ profilemeData.name }}
+            </h5>
+            <p class="">{{ profilemeData.email }}</p>
+            <p class="text-success">{{ uploadedImageMassage }}</p>
           </div>
 
           <ul class="list-unstyled text-capitalize">
@@ -105,6 +108,24 @@
                 [class.textSecondColor]="selectedTab !== 'myBooking'"
                 [class.text-white]="selectedTab === 'myBooking'"
                 >my booking</span
+              >
+            </li>
+            <li
+              role="button"
+              [class.bg-transparent]="selectedTab !== 'myCredit'"
+              [class.bgMainColor]="selectedTab === 'myCredit'"
+              (click)="selectedTab = 'myCredit'"
+              class="mb-2 p-2 specialBorder"
+            >
+              <i
+                [class.textMainColor]="selectedTab !== 'myCredit'"
+                [class.text-white]="selectedTab === 'myCredit'"
+                class="fa fa-clipboard-list me-2"
+              ></i>
+              <span
+                [class.textSecondColor]="selectedTab !== 'myCredit'"
+                [class.text-white]="selectedTab === 'myCredit'"
+                >my credit</span
               >
             </li>
             <li
@@ -172,7 +193,7 @@
             <div class="col-md-6">
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
-                  <b class="fs-3">120</b>
+                  <b class="fs-3">{{ tourCart.length }}</b>
                   <p class="mb-1 text-capitalize">total booking</p>
                 </div>
                 <div class="iconBox m-0 bg-transparent text-danger">
@@ -183,11 +204,22 @@
             <div class="col-md-6">
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
-                  <b class="fs-3">120</b>
+                  <b class="fs-3">{{ favList.length }}</b>
                   <p class="mb-1 text-capitalize">favorite tour</p>
                 </div>
                 <div class="iconBox m-0 bg-white text-danger">
                   <i class="fa fa-heart-circle-plus"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 specialBorder border flexBetween">
+                <div class="textSecondColor">
+                  <b class="fs-3">{{ loyaltyCredit?.points || 0 }}</b>
+                  <p class="mb-1 text-capitalize">total points</p>
+                </div>
+                <div class="iconBox m-0 bg-white text-danger">
+                  <i class="fa fa-coins"></i>
                 </div>
               </div>
             </div>
@@ -199,11 +231,87 @@
           >
             <h5 class="fw-bold mb-3 pb-3 border-bottom">profile info</h5>
 
-            <p><b class="me-5">Full Name:</b> Antoni Jonson</p>
-            <p><b class="me-5">Email:</b> jonsonexample.com</p>
-            <p><b class="me-5">Phone:</b>+2 134 562 458</p>
-            <p><b class="me-5">Address:</b>New York, USA</p>
-            <p><b class="me-5">Join Date:</b>21 August, 2025</p>
+            <p><b class="me-5">Full Name:</b> {{ profilemeData.name }}</p>
+            <p><b class="me-5">Email:</b> {{ profilemeData.email }}</p>
+            <p><b class="me-5">Phone:</b>{{ profilemeData.phone }}</p>
+            <!-- <p><b class="me-5">Address:</b>New York, USA</p> -->
+            <p>
+              <b class="me-5">Nationality:</b>{{ profilemeData.nationality }}
+            </p>
+            <p>
+              <b class="me-5">Birth Date:</b
+              >{{ profilemeData.birthdate | date }}
+            </p>
+            <p>
+              <b class="me-5">Join Date:</b
+              >{{ profilemeData.created_at | date }}
+            </p>
+          </div>
+          } @if (selectedTab==='myCredit') {
+          <div
+            class="p-4 border sideBar rounded-3 textSecondColor text-capitalize"
+          >
+            <h5 class="fw-bold mb-3 pb-3 border-bottom">credit info</h5>
+
+            <form
+              [formGroup]="transferLoyaltyCreditForm"
+              (ngSubmit)="transferLoyaltyCredit()"
+            >
+              <div class="mb-3">
+                <label
+                  for="recipient_email"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >recipient email</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="email"
+                    id="recipient_email"
+                    formControlName="recipient_email"
+                    placeholder="Your Email "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa fa-file-signature textMainColor"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label
+                  for="points"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >points</label
+                >
+                <div class="item position-relative">
+                  <input
+                    type="number"
+                    id="points"
+                    formControlName="points"
+                    placeholder="Enter Your points "
+                    class="form-control p-2 ps-5 rounded-3"
+                  />
+                  <i class="fa fa-file-signature textMainColor"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label
+                  for="notes"
+                  class="textSecondColor text-capitalize fw-bold mb-2"
+                  >notes</label
+                >
+                <div class="item position-relative">
+                  <textarea
+                    id="notes"
+                    formControlName="notes"
+                    placeholder="add notes ... "
+                    class="form-control p-2 ps-5 rounded-3"
+                  ></textarea>
+                  <i class="fa fa-file-signature textMainColor"></i>
+                </div>
+              </div>
+
+              <button type="submit" class="mainBtn Btn">
+                transfer loyalty points
+              </button>
+            </form>
           </div>
           } @if (selectedTab==='myBooking') { @if (haveData) {
           <owl-carousel-o [options]="bookingOptions">
@@ -344,7 +452,9 @@
                     formControlName="nationality"
                     class="form-control p-2 ps-5 rounded-3"
                   >
-                    <option selected disabled>select your nationality</option>
+                    <option value="" hidden disabled selected>
+                      select your nationality
+                    </option>
                     @for (item of countriesList; track $index) {
 
                     <option [value]="item.name">{{ item.name }}</option>

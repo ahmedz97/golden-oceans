@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,7 +36,8 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 export class CheckoutComponent {
   constructor(
     private _BookingService: BookingService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   checkoutData: object = {};
@@ -47,6 +53,7 @@ export class CheckoutComponent {
       },
     });
     this.getListCart();
+    this.getLoyaltyCredit();
   }
 
   checkoutForm: FormGroup = new FormGroup({
@@ -54,14 +61,13 @@ export class CheckoutComponent {
     last_name: new FormControl(''),
     phone: new FormControl(''),
     email: new FormControl(''),
-    // start_date: new FormControl(''),
     country: new FormControl(''),
     state: new FormControl(''),
-    // street_addres: new FormControl(''),
     payment_method: new FormControl(''),
     notes: new FormControl(''),
     currency_id: new FormControl(1),
     coupon_id: new FormControl(''),
+    loyalty_credit_used: new FormControl(0),
   });
 
   getCheckoutData(): void {
@@ -167,12 +173,52 @@ export class CheckoutComponent {
               item.children * item.childPrice +
               item.infants * item.infantPrice;
           });
+
+          // discount cart
+          this._BookingService
+            .loyaltyCheckPreview({
+              total_amount: this.getTotalPrice(),
+              loyalty_credit_to_use: this.loyaltyCredit.credit_balance,
+            })
+            .subscribe({
+              next: (res) => {
+                this.toaster.success(res.message);
+                this.checkoutPreview = res.data;
+                console.log(this.checkoutPreview);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            });
         }
       },
       error: (err) => {
         // console.log(err);
       },
     });
+  }
+
+  loyaltyCredit: any = {};
+  checkoutPreview: any = {};
+  getLoyaltyCredit(): void {
+    this._BookingService.getLoyaltyCredit().subscribe({
+      next: (response) => {
+        this.loyaltyCredit = response.data;
+        console.log(this.loyaltyCredit);
+        // Trigger change detection for OnPush strategy
+        // this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error fetching loyalty credit:', err);
+      },
+    });
+  }
+
+  handleDiscount(): void {
+    this.checkoutForm.patchValue({
+      loyalty_credit_used: this.checkoutPreview.discount_amount,
+    });
+    console.log('discount amount =>', this.checkoutPreview.discount_amount);
   }
 
   getTotalPrice(): number {

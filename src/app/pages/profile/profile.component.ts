@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnInit,
   signal,
@@ -43,15 +44,19 @@ export class ProfileComponent implements OnInit {
     private _BookingService: BookingService,
     private _ProfileService: ProfileService,
     private _Router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private cdr: ChangeDetectorRef
   ) {}
   updateProfile!: FormGroup;
   updateImage!: FormGroup;
+  transferLoyaltyCreditForm!: FormGroup;
   countriesList: any[] = [];
   tourCart: any[] = [];
   favList: any[] = [];
   haveData: boolean = false;
   profilemeData: any = {};
+  loyaltyCredit: any = { points: 0 };
+  uploadedImageMassage: string = '';
 
   readonly files = signal<File[]>([]);
 
@@ -71,9 +76,15 @@ export class ProfileComponent implements OnInit {
     this.updateImage = new FormGroup({
       image: new FormControl(''),
     });
+    this.transferLoyaltyCreditForm = new FormGroup({
+      recipient_email: new FormControl(''),
+      points: new FormControl(''),
+      notes: new FormControl(''),
+    });
 
     this.getListCart();
     this.getFav();
+    this.getLoyaltyCredit();
   }
 
   // عند الاختيار
@@ -101,40 +112,17 @@ export class ProfileComponent implements OnInit {
       next: (res) => {
         console.log('Uploaded ✅', res);
         this.toaster.success('Profile image updated');
+        // this.updateImage.patchValue({
+        //   image: res.data.image,
+        // });
       },
       error: (err) => {
         console.error('Upload error ❌', err);
         this.toaster.error(err?.error?.message || 'Upload failed');
+        this.uploadedImageMassage = err?.error?.message || 'Upload failed';
       },
     });
   }
-
-  // // start user profile image
-  // onSelect(event: any) {
-  //   console.log(event);
-  //   this.files.set([...this.files(), ...event.addedFiles]);
-  //   console.log(this.files);
-
-  //   this.uploadImage(this.files);
-  // }
-  // onRemove(event: any) {
-  //   console.log(event);
-  //   const files = this.files();
-  //   files.splice(files.indexOf(event), 1);
-  //   this.files.set([...files]);
-  //   console.log(files);
-  //   this.uploadImage(files);
-  // }
-  // // end user profile image
-
-  // uploadImage(img: any): void {
-  //   this._ProfileService.updateImageProfile(img).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //     },
-  //   });
-  //   console.log(img);
-  // }
 
   getListCart(): void {
     this._BookingService.getCartList().subscribe({
@@ -194,12 +182,12 @@ export class ProfileComponent implements OnInit {
       next: (response) => {
         this.profilemeData = response.data;
         console.log(this.profilemeData);
-        // this.updateProfile.patchValue({
-        //   name: this.profilemeData.name,
-        //   phone: this.profilemeData.phone,
-        //   birthdate: this.profilemeData.birthdate?.split('T')[0],
-        //   nationality: this.profilemeData.nationality,
-        // });
+        this.updateProfile.patchValue({
+          name: this.profilemeData.name,
+          phone: this.profilemeData.phone,
+          birthdate: this.profilemeData.birthdate?.split('T')[0],
+          nationality: this.profilemeData.nationality,
+        });
       },
       error: (err) => {
         console.log(err);
@@ -267,26 +255,36 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // addFav(id: any): void {
-  //   this._DataService.toggleWishlist(id).subscribe({
-  //     next: (response) => {
-  //       this.myFavList = response;
-  //       // toggle fav icon style (add , remove)
-  //       const index = this.favouriteIds.indexOf(id);
-  //       if (index > -1) {
-  //         this.favouriteIds.splice(index, 1);
-  //       } else {
-  //         this.favouriteIds.push(id);
-  //       }
-  //       console.log(id);
-  //       console.log(this.myFavList);
-  //       this.getFav();
-  //       // this.toaster.success(response.message);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //       this.toaster.error(err.error.message);
-  //     },
-  //   });
-  // }
+  getLoyaltyCredit(): void {
+    this._BookingService.getLoyaltyCredit().subscribe({
+      next: (response) => {
+        this.loyaltyCredit = response.data;
+        console.log(this.loyaltyCredit.points);
+        // Trigger change detection for OnPush strategy
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error fetching loyalty credit:', err);
+      },
+    });
+  }
+
+  transferLoyaltyCredit(): void {
+    if (this.transferLoyaltyCreditForm.valid) {
+      console.log(this.transferLoyaltyCreditForm.value);
+      this._BookingService
+        .sendLoyaltyTransferCredit(this.transferLoyaltyCreditForm.value)
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            this.toaster.success(response.message);
+          },
+          error: (err) => {
+            this.toaster.error(err.error.message);
+          },
+        });
+    } else {
+      console.log('not done');
+    }
+  }
 }
