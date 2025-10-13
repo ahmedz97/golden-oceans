@@ -11,13 +11,13 @@
       <h4 class="textSecondColor mb-1 h5">{{ testimonial.reviewer_name }}</h4>
       <p class="textMainColor mb-0">our clients</p>
     </div>
-    <div class="qoute">
+    <!-- <div class="qoute">
       <img
         src="../../../assets/image/quote.svg"
         class="w-100"
         alt="qoutes icon"
       />
-    </div>
+    </div> -->
     <p class="textSecondColor my-3 mb-2">" {{ testimonial.content }} "</p>
 
     <span *ngFor="let filled of getStars(testimonial.rate)">

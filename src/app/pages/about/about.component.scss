@@ -1,0 +1,240 @@
+// About page specific styles
+.features {
+  .sideBar {
+    transition: all 0.3s ease;
+    border: 1px solid #EEEFEF;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(219, 159, 62, 0.15);
+      border-color: #DB9F3E;
+    }
+    
+    .iconBox {
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.team {
+  .secTitle {
+    margin-bottom: 3rem;
+  }
+}
+
+.testimonial {
+  .testimonial-carousel-wrapper {
+    position: relative;
+    padding: 2rem 0;
+    
+    .testimonial-carousel {
+      .owl-nav {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+        
+        .owl-prev,
+        .owl-next {
+          pointer-events: all;
+          background: rgba(255, 255, 255, 0.9) !important;
+          border: 2px solid #DB9F3E !important;
+          color: #DB9F3E !important;
+          width: 50px !important;
+          height: 50px !important;
+          border-radius: 50% !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          font-size: 18px !important;
+          transition: all 0.3s ease !important;
+          
+          &:hover {
+            background: #DB9F3E !important;
+            color: white !important;
+            transform: scale(1.1);
+          }
+        }
+        
+        .owl-prev {
+          left: -25px;
+          position: absolute;
+        }
+        
+        .owl-next {
+          right: -25px;
+          position: absolute;
+        }
+      }
+    }
+  }
+  
+  .projectName {
+    font-size: 8rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    opacity: 0.1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    
+    @media (max-width: 992px) {
+      font-size: 6rem;
+      letter-spacing: 0.3rem;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 4rem;
+      letter-spacing: 0.2rem;
+    }
+    
+    @media (max-width: 576px) {
+      font-size: 3rem;
+      letter-spacing: 0.1rem;
+    }
+  }
+}
+
+// Page banner improvements
+.pageBanner {
+  .breadcrumb {
+    background: transparent;
+    margin-bottom: 0;
+    
+    .breadcrumb-item {
+      font-size: 0.9rem;
+      
+      a {
+        transition: all 0.3s ease;
+        
+        &:hover {
+          color: #DB9F3E !important;
+          text-decoration: underline !important;
+        }
+      }
+    }
+  }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .features {
+    .sideBar {
+      margin-bottom: 1rem;
+      
+      .iconBox {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+  
+  .team {
+    .secTitle {
+      margin-bottom: 2rem;
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      p {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+      }
+    }
+  }
+  
+  .testimonial {
+    .testimonial-carousel-wrapper {
+      .testimonial-carousel {
+        .owl-nav {
+          .owl-prev,
+          .owl-next {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 14px !important;
+          }
+          
+          .owl-prev {
+            left: -20px;
+          }
+          
+          .owl-next {
+            right: -20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .pageBanner {
+    height: 50vh;
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    .breadcrumb {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .features {
+    .secTitle {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .sideBar {
+      padding: 1.5rem !important;
+      
+      .iconBox {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        
+        img {
+          width: 25px;
+        }
+      }
+      
+      h6 {
+        font-size: 1rem;
+      }
+      
+      p {
+        font-size: 0.85rem;
+      }
+    }
+  }
+  
+  .team {
+    .secTitle {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  
+  .testimonial {
+    .secTitle {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

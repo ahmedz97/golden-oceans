@@ -46,9 +46,13 @@
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
                   call us
                 </h6>
-                <a href="tel:{{ phoneNumber }}" class="mb-1">{{
-                  phoneNumber
-                }}</a>
+                <div class="mb-1">
+                  <a href="tel:{{ phoneNumber }}" class="d-block mb-1">{{
+                    phoneNumber
+                  }}</a>
+                  <a href="tel:0422454484" class="d-block mb-1">Ahmed – 0422 454 484</a>
+                  <a href="tel:0434133646" class="d-block">Libby – 0434 133 646</a>
+                </div>
               </div>
             </li>
 
@@ -60,9 +64,21 @@
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
                   email us
                 </h6>
-                <a href="mailTo:{{ userEmail }}" class="mb-1">{{
+                <a href="mailTo:{{ userEmail }}" class="d-block mb-1">{{
                   userEmail
                 }}</a>
+              </div>
+            </li>
+
+            <li class="d-flex align-items-center mb-4">
+              <i
+                class="fa fa-globe bgMainColor text-white fs-4 flexCenter flex-shrink-0 me-3"
+              ></i>
+              <div>
+                <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
+                  visit us
+                </h6>
+                <a href="https://www.goldenoceantrvl.com" target="_blank" class="d-block mb-1">www.goldenoceantrvl.com</a>
               </div>
             </li>
 
@@ -81,12 +97,10 @@
         </div>
       </div>
       <div class="col-lg-8 align-self-center">
-        <div class="bg-white rounded-3 p-3 sideBar">
-          <h5 class="text-capitalize textSecondColor fw-bold">get in touch</h5>
-          <p>
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page randomised words which don't look
-            even slightly when looking at its layout.
+        <div class="bg-white rounded-3 p-4 sideBar">
+          <h5 class="text-capitalize textSecondColor fw-bold mb-3">get in touch</h5>
+          <p class="text-muted mb-4">
+            Ready to embark on your next adventure? Contact us today to start planning your dream getaway. Our dedicated team is here to guide you every step of the way, ensuring a seamless and unforgettable travel experience. Experience the world with us and create memories that will last a lifetime. Let us turn your travel dreams into reality!
           </p>
 
           <form

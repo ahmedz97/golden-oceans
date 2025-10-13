@@ -126,63 +126,52 @@
 
 <section class="carts py-5 my-5">
   <div class="container">
-    <div class="row g-3 my-4">
-      <div class="col-xl-4 col-lg-6">
-        <div class="sideBar position-relative p-2 rounded-4 d-flex">
-          <div
-            class="iconBox rou overflow-hidden bgMainColor border flex-shrink-0"
-          >
+    <div class="row g-4 my-5">
+      <div class="col-xl-4 col-lg-6 col-md-12">
+        <div class="sideBar position-relative p-4 rounded-4 h-100">
+          <div class="iconBox-bg">
             <img src="../../../assets/image/world.svg" alt="icon image" />
           </div>
-          <div>
-            <h6 class="textSecondColor text-capitalize fw-bold h5">
-              🌍 Worldwide Coverage
+          <div class="content-overlay">
+            <h6 class="textSecondColor text-capitalize fw-bold h5 mb-3">
+              <i class="fa fa-globe"></i> Our Packages
             </h6>
-            <p class="mb-0">
-              We proudly arrange unforgettable journeys from Egypt to
-              destinations all over the world. Whether you’re dreaming of
-              Europe’s rich history, Asia’s vibrant culture, or Africa’s
-              breathtaking safaris, our team ensures seamless travel experiences
-              from start to finish.
+            <p class="mb-0 text-muted">
+              Embark on once-in-a-lifetime adventures with our Middle Eastern tours. From the iconic landmarks to ancient wonders and beyond, our tours are designed to immerse you in the fascinating history and vibrant cultures. You can choose the exclusivity of private excursions or the camaraderie of a small group, our tours are fully customizable to suit your preferences, ensuring an extraordinary.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="col-xl-4 col-lg-6">
-        <div class="sideBar position-relative p-2 rounded-4 d-flex">
-          <div
-            class="iconBox rou overflow-hidden bgMainColor border flex-shrink-0"
-          >
+      <div class="col-xl-4 col-lg-6 col-md-12">
+        <div class="sideBar position-relative p-4 rounded-4 h-100">
+      
+          <div class="iconBox-bg">
             <img src="../../../assets/image/deal.svg" alt="icon image" />
           </div>
-          <div>
-            <h6 class="textSecondColor text-capitalize fw-bold h5">
-              🤝 Best Quality Services
+          <div class="content-overlay">
+            <h6 class="textSecondColor text-capitalize fw-bold h5 mb-3">
+              <i class="fa fa-ticket-alt"></i> Ticketing
             </h6>
-            <p class="mb-0">
-              Our agency offers top-tier travel packages, including flights,
-              luxury accommodations, guided tours, and visa assistance. With
-              partnerships across airlines and hotels, we deliver exceptional
-              value and comfort for every traveler.
+            <p class="mb-0 text-muted">
+              Leave the hassle of ticketing and transfers to us. We book airline and train tickets effortlessly, and ensure smooth, stress-free transitions throughout your journey. We can accommodate any budget, ensuring a seamless and comfortable experience from start to finish.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="col-xl-4 col-lg-6">
-        <div class="sideBar position-relative p-2 rounded-4 d-flex">
-          <div
-            class="iconBox rou overflow-hidden bgMainColor border flex-shrink-0"
-          >
+      <div class="col-xl-4 col-lg-6 col-md-12">
+        <div class="sideBar position-relative p-4 rounded-4 h-100">
+       
+          <div class="iconBox-bg">
             <img src="../../../assets/image/support.svg" alt="icon image" />
           </div>
-          <div>
-            <h6 class="textSecondColor text-capitalize fw-bold h5">
-              📞 24/7 Customer Service
+          <div class="content-overlay">
+            <h6 class="textSecondColor text-capitalize fw-bold h5 mb-3">
+              <i class="fa fa-headset"></i> 24/7 Customer Service
             </h6>
-            <p class="mb-0">
-              We’re here for you around the clock! Our dedicated support team
+            <p class="mb-0 text-muted">
+              We're here for you around the clock! Our dedicated support team
               assists travelers before, during, and after their trips—ensuring
               peace of mind and quick solutions for any travel need, anytime,
               anywhere.
@@ -439,12 +428,12 @@
 
     <div class="mt-5">
       <owl-carousel-o
-        *ngIf="allDestinations.length > 0"
+        *ngIf="shuffledTours.length > 0"
         [options]="destinationOptions"
       >
-        @for (des of allDestinations; track $index) {
+        @for (tour of shuffledTours; track $index) {
         <ng-template carouselSlide>
-          <app-destination-cart [destination]="des"></app-destination-cart>
+          <app-tour-cart [tour]="tour"></app-tour-cart>
         </ng-template>
         }
       </owl-carousel-o>
@@ -503,7 +492,7 @@
       </owl-carousel-o>
     </div>
 
-    <h1 class="projectName text-white text-uppercase pb-3">h&s</h1>
+    <h1 class="projectName text-white text-uppercase pb-3">Gots</h1>
   </div>
 </section>
 

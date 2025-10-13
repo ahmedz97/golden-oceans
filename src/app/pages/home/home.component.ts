@@ -11,7 +11,6 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { TourCartComponent } from '../../components/tour-cart/tour-cart.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { DestinationCartComponent } from '../../components/destination-cart/destination-cart.component';
 import { TeamCartComponent } from '../../components/team-cart/team-cart.component';
 import { BlogCartComponent } from '../../components/blog-cart/blog-cart.component';
 import { BooknowComponent } from '../../components/booknow/booknow.component';
@@ -33,7 +32,6 @@ interface DestinationPriceMap {
     ReactiveFormsModule,
     RouterLink,
     TourCartComponent,
-    DestinationCartComponent,
     TeamCartComponent,
     BlogCartComponent,
     BooknowComponent,
@@ -63,6 +61,7 @@ export class HomeComponent implements OnInit {
   allCategories: any[] = [];
   allDurations: any[] = [];
   alltours: any[] = [];
+  shuffledTours: any[] = [];
   destinationPrices: DestinationPriceMap = {};
   categoryPrices: DestinationPriceMap = {};
   activeCategoryTitle: string | null = null;
@@ -153,6 +152,10 @@ export class HomeComponent implements OnInit {
         console.log(this.alltours);
         console.log(this.destinationPrices);
         console.log(this.categoryPrices);
+        
+        // Create shuffled tours for Travel Deals section
+        this.createShuffledTours();
+        
         // this.getDestination();
         // this.getCategory();
       },
@@ -309,6 +312,25 @@ export class HomeComponent implements OnInit {
     return Array.from({ length: 5 }, (_, i) => i < safeRate);
   }
 
+  // Shuffle array using Fisher-Yates algorithm
+  private shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  // Create shuffled tours for Travel Deals section
+  createShuffledTours(): void {
+    if (this.alltours.length > 0) {
+      // Shuffle all tours and take first 8 for display
+      this.shuffledTours = this.shuffleArray(this.alltours).slice(0, 8);
+      console.log('Shuffled tours for Travel Deals:', this.shuffledTours);
+    }
+  }
+
   // owl carousel options
   mainSecOptions: OwlOptions = {
     loop: true,
@@ -331,13 +353,14 @@ export class HomeComponent implements OnInit {
     pullDrag: true,
     autoplay: true,
     dots: true,
-    smartSpeed: 1500,
-    margin: 10,
+    smartSpeed: 2000,
+    margin: 20,
+    autoplayTimeout: 4000,
     responsive: {
       0: { items: 1 },
-      767: { items: 2 },
-      992: { items: 3 },
-      1200: { items: 4 },
+      576: { items: 2 },
+      768: { items: 3 },
+      992: { items: 4 },
     },
     nav: true,
     navText: [

@@ -10,6 +10,13 @@
     height: 150px;
     line-height: 1.2;
     border: 10px solid #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 15px 40px rgba(219, 159, 62, 0.2);
+    }
   }
 
   .aboutBg::before{
@@ -23,6 +30,16 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
+    animation: rotate 20s linear infinite;
+  }
+
+  .img-hover {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
   }
 
   .sideBar::before{
@@ -35,20 +52,47 @@
   }
 
   .iconBox{
-            border-radius:50px 50px 50px 0px ;
+    border-radius:50px 50px 50px 0px ;
     img{
-        width: 35px;
-        filter: brightness(0) invert(1);
-        }
-
+      width: 35px;
+      filter: brightness(0) invert(1);
     }
+  }
 
-    .sideBar{
-      @media screen and (min-width:1200px) {
-        h6{height: 35px;}
-        
+  .sideBar{
+    @media screen and (min-width:1200px) {
+      h6{height: 35px;}
+    }
+  }
+
+  // Responsive improvements
+  @media (max-width: 768px) {
+    .aboutBg {
+      margin-right: 0 !important;
+      margin-bottom: 2rem;
+    }
+    
+    .experience {
+      width: 120px;
+      height: 120px;
+      border: 8px solid #fff;
+      
+      h5 {
+        font-size: 1.5rem !important;
+      }
+      
+      p {
+        font-size: 0.8rem;
       }
     }
+  }
+}
 
-
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
