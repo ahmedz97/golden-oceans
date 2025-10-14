@@ -29,13 +29,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const token = getToken();
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
-      console.log('✅ Token attached:', token);
-    } else {
-      console.warn('⚠️ No token found in localStorage.');
     }
-  } else {
-    console.warn('⚠️ Not running in browser. Skipping token.');
+    // Remove warnings as they're normal behavior
   }
+  // Remove SSR warning as it's expected behavior during server-side rendering
 
   return next(req.clone({ url, setHeaders: headers }));
 };

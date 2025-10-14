@@ -30,9 +30,8 @@ export class TourCartComponent implements OnInit {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const favs = localStorage.getItem('favouriteIds');
       this.favouriteIds = favs ? JSON.parse(favs) : [];
-    } else {
-      console.warn('localStorage is not available (probably SSR mode)');
     }
+    // Remove SSR warning as it's expected behavior during server-side rendering
     
     // Fetch reviews for this tour
     if (this.tour?.id) {

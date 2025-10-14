@@ -20,7 +20,7 @@
 
 <app-aboutsection></app-aboutsection>
 
-<section class="team my-5 py-5">
+<section class="features my-5 py-5">
   <div class="container">
     <div class="secTitle text-center">
       <span
@@ -28,12 +28,76 @@
       >
         <span
           class="bg-white textMainColor rounded-circle transition d-inline-block"
-          ><i class="fa fa-plane me-2 ps-1"></i
+          ><i class="fa fa-star me-2 ps-1"></i
+        ></span>
+        our features
+      </span>
+      <h2 class="my-3 textSecondColor fw-bold">Why Choose Our Services</h2>
+    </div>
+
+    <div class="row g-4 my-5">
+      <div class="col-xl-6 col-lg-12 col-md-6">
+        <div class="sideBar position-relative p-4 rounded-4 d-flex h-100">
+          <div
+            class="iconBox rounded-circle overflow-hidden bgMainColor border flex-shrink-0"
+          >
+            <img src="../../../assets/image/deal.svg" alt="icon image" />
+          </div>
+          <div class="ms-3">
+            <h6 class="textSecondColor text-capitalize fw-bold mb-3">
+              Our Mission
+            </h6>
+            <p class="mb-0 text-muted">
+              Our mission is to earn the trust of our clients and suppliers by upholding the values of quality, integrity, and cost-effectiveness.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-6 col-lg-12 col-md-6">
+        <div class="sideBar position-relative p-4 rounded-4 d-flex h-100">
+          <div
+            class="iconBox rounded-circle overflow-hidden bgMainColor border flex-shrink-0"
+          >
+            <img
+              src="../../../assets/image/booking.svg"
+              alt="icon image"
+            />
+          </div>
+          <div class="ms-3">
+            <h6 class="textSecondColor text-capitalize fw-bold mb-3">
+              Our Vision
+            </h6>
+            <p class="mb-0 text-muted">
+              Our vision is to redefine the travel experience by offering unparalleled service and crafting unforgettable journeys that inspire, delight, and leave lasting memories.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button routerLink="/tour" class="mainBtn Btn">explore our tours</button>
+    </div>
+  </div>
+</section>
+<section class="team my-5 py-5">
+  <div class="container">
+    <div class="secTitle text-center mb-5">
+      <span
+        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
+      >
+        <span
+          class="bg-white textMainColor rounded-circle transition d-inline-block"
+          ><i class="fa fa-users me-2 ps-1"></i
         ></span>
 
         our team
       </span>
       <h2 class="my-3 textSecondColor fw-bold">Meet With Our Experts Team</h2>
+      <p class="text-muted mx-auto" style="max-width: 600px;">
+        Our dedicated team of travel professionals brings years of experience and passion to ensure your journey is nothing short of extraordinary.
+      </p>
     </div>
 
     <app-team-cart></app-team-cart>
@@ -48,20 +112,21 @@
       >
         <span
           class="bg-white textMainColor rounded-circle transition d-inline-block"
-          ><i class="fa fa-plane me-2 ps-1"></i
+          ><i class="fa fa-star me-2 ps-1"></i
         ></span>
 
-        testmonials
+        testimonials
       </span>
       <h2 class="my-3 text-white fw-bold">
         What Our Customers Are Saying About Us?
       </h2>
     </div>
 
-    <div class="mt-5">
+    <div class="testimonial-carousel-wrapper mt-5">
       <owl-carousel-o
         *ngIf="allReviews.length > 0"
         [options]="testimonialOptions"
+        class="testimonial-carousel"
       >
         @for (review of allReviews; track $index) {
         <ng-template carouselSlide>
@@ -71,7 +136,7 @@
       </owl-carousel-o>
     </div>
 
-    <h1 class="projectName text-white text-uppercase pb-3">H&S</h1>
+    <h1 class="projectName text-white text-uppercase pb-3">Gots</h1>
   </div>
 </section>
 

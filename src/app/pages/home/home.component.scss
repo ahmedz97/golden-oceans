@@ -43,22 +43,208 @@
 }
 
 .carts{
-    .iconBox{
-        border-radius:50px 50px 50px 0px ;
-        img{
-            width: 35px;
-            filter: brightness(0) invert(1);
+    .sideBar {
+        transition: all 0.3s ease;
+        border: 1px solid #EEEFEF;
+        min-height: 200px;
+        overflow: hidden;
+        
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(219, 159, 62, 0.15);
+            border-color: #DB9F3E;
+            
+            .iconBox-bg {
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.8;
             }
+            
+            .side-icon-left {
+                transform: translateY(-50%) scale(1.1);
+                box-shadow: 0 6px 20px rgba(219, 159, 62, 0.4);
+                
+                i {
+                    transform: rotate(360deg);
+                }
+            }
+        }
+    }
+    
+    .side-icon-left {
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #DB9F3E 0%, #F4C430 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        box-shadow: 0 4px 15px rgba(219, 159, 62, 0.3);
+        transition: all 0.3s ease;
+        
+        i {
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+    }
+    
+    .iconBox-bg {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #DB9F3E 0%, #F4C430 100%);
+        border-radius: 50px 50px 50px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.1;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+        
+        img {
+            width: 60px;
+            height: 60px;
+            filter: brightness(0) invert(1);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+    }
+    
+    .content-overlay {
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin: 1rem;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.98);
+            transform: translateY(-2px);
+        }
+    }
+
+    // Ensure equal heights for all cards
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        
+        > [class*="col-"] {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
+    .sideBar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
     }
 
     @media screen and (min-width:992px) {
-        
         p{
             line-clamp: 6;
             -webkit-line-clamp: 6;
             overflow: hidden;
             -webkit-box-orient: vertical;
             display: -webkit-box;
+        }
+    }
+    
+    // Mobile responsive improvements
+    @media (max-width: 768px) {
+        .sideBar {
+            min-height: 180px;
+            padding: 1rem !important;
+            
+            .side-icon-left {
+                width: 35px;
+                height: 35px;
+                left: -12px;
+                
+                i {
+                    font-size: 16px;
+                }
+            }
+            
+            .iconBox-bg {
+                width: 100px;
+                height: 100px;
+                top: 15px;
+                right: 15px;
+                
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+            
+            .content-overlay {
+                padding: 1rem;
+                margin: 0.5rem;
+            }
+            
+            h6 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem !important;
+            }
+            
+            p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .sideBar {
+            min-height: 160px;
+            padding: 0.75rem !important;
+            
+            .side-icon-left {
+                width: 30px;
+                height: 30px;
+                left: -10px;
+                
+                i {
+                    font-size: 14px;
+                }
+            }
+            
+            .iconBox-bg {
+                width: 80px;
+                height: 80px;
+                top: 10px;
+                right: 10px;
+                
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            
+            .content-overlay {
+                padding: 0.75rem;
+                margin: 0.25rem;
+            }
+            
+            h6 {
+                font-size: 1rem;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            p {
+                font-size: 0.85rem;
+            }
         }
     }
 }
