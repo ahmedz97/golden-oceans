@@ -4,7 +4,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SoundComponent } from './components/sound/sound.component';
+// import { SoundComponent } from './components/sound/sound.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ import { SoundComponent } from './components/sound/sound.component';
     RouterOutlet,
     FooterComponent,
     NgxSpinnerModule,
-    SoundComponent,
+    // SoundComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

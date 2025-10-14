@@ -210,7 +210,7 @@ export class HomeComponent implements OnInit {
         takeUntil(this.$destory), // close , clear suscripe memory on destroy
         tap((res) => {
           if (res) {
-            // console.log('home page -- ', res);
+            // console.log('home page -- ', res.data.data);
             this.allDestinations = res.data.data;
           }
         })
