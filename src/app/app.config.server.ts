@@ -14,7 +14,7 @@ const serverConfig: ApplicationConfig = {
     // استخدم الـ API الحقيقي عندك
     {
       provide: API_ROOT,
-      useValue: 'https://tourism-api.perfectsolutions4u.com/api',
+      useValue: 'https://backend-goldenoceans.perfectsolutions4u.com/api',
     },
   ],
 };

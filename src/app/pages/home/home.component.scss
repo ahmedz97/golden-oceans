@@ -416,7 +416,11 @@
 }
 
 .destinations{
-
+    .desTours{
+        margin-left: -150px;
+        width: 75%;
+        position: relative;
+    }
     .desTitle{
         background-color: rgba(10, 43, 75, 1);
         color: white;
@@ -432,11 +436,7 @@
         }
     }
 
-    .desTours{
-        margin-left: -150px;
-        width: 75%;
-        position: relative;
-    }
+  
 
     // Owl Carousel Navigation Positioning - Top Right
     ::ng-deep .owl-theme .owl-nav {

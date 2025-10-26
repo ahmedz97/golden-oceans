@@ -182,7 +182,7 @@
   </div>
 </section>
 
-<section class="popTours">
+<!-- <section class="popTours">
   <div class="container">
     <div class="flexBetween flex-wrap">
       <div class="secTitle">
@@ -229,9 +229,9 @@
       }
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="video my-5 pt-5">
+<!-- <section class="video my-5 pt-5">
   <div class="container-fluid">
     <div class="col-lg-10 ms-lg-auto">
       <div class="row g-4 align-items-center">
@@ -282,7 +282,7 @@
         </div>
       </div>
 
-      <!-- Modal -->
+      
       <div
         class="modal fade"
         id="videoModal"
@@ -318,9 +318,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="offers my-5 py-5">
+<!-- <section class="offers my-5 py-5">
   <div class="container">
     <div class="secTitle text-center">
       <span
@@ -362,7 +362,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- <section class="travelDeal my-5 py-5">
   <div class="container">
@@ -437,7 +437,7 @@
   <div
     class="container-fluid px-0 d-flex align-items-center flex-wrap flex-lg-nowrap gap-4 gap-lg-0"
   >
-    <div class="desTitle d-flex flex-column justify-content-center">
+    <div class="desTitle   d-flex flex-column justify-content-center">
       <h2 class="">Multi-Country Tours</h2>
       <p>
         Experience a journey through multiple destinations with expertly curated
@@ -446,8 +446,8 @@
       <button class="secBtn Btn">explore tour</button>
     </div>
 
-    <div class="desTours ps-5 pe-0 py-5">
-      <owl-carousel-o
+    <div class="desTours  z-3 ps-5 pe-0 py-5">
+      <owl-carousel-o class="m-5"
         *ngIf="shuffledTours.length > 0"
         [options]="destinationOptions"
       >
@@ -576,6 +576,5 @@
   </div>
 </section>
 
-<app-booknow></app-booknow>
 
 <app-partner-slider></app-partner-slider>

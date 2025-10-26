@@ -62,7 +62,7 @@ export const appConfig: ApplicationConfig = {
     provideNgxCountAnimations(),
     {
       provide: API_ROOT,
-      useValue: 'https://tourism-api.perfectsolutions4u.com/api',
+      useValue: 'https://backend-goldenoceans.perfectsolutions4u.com/api',
     },
     {
       provide: ACCESS_TOKEN_GETTER,
