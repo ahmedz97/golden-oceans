@@ -2,21 +2,23 @@
   @for (item of faqs; track $index) {
   <mat-expansion-panel class="my-4 rounded-4" #panel>
     <mat-expansion-panel-header class="">
-      <mat-panel-title class="h5 mb-0 fw-bold">
-        {{ item.question }}
-      </mat-panel-title>
-
       <!-- Custom Icon -->
       <mat-panel-description>
         <i
           *ngIf="!panel.expanded"
-          class="fa fa-plus border flexCenter textMainColor rounded-circle p-1 px-0"
+          class="fa-solid fa-arrow-up fa-rotate-by border flexCenter text-white bgSecondColor rounded-circle p-1 px-0"
+          style="--fa-rotate-angle: 45deg"
         ></i>
         <i
           *ngIf="panel.expanded"
-          class="fa fa-minus border flexCenter textSecondColor rounded-circle p-1 px-0"
+          class="fa-solid fa-arrow-up fa-rotate-by text-dark fs-5"
+          style="--fa-rotate-angle: 45deg"
         ></i>
       </mat-panel-description>
+
+      <mat-panel-title class="h5 mb-0 fw-bold">
+        {{ item.question }}
+      </mat-panel-title>
     </mat-expansion-panel-header>
 
     <h6 [innerHTML]="item.answer"></h6>

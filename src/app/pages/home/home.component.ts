@@ -18,6 +18,7 @@ import { TestimonialCartComponent } from '../../components/testimonial-cart/test
 import { PartnerSliderComponent } from '../../components/partner-slider/partner-slider.component';
 import { AboutsectionComponent } from '../../components/aboutsection/aboutsection.component';
 import { Subject, takeUntil, tap } from 'rxjs';
+import { DestinationCartComponent } from '../../components/destination-cart/destination-cart.component';
 
 interface DestinationPriceMap {
   [title: string]: number;
@@ -35,9 +36,10 @@ interface DestinationPriceMap {
     TeamCartComponent,
     BlogCartComponent,
     BooknowComponent,
-    TestimonialCartComponent,
+    // TestimonialCartComponent,
     PartnerSliderComponent,
     AboutsectionComponent,
+    DestinationCartComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -67,6 +69,7 @@ export class HomeComponent implements OnInit {
   activeCategoryTitle: string | null = null;
   allBlogs: any[] = [];
   allReviews: any[] = [];
+  activeDestinationTab: string = 'all';
 
   mainSecSlider: any[] = [
     { src: '../../../assets/image/Wallpaper/first.jpg' },
@@ -152,10 +155,10 @@ export class HomeComponent implements OnInit {
         console.log(this.alltours);
         console.log(this.destinationPrices);
         console.log(this.categoryPrices);
-        
+
         // Create shuffled tours for Travel Deals section
         this.createShuffledTours();
-        
+
         // this.getDestination();
         // this.getCategory();
       },
@@ -331,6 +334,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Set active destination tab
+  setActiveDestinationTab(tab: string): void {
+    this.activeDestinationTab = tab;
+    // You can add filtering logic here based on the selected tab
+    console.log('Active destination tab:', tab);
+  }
+
   // owl carousel options
   mainSecOptions: OwlOptions = {
     loop: true,
@@ -338,11 +348,15 @@ export class HomeComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     autoplay: true,
-    dots: false,
+    dots: true,
     // navSpeed: 10000,
     margin: 20,
     items: 1,
-    nav: false,
+    nav: true,
+    navText: [
+      '<i class="fa fa-angle-left"></i>',
+      '<i class="fa fa-angle-right"></i>',
+    ],
     // autoplaySpeed: 1500,
     smartSpeed: 1500, // = navSpeed , autoplaySpeed
   };
@@ -352,15 +366,16 @@ export class HomeComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     autoplay: true,
-    dots: true,
+    dots: false,
     smartSpeed: 2000,
-    margin: 20,
+    margin: 30,
     autoplayTimeout: 4000,
     responsive: {
       0: { items: 1 },
-      576: { items: 2 },
-      768: { items: 3 },
-      992: { items: 4 },
+      500: { items: 1.5 },
+      600: { items: 2 },
+      768: { items: 2.5 },
+      992: { items: 3 },
     },
     nav: true,
     navText: [

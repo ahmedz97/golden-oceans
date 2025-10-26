@@ -1,44 +1,32 @@
 <div
   role="button"
   [routerLink]="['/destination', destination.slug]"
-  class="item p-2 overflow-hidden mb-4 position-relative"
+  class="item p-2 overflow-hidden mb-4 cPointer"
 >
-  <figure class="overflow-hidden">
+  <figure class="overflow-hidden rounded-4 position-relative imgHover">
     <img
       [src]="destination.featured_image"
-      class="w-100"
-      height="350px"
+      class="w-100 transition"
+      height="250px"
       [alt]="destination.title"
       [title]="destination.title"
     />
-  </figure>
-  <figcaption class="position-relative text-center py-2 px-3 shadow bg-white">
-    <h5
-      [routerLink]="['/destination', destination.slug]"
-      class="textSecondColor text-capitalize fw-bold"
+    <div
+      class="bg-dark bg-opacity-25 position-absolute top-0 start-0 end-0 bottom-0 p-3 d-flex flex-column justify-content-end"
     >
-      {{ destination.title }}
-    </h5>
-    <div>
-      @if (destination.rate) {
+      <h5
+        [routerLink]="['/destination', destination.slug]"
+        class="text-white text-capitalize h3 fw-bold"
+      >
+        {{ destination.title }}
+      </h5>
 
-      <span *ngFor="let _ of getStars(destination.rate)">
-        <i class="fa fa-star text-warning"></i>
-      </span>
-      <span class="textSecondColor ms-2">
-        ({{ destination.display_order }} reviews)
-      </span>
-      }
+      <button
+        [routerLink]="['/destination', destination.slug]"
+        class="secBtn Btn text-white w-75"
+      >
+        see more
+      </button>
     </div>
-    <div class="d-flex align-items-center justify-content-around">
-      <span>
-        <i class="fa fa-coins me-1 texttMainColor"></i>
-        {{ destination.start_price || 0 | currency }} start
-      </span>
-      <span>
-        <i class="fa fa-earth-africa me-1 texttMainColor"></i>
-        {{ destination.tours_count }} tour
-      </span>
-    </div>
-  </figcaption>
+  </figure>
 </div>

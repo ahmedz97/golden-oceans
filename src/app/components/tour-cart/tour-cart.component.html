@@ -4,10 +4,10 @@
   [ngClass]="
     layoutType === 'grid' ? 'row gx-3 flex-column' : 'row gx-3 flex-wrap'
   "
-  class="item overflow-hidden sideBar transition"
+  class="item overflow-hidden transition p-3"
 >
   <div [ngClass]="layoutType === 'grid' ? '' : ' col-md-5'" class="px-0">
-    <figure class="mb-0 overflow-hidden position-relative">
+    <figure class="mb-0 rounded-4 overflow-hidden position-relative">
       <img
         [src]="tour.featured_image"
         class="w-100"
@@ -18,7 +18,7 @@
       />
       <button
         (click)="addFav(tour.id, $event)"
-        class="mainBtn Btn position-absolute bottom-0 start-0 p-2"
+        class="mainBtn Btn position-absolute top-0 end-0 p-1 pb-0 m-2"
       >
         <i
           [ngClass]="{
@@ -31,31 +31,32 @@
         ></i>
       </button>
 
-      @if (tour.featured) {
+      <!-- @if (tour.featured) {
       <span
         class="text-uppercase text-white py-0 px-2 m-1 me-3 mainBtn Btn position-absolute top-0 end-0"
         >featured</span
       >
-      }
+      } -->
     </figure>
   </div>
 
-  <div [ngClass]="layoutType === 'grid' ? '' : ' col-md-7'" class="">
-    <figcaption class="p-2">
-      <div class="flexBetween text-capitalize">
+  <div [ngClass]="layoutType === 'grid' ? '' : ' col-md-7'" class="px-0">
+    <figcaption class="bg-white p-2">
+      <!-- <div class="flexBetween text-capitalize">
         <div>
           <i class="fa fa-tag me-1 textMainColor"></i>
           <span class="textSecondColor">{{ tour.type }}</span>
         </div>
         
-      </div>
+      </div> -->
       <h3
         [routerLink]="['/tour', tour.slug]"
-        class="h4 text-capitalize transition cPointer"
+        class="text-capitalize transition cPointer py-2"
       >
         {{ tour.title }}
       </h3>
-      <a href="" class="">
+      <p class="overview_text textMainColor">{{ tour.overview_text }}</p>
+      <!-- <a href="" class="">
         <i class="fa fa-location-dot me-1 textMainColor"></i>
         <span class="textSecondColor">{{ getDestinationText() }}</span>
       </a>
@@ -68,21 +69,26 @@
         <span class="textSecondColor">
           ({{ getReviewCount() }} Reviews)</span
         >
-      </div>
-      <div class="mb-3">
-        <i class="fa fa-clock-four me-1 textMainColor"></i>
-        <span class="textSecondColor">{{ tour.duration }}</span>
+      </div> -->
+
+      <div class="flexBetween flex-wrap textMainColor">
+        <span
+          >From <b>{{ tour.start_from | currency }}</b></span
+        >
+
+        <div class="">
+          <i class="fa fa-clock-four me-1"></i>
+          <span>{{ tour.duration }}</span>
+        </div>
       </div>
 
-      <div class="textSecondColor py-2 border-top flexBetween text-capitalize">
-        <span
-          >from
-          <b class="textThirdColor">{{ tour.start_from | currency }}</b></span
-        >
-        <span [routerLink]="['/tour', tour.slug]"
-          >see more <i class="fa fa-arrow-right ms-1"></i
-        ></span>
-      </div>
+      <button
+        [routerLink]="['/tour', tour.slug]"
+        class="mainBtn Btn w-100 mt-2 rounded-3"
+      >
+        view trip
+        <!-- <i class="fa fa-arrow-right ms-1 rounded-circle"></i> -->
+      </button>
     </figcaption>
   </div>
 </div>

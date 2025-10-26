@@ -16,8 +16,8 @@
   // height: 70px;
   z-index: 1030;
   .navbar-brand{
-    width: 200px;
-    height: 90px;
+    width: 120px;
+    height: 60px;
   }
   @media screen and (max-width:586px) {
     .navbar-brand{
@@ -37,7 +37,7 @@
 
 .navbar-nav .nav-link{
 // color: #fff !important;
-  &.active {
+  &.active , .dropdown-item.active , & span.active {
     color: $primary-color !important;
     // background-color: rgba($primary-color, 0.1);
     border-radius: 0.375rem;

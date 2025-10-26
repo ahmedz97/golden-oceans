@@ -1,123 +1,258 @@
 <section class="my-5">
   <div class="container">
-    <!-- sections nav -->
-    <div #controlsBar class="p-3 border rounded-3 my-4 d-flex flex-wrap gap-2 controls">
-      <button class="text-capitalize p-2" (click)="scrollTo('gallery')">
-        gallery
-      </button>
-      <button class="text-capitalize p-2" (click)="scrollTo('description')">
-        description
-      </button>
-      <button class="text-capitalize p-2" (click)="scrollTo('inclusive')">
-        inclusive
-      </button>
-      <button class="text-capitalize p-2" (click)="scrollTo('itinerary')">
-        itinerary
-      </button>
-      <button class="text-capitalize p-2" (click)="scrollTo('map')">map</button>
-      <button class="text-capitalize p-2" (click)="scrollTo('faq')">faq</button>
-      <button class="text-capitalize p-2" (click)="scrollTo('reviews')">
-        reviews
-      </button>
-      <button class="text-capitalize p-2" (click)="scrollTo('book-now')">
-        book now
-      </button>
+    <!-- tour title  , rate -->
+    <div class="textSecondColor mb-4">
+      <h2 class="fw-bold textMainColor text-capitalize mb-2 h3">
+        {{ tourData?.title }}
+      </h2>
+      <div class="flexBetween mb-4">
+        <div>
+          <span class="specialBorder text-warning px-2 py-1">
+            @for (star of [0,1,2,3,4]; track $index) {
+
+            <i
+              [ngClass]="
+                star <= getAverageRating() ? 'fa fa-star' : 'fa-regular fa-star'
+              "
+              class="fa fa-star me-1"
+            ></i>
+            }
+
+            <span class="">{{ getAverageRating() | number : "1.1-1" }}</span>
+          </span>
+          <span class="mx-2"
+            >({{
+              tourReviews.length || tourData?.reviews_number || 0
+            }}
+            reviews)</span
+          >
+        </div>
+        <span>
+          <i class="fa fa-location-dot me-2"></i>
+          <span>{{ tourData?.destinationsTitle }}</span>
+        </span>
+      </div>
+
+      <!-- gallery Modal -->
+      <div
+        class="modal fade"
+        id="galleryModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-transparent border-0">
+            <div class="modal-header bg-transparent border-0">
+              <button
+                type="button"
+                class="btn-close bg-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body bg-transparent border-0">
+              <owl-carousel-o
+                *ngIf="renderCarousel"
+                #owlRef
+                [options]="galleryOptions"
+              >
+                <ng-container *ngFor="let slide of tourGallery">
+                  <ng-template carouselSlide>
+                    <figure class="rounded-3 overflow-hidden imgHover">
+                      <img
+                        class="w-100 d-block"
+                        [style.height.px]="400"
+                        [src]="slide"
+                        [alt]="tourData?.title || 'gallery image'"
+                        [title]="tourData?.title || ''"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+              <!-- <owl-carousel-o [options]="galleryOptions">
+                <ng-container *ngFor="let slide of tourGallery">
+                  <ng-template carouselSlide>
+                    <figure class="rounded-3 overflow-hidden imgHover">
+                      <img
+                        loading="lazy"
+                        height="400px"
+                        class="w-100"
+                        [src]="slide"
+                        [alt]="tourData?.title"
+                        [title]="tourData?.title"
+                      />
+                    </figure>
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- gallery -->
+      <div class="anchor-section" id="gallery">
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <figure
+              class="rounded-3 overflow-hidden imgHover mb-0 position-relative"
+            >
+              <img
+                [src]="tourGallery[0]"
+                [alt]="tourData?.title"
+                [title]="tourData?.title"
+                height="420px"
+                class="w-100"
+                loading="lazy"
+              />
+              <div
+                class="m-3 text-white position-absolute bottom-0 end-0 d-md-none"
+              >
+                <span
+                  data-bs-toggle="modal"
+                  data-bs-target="#galleryModal"
+                  role="button"
+                  class="text-capitalize cPointer"
+                >
+                  <i class="fa-solid fa-photo-film me-2"></i>
+                  show all photos
+                </span>
+              </div>
+            </figure>
+          </div>
+          <div class="col-md-6 d-none d-md-block">
+            <div class="row g-2">
+              @for (img of tourGallery.slice(1,4); track $index) {
+              <div class="col-6">
+                <figure class="rounded-3 overflow-hidden imgHover mb-0">
+                  <img
+                    [src]="img"
+                    [alt]="tourData?.title"
+                    [title]="tourData?.title"
+                    height="205px"
+                    class="w-100"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              }
+              <div class="col-6">
+                <div class="flexCenter h-100">
+                  <span
+                    data-bs-toggle="modal"
+                    data-bs-target="#galleryModal"
+                    role="button"
+                    class="text-capitalize cPointer"
+                  >
+                    <i class="fa-solid fa-photo-film me-2"></i>
+                    show all photos
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <owl-carousel-o [options]="galleryOptions">
+          <ng-container *ngFor="let slide of tourGallery">
+            <ng-template carouselSlide>
+              <figure class="rounded-3 overflow-hidden imgHover">
+                <img
+                  loading="lazy"
+                  height="400px"
+                  class="w-100"
+                  [src]="slide"
+                  [alt]="tourData?.title"
+                  [title]="tourData?.title"
+                />
+              </figure>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o> -->
+
+        <!-- icons -->
+        <div class="row g-3 mb-4 textMainColor">
+          <div class="col-lg-3 col-md-6">
+            <div
+              class="d-flex flex-column align-items-center text-capitalize p-3 border rounded-3"
+            >
+              <i class="fa fa-clock-four fs-1 mb-3"></i>
+              <h5 class="textSecondColor h6 fw-bold">duration</h5>
+              <span>{{ tourData?.duration }}</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div
+              class="d-flex flex-column align-items-center text-capitalize p-3 border rounded-3"
+            >
+              <i class="fa fa-calendar-days fs-1 mb-3"></i>
+              <h5 class="textSecondColor h6 fw-bold">time</h5>
+              <span>{{ tourData?.pickup_time }}</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div
+              class="d-flex flex-column align-items-center text-capitalize p-3 border rounded-3"
+            >
+              <i class="fa fa-user-group fs-1 mb-3"></i>
+
+              <h5 class="textSecondColor h6 fw-bold">avability</h5>
+              <span>{{ tourData?.run }}</span>
+              <div></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div
+              class="d-flex flex-column align-items-center text-capitalize p-3 border rounded-3"
+            >
+              <i class="fa fa-grid-horizontal fs-1 mb-3"></i>
+
+              <h5 class="textSecondColor h6 fw-bold">Tour Type</h5>
+              <span>{{ tourData?.type }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="row g-3">
       <div class="col-lg-8">
         <div>
-          <!-- gallery -->
-          <div class="anchor-section" id="gallery">
-            <owl-carousel-o [options]="galleryOptions">
-              <ng-container *ngFor="let slide of tourGallery">
-                <ng-template carouselSlide>
-                  <figure class="rounded-3 overflow-hidden imgHover">
-                    <img loading="lazy" height="400px" class="w-100" [src]="slide" [alt]="tourData?.title"
-                      [title]="tourData?.title" />
-                  </figure>
-                </ng-template>
-              </ng-container>
-            </owl-carousel-o>
-            <!-- tour title  , rate -->
-            <div class="flexBetween flex-wrap textSecondColor mb-4">
-              <div>
-                <h2 class="fw-bold text-capitalize mb-2">
-                  {{ tourData?.title }}
-                </h2>
-                <span>
-                  <i class="fa fa-location-dot me-2 textMainColor"></i>
-                  <span>{{ tourData?.destinationsTitle }}</span>
-                </span>
-              </div>
-              <div>
-                <span class="specialBorder text-warning px-2 py-1">
-                  @for (star of [0,1,2,3,4]; track $index) {
-
-                  <i [ngClass]="
-                      star <= getAverageRating()
-                        ? 'fa fa-star'
-                        : 'fa-regular fa-star'
-                    " class="fa fa-star me-1"></i>
-                  }
-
-                  <span class="">{{
-                    getAverageRating() | number : "1.1-1"
-                    }}</span>
-                </span>
-                <span class="mx-2">({{
-                  tourReviews.length || tourData?.reviews_number || 0
-                  }}
-                  reviews)</span>
-              </div>
-            </div>
-            <!-- icons -->
-            <div class="row g-3 py-3 border-top border-bottom mb-4">
-              <div class="col-lg-3 col-md-6">
-                <div class="d-flex text-capitalize">
-                  <div class="iconBox specialBorder flex-shrink-0">
-                    <i class="fa fa-clock-four text-white"></i>
-                  </div>
-                  <div>
-                    <h5 class="textSecondColor h6 fw-bold">duration</h5>
-                    <span>{{ tourData?.duration }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6">
-                <div class="d-flex text-capitalize">
-                  <div class="iconBox specialBorder flex-shrink-0">
-                    <i class="fa fa-calendar-days text-white"></i>
-                  </div>
-                  <div>
-                    <h5 class="textSecondColor h6 fw-bold">time</h5>
-                    <span>{{ tourData?.pickup_time }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6">
-                <div class="d-flex text-capitalize">
-                  <div class="iconBox specialBorder flex-shrink-0">
-                    <i class="fa fa-user-group text-white"></i>
-                  </div>
-                  <div>
-                    <h5 class="textSecondColor h6 fw-bold">avability</h5>
-                    <span>{{ tourData?.run }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6">
-                <div class="d-flex text-capitalize">
-                  <div class="iconBox specialBorder flex-shrink-0">
-                    <i class="fa fa-grid-horizontal text-white"></i>
-                  </div>
-                  <div>
-                    <h5 class="textSecondColor h6 fw-bold">Tour Type</h5>
-                    <span>{{ tourData?.type }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <!-- sections nav -->
+          <div
+            #controlsBar
+            class="p-3 border rounded-3 mb-4 d-flex flex-wrap gap-2 controls"
+          >
+            <button class="text-capitalize p-2" (click)="scrollTo('gallery')">
+              gallery
+            </button>
+            <button
+              class="text-capitalize p-2"
+              (click)="scrollTo('description')"
+            >
+              description
+            </button>
+            <button class="text-capitalize p-2" (click)="scrollTo('inclusive')">
+              inclusive
+            </button>
+            <button class="text-capitalize p-2" (click)="scrollTo('itinerary')">
+              itinerary
+            </button>
+            <button class="text-capitalize p-2" (click)="scrollTo('map')">
+              map
+            </button>
+            <button class="text-capitalize p-2" (click)="scrollTo('faq')">
+              faq
+            </button>
+            <button class="text-capitalize p-2" (click)="scrollTo('reviews')">
+              reviews
+            </button>
+            <button class="text-capitalize p-2" (click)="scrollTo('book-now')">
+              book now
+            </button>
           </div>
 
           <!-- description & highlights -->
@@ -133,29 +268,41 @@
           </div>
 
           <!-- inclusive=> included & not included   -->
-          <div class="anchor-section" id="inclusive" class="row g-3 my-4 pb-3 border-bottom">
+          <div
+            class="anchor-section"
+            id="inclusive"
+            class="row g-3 my-4 pb-3 border-bottom"
+          >
             <div class="col-md-6">
-              <h5 class="fw-bold pb-3 border-bottom text-success text-capitalize">
+              <h5
+                class="fw-bold pb-2 mb-2 border-bottom text-success text-capitalize"
+              >
                 included
               </h5>
-              <div class="p-3 rounded-3 bgPrimaryWhiteColor">
+              <div class="p-3 rounded-3 bg-success bg-opacity-10">
                 <div *ngFor="let item of tourIncluded">
                   <div class="text-capitalize d-flex mb-3">
-                    <i class="fa fa-check-circle me-2 text-success mt-1 flex-shrink-0"></i>
-                    <span>{{ item }}</span>
+                    <i
+                      class="fa-regular fa-check-circle me-2 text-success mt-2 flex-shrink-0"
+                    ></i>
+                    <span class="pt-1">{{ item }}</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <h5 class="fw-bold pb-3 border-bottom text-danger text-capitalize">
+              <h5
+                class="fw-bold pb-2 mb-2 border-bottom text-danger text-capitalize"
+              >
                 not included
               </h5>
-              <div class="p-3 rounded-3 bgPrimaryWhiteColor">
+              <div class="p-3 rounded-3 bg-danger bg-opacity-10">
                 <div *ngFor="let item of tourExcluded">
                   <div class="text-capitalize d-flex mb-3">
-                    <i class="fa fa-xmark-circle me-2 text-danger mt-1 flex-shrink-0"></i>
-                    <span>{{ item }}</span>
+                    <i
+                      class="fa-regular fa-xmark-circle me-2 text-danger mt-2 flex-shrink-0"
+                    ></i>
+                    <span class="pt-1">{{ item }}</span>
                   </div>
                 </div>
               </div>
@@ -163,22 +310,39 @@
           </div>
 
           <!-- itinerary -->
-          <div class="anchor-section" id="itinerary" class="mb-4 pb-3 border-bottom">
+          <div
+            class="anchor-section"
+            id="itinerary"
+            class="mb-4 pb-3 border-bottom"
+          >
             <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
               itinerary
             </h5>
 
             <mat-accordion multi>
               @for (item of tourItenary; track $index) {
-              <mat-expansion-panel class="my-4 rounded-4" (opened)="panelOpenState = true"
-                (closed)="panelOpenState = false">
+              <mat-expansion-panel class="my-4 rounded-4" #panel>
                 <mat-expansion-panel-header class="py-2">
                   <!-- Custom Icon -->
                   <mat-panel-description>
-                    <i *ngIf="!panelOpenState"
-                      class="fa fa-plus border textMainColor rounded-circle p-1 flexCenter"></i>
-                    <i *ngIf="panelOpenState"
-                      class="fa fa-minus border textSecondColor rounded-circle p-1 flexCenter"></i>
+                    <i
+                      *ngIf="!panel.expanded"
+                      class="fa-solid fa-arrow-up fa-rotate-by border flexCenter text-white bgSecondColor rounded-circle p-1 px-0"
+                      style="--fa-rotate-angle: 45deg"
+                    ></i>
+                    <i
+                      *ngIf="panel.expanded"
+                      class="fa-solid fa-arrow-up fa-rotate-by text-dark fs-5"
+                      style="--fa-rotate-angle: 45deg"
+                    ></i>
+                    <!-- <i
+                      *ngIf="!panelOpenState"
+                      class="fa fa-plus border textMainColor rounded-circle p-1 flexCenter"
+                    ></i>
+                    <i
+                      *ngIf="panelOpenState"
+                      class="fa fa-minus border textSecondColor rounded-circle p-1 flexCenter"
+                    ></i> -->
                   </mat-panel-description>
 
                   <mat-panel-title class="h5 mb-0 fw-bold">
@@ -186,7 +350,10 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <div class="fs-sm-5 fs-6" [innerHTML]="getSanitizedHtml(item.description)"></div>
+                <div
+                  class="fs-sm-5 fs-6"
+                  [innerHTML]="getSanitizedHtml(item.description)"
+                ></div>
               </mat-expansion-panel>
               }
             </mat-accordion>
@@ -217,8 +384,11 @@
                 {{ getAverageRating() | number : "1.1-1" }}
               </p>
               <span>
-                <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" class="fa-star textSecondColor"
-                  [ngClass]="i < getAverageRating() ? 'fa' : 'fa-regular'"></i>
+                <i
+                  *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                  class="fa-star textSecondColor"
+                  [ngClass]="i < getAverageRating() ? 'fa' : 'fa-regular'"
+                ></i>
               </span>
 
               <h6 class="fw-bold textSecondColor h4 mt-3">
@@ -241,25 +411,38 @@
 
               <!-- No reviews message -->
               <div *ngIf="tourReviews.length === 0" class="text-center py-4">
-                <i class="fa fa-comment-slash text-muted" style="font-size: 3rem"></i>
+                <i
+                  class="fa fa-comment-slash text-muted"
+                  style="font-size: 3rem"
+                ></i>
                 <p class="text-muted mt-3">
                   No reviews yet. Be the first to review this tour!
                 </p>
               </div>
 
               <!-- Reviews list -->
-              <div class="row justify-content-between g-3 my-3" *ngFor="let item of tourReviews">
+              <div
+                class="row justify-content-between g-3 my-3"
+                *ngFor="let item of tourReviews"
+              >
                 <div class="col-lg-2 col-sm-3 col-4">
                   <figure class="rounded-circle overflow-hidden">
-                    <img [src]="
+                    <img
+                      [src]="
                         item.user_avatar || '../../../assets/image/blog2.jpg'
-                      " class="w-100 h-100 object-fit-cover" [alt]="item.reviewer_name" [title]="item.reviewer_name"
-                      onerror="this.src='../../../assets/image/blog2.jpg'" />
+                      "
+                      class="w-100 h-100 object-fit-cover"
+                      [alt]="item.reviewer_name"
+                      [title]="item.reviewer_name"
+                      onerror="this.src='../../../assets/image/blog2.jpg'"
+                    />
                   </figure>
                 </div>
                 <div class="col-lg-10 col-sm-9 col-8">
                   <div>
-                    <div class="d-flex align-items-center justify-content-between flex-wrap">
+                    <div
+                      class="d-flex align-items-center justify-content-between flex-wrap"
+                    >
                       <div class="text-capitalize">
                         <h6 class="fw-semibold mb-0">
                           {{ item.reviewer_name }}
@@ -270,8 +453,11 @@
                       </div>
                       <div class="font-sm">
                         <span class="pe-3">({{ item.rate }})</span>
-                        <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" class="textSecondColor fa-star"
-                          [ngClass]="i < (item.rate ?? 0) ? 'fa' : 'fa-regular'"></i>
+                        <i
+                          *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                          class="textSecondColor fa-star"
+                          [ngClass]="i < (item.rate ?? 0) ? 'fa' : 'fa-regular'"
+                        ></i>
                       </div>
                     </div>
                     <div>
@@ -293,27 +479,65 @@
                 >Don’t Be Afraid you're all information are be secure not be
                 published</span
               > -->
-              <form [formGroup]="writeReview" (ngSubmit)="getWriteReview()" class="row g-3 mt-2" id="writeReview">
+              <form
+                [formGroup]="writeReview"
+                (ngSubmit)="getWriteReview()"
+                class="row g-3 mt-2"
+                id="writeReview"
+              >
                 <div class="col-md-6 mt-3">
-                  <input type="text" formControlName="reviewer_name" placeholder="Name..." class="form-control ps-3" />
+                  <input
+                    type="text"
+                    formControlName="reviewer_name"
+                    placeholder="Name..."
+                    class="form-control ps-3"
+                  />
                 </div>
                 <div class="col-md-6 mt-3">
-                  <input type="number" formControlName="rate" placeholder="Rate of Star ..." class="form-control ps-3"
-                    max="5" min="0" required (input)="validateRate($event)" />
+                  <input
+                    type="number"
+                    formControlName="rate"
+                    placeholder="Rate of Star ..."
+                    class="form-control ps-3"
+                    max="5"
+                    min="0"
+                    required
+                    (input)="validateRate($event)"
+                  />
                 </div>
                 <div class="col-12 my-3">
                   <div class="d-flex mb-4">
-                    <input type="checkbox" id="confirmData" formControlName="confirm" class="mt-1" />
-                    <label for="confirmData" class="text-capitalize ms-2 fw-light">
+                    <input
+                      type="checkbox"
+                      id="confirmData"
+                      formControlName="confirm"
+                      class="mt-1"
+                    />
+                    <label
+                      for="confirmData"
+                      class="text-capitalize ms-2 fw-light"
+                    >
                       Save your name, rate for the next time review
                     </label>
                   </div>
 
-                  <textarea placeholder="Write a Comment...." formControlName="content" id="comment" cols="30" rows="5"
-                    class="form-control mb-3"></textarea>
+                  <textarea
+                    placeholder="Write a Comment...."
+                    formControlName="content"
+                    id="comment"
+                    cols="30"
+                    rows="5"
+                    class="form-control mb-3"
+                  ></textarea>
 
-                  <button type="submit" class="Btn mainBtn py-2 px-3 text-capitalize">
-                    <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin me-1"></i>
+                  <button
+                    type="submit"
+                    class="Btn mainBtn py-2 px-3 text-capitalize"
+                  >
+                    <i
+                      *ngIf="isLoading"
+                      class="fa-solid fa-spinner fa-spin me-1"
+                    ></i>
                     Leave A Review
                   </button>
                 </div>
@@ -333,132 +557,336 @@
               From
               <b class="textMainColor fs-5 ms-2">{{
                 bookingFormData.get("infants")?.value * infantPrice +
-                bookingFormData.get("adults")?.value * adultPrice +
-                bookingFormData.get("children")?.value * childPrice | currency
-                }}</b>
+                  bookingFormData.get("adults")?.value * adultPrice +
+                  bookingFormData.get("children")?.value * childPrice | currency
+              }}</b>
             </h6>
             <form [formGroup]="bookingFormData">
               <mat-form-field class="w-100">
                 <mat-label class="textSecondColor">Choose a date</mat-label>
-                <input formControlName="start_date" required matInput [matDatepicker]="picker" />
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <input
+                  formControlName="start_date"
+                  required
+                  matInput
+                  [matDatepicker]="picker"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
 
-              <div data-bs-auto-close="outside"
-                class="tickets dropdown-center text-capitalize p-3 border rounded-3 textSecondColor mb-3">
-                <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <label>{{
-                    bookingFormData.get("infants")?.value +
-                    bookingFormData.get("adults")?.value +
-                    bookingFormData.get("children")?.value
+              <div
+                data-bs-auto-close="outside"
+                class="tickets dropdown-center text-capitalize p-3 border rounded-3 textSecondColor mb-3"
+              >
+                <div>
+                  <label
+                    >{{
+                      bookingFormData.get("infants")?.value +
+                        bookingFormData.get("adults")?.value +
+                        bookingFormData.get("children")?.value
                     }}
-                    guests</label>
+                    guests</label
+                  >
                   <h6>
                     {{ bookingFormData.get("adults")?.value }} adults ,
                     {{ bookingFormData.get("children")?.value }} children ,
                     {{ bookingFormData.get("infants")?.value }} infants
                   </h6>
                 </div>
-                <ul class="dropdown-menu w-100" (click)="$event.stopPropagation()">
+                <div>
+                  <div
+                    class="d-flex align-items-center justify-content-between mb-2"
+                  >
+                    <label for="adults">
+                      <p class="pe-2 mb-1">Adults(+12years)</p>
+                      <span class="textMainColor fw-bold"
+                        >price ==> $
+                        {{
+                          bookingFormData.get("adults")?.value * adultPrice
+                        }}</span
+                      >
+                    </label>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <button
+                        (click)="
+                          decrement('adults');
+                          getTourPricing(bookingFormData.get('adults')?.value)
+                        "
+                        [ngClass]="{
+                          disabled: bookingFormData.get('adults')?.value == 0
+                        }"
+                        class="secBtn Btn p-1 px-2"
+                      >
+                        -
+                      </button>
+                      <span class="setCount text-center">{{
+                        bookingFormData.get("adults")?.value
+                      }}</span>
+                      <input type="hidden" value="0" formControlName="adults" />
+                      <button
+                        (click)="
+                          increment('adults');
+                          getTourPricing(bookingFormData.get('adults')?.value)
+                        "
+                        class="secBtn Btn p-1 px-2"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="d-flex align-items-center justify-content-between mb-2"
+                  >
+                    <label for="children">
+                      <p class="pe-2 mb-1">Children(2-12years)</p>
+                      <span class="textMainColor fw-bold"
+                        >price ==> $
+                        {{
+                          bookingFormData.get("children")?.value * childPrice
+                        }}
+                      </span>
+                    </label>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <button
+                        (click)="
+                          decrement('children');
+                          getTourPricing(bookingFormData.get('adults')?.value)
+                        "
+                        class="secBtn Btn p-1 px-2"
+                        [ngClass]="{
+                          disabled: bookingFormData.get('children')?.value == 0
+                        }"
+                      >
+                        -
+                      </button>
+                      <span class="setCount text-center">{{
+                        bookingFormData.get("children")?.value
+                      }}</span>
+                      <input
+                        type="hidden"
+                        value="0"
+                        formControlName="children"
+                      />
+                      <button
+                        (click)="
+                          increment('children');
+                          getTourPricing(bookingFormData.get('adults')?.value)
+                        "
+                        class="secBtn Btn p-1 px-2"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="d-flex align-items-center justify-content-between mb-2"
+                  >
+                    <label for="infants">
+                      <p class="pe-2 mb-1">infants(0-2years)</p>
+                      <span class="textMainColor fw-bold"
+                        >price ==> $
+                        {{
+                          bookingFormData.get("infants")?.value * infantPrice
+                        }}</span
+                      >
+                    </label>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <button
+                        (click)="
+                          decrement('infants');
+                          getTourPricing(bookingFormData.get('adults')?.value)
+                        "
+                        class="secBtn Btn p-1 px-2"
+                        [ngClass]="{
+                          disabled: bookingFormData.get('infants')?.value == 0
+                        }"
+                      >
+                        -
+                      </button>
+                      <span class="setCount text-center">{{
+                        bookingFormData.get("infants")?.value
+                      }}</span>
+                      <input
+                        type="hidden"
+                        value="0"
+                        formControlName="infants"
+                      />
+                      <button
+                        (click)="
+                          increment('infants');
+                          getTourPricing(bookingFormData.get('adults')?.value)
+                        "
+                        class="secBtn Btn p-1 px-2"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- <ul
+                  class="dropdown-menu w-100"
+                  (click)="$event.stopPropagation()"
+                >
                   <li class="dropdown-item">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div
+                      class="d-flex align-items-center justify-content-between mb-2"
+                    >
                       <label for="adults">
                         <p class="pe-2 mb-1">Adults(+12years)</p>
-                        <span class="textMainColor fw-bold">price ==> $
+                        <span class="textMainColor fw-bold"
+                          >price ==> $
                           {{
-                          bookingFormData.get("adults")?.value * adultPrice
-                          }}</span>
+                            bookingFormData.get("adults")?.value * adultPrice
+                          }}</span
+                        >
                       </label>
-                      <div class="d-flex justify-content-around align-items-center">
-                        <button (click)="
+                      <div
+                        class="d-flex justify-content-around align-items-center"
+                      >
+                        <button
+                          (click)="
                             decrement('adults');
                             getTourPricing(bookingFormData.get('adults')?.value)
-                          " class="mainBtn Btn p-1 px-2">
+                          "
+                          class="mainBtn Btn p-1 px-2"
+                        >
                           -
                         </button>
                         <span class="setCount text-center">{{
                           bookingFormData.get("adults")?.value
-                          }}</span>
-                        <input type="hidden" value="0" formControlName="adults" />
-                        <button (click)="
+                        }}</span>
+                        <input
+                          type="hidden"
+                          value="0"
+                          formControlName="adults"
+                        />
+                        <button
+                          (click)="
                             increment('adults');
                             getTourPricing(bookingFormData.get('adults')?.value)
-                          " class="mainBtn Btn p-1 px-2">
+                          "
+                          class="mainBtn Btn p-1 px-2"
+                        >
                           +
                         </button>
                       </div>
                     </div>
                   </li>
                   <li class="dropdown-item">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div
+                      class="d-flex align-items-center justify-content-between mb-2"
+                    >
                       <label for="children">
                         <p class="pe-2 mb-1">Children(2-12years)</p>
-                        <span class="textMainColor fw-bold">price ==> $
+                        <span class="textMainColor fw-bold"
+                          >price ==> $
                           {{
-                          bookingFormData.get("children")?.value * childPrice
+                            bookingFormData.get("children")?.value * childPrice
                           }}
                         </span>
                       </label>
-                      <div class="d-flex justify-content-around align-items-center">
-                        <button (click)="
+                      <div
+                        class="d-flex justify-content-around align-items-center"
+                      >
+                        <button
+                          (click)="
                             decrement('children');
                             getTourPricing(bookingFormData.get('adults')?.value)
-                          " class="mainBtn Btn p-1 px-2">
+                          "
+                          class="mainBtn Btn p-1 px-2"
+                        >
                           -
                         </button>
                         <span class="setCount text-center">{{
                           bookingFormData.get("children")?.value
-                          }}</span>
-                        <input type="hidden" value="0" formControlName="children" />
-                        <button (click)="
+                        }}</span>
+                        <input
+                          type="hidden"
+                          value="0"
+                          formControlName="children"
+                        />
+                        <button
+                          (click)="
                             increment('children');
                             getTourPricing(bookingFormData.get('adults')?.value)
-                          " class="mainBtn Btn p-1 px-2">
+                          "
+                          class="mainBtn Btn p-1 px-2"
+                        >
                           +
                         </button>
                       </div>
                     </div>
                   </li>
                   <li class="dropdown-item">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div
+                      class="d-flex align-items-center justify-content-between mb-2"
+                    >
                       <label for="infants">
                         <p class="pe-2 mb-1">infants(0-2years)</p>
-                        <span class="textMainColor fw-bold">price ==> $
+                        <span class="textMainColor fw-bold"
+                          >price ==> $
                           {{
-                          bookingFormData.get("infants")?.value * infantPrice
-                          }}</span>
+                            bookingFormData.get("infants")?.value * infantPrice
+                          }}</span
+                        >
                       </label>
-                      <div class="d-flex justify-content-around align-items-center">
-                        <button (click)="
+                      <div
+                        class="d-flex justify-content-around align-items-center"
+                      >
+                        <button
+                          (click)="
                             decrement('infants');
                             getTourPricing(bookingFormData.get('adults')?.value)
-                          " class="mainBtn Btn p-1 px-2">
+                          "
+                          class="mainBtn Btn p-1 px-2"
+                        >
                           -
                         </button>
                         <span class="setCount text-center">{{
                           bookingFormData.get("infants")?.value
-                          }}</span>
-                        <input type="hidden" value="0" formControlName="infants" />
-                        <button (click)="
+                        }}</span>
+                        <input
+                          type="hidden"
+                          value="0"
+                          formControlName="infants"
+                        />
+                        <button
+                          (click)="
                             increment('infants');
                             getTourPricing(bookingFormData.get('adults')?.value)
-                          " class="mainBtn Btn p-1 px-2">
+                          "
+                          class="mainBtn Btn p-1 px-2"
+                        >
                           +
                         </button>
                       </div>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
               </div>
 
-              <button (click)="submitBookingForm()" type="submit" class="mainBtn Btn text-capitalize w-100 p-2">
+              <button
+                (click)="submitBookingForm()"
+                type="submit"
+                class="mainBtn Btn text-capitalize w-100 p-2"
+              >
                 booking now
               </button>
             </form>
           </div>
 
-          <div class="border p-3 rounded-3 mb-4">
+          <!-- <div class="border p-3 rounded-3 mb-4">
             <h4 class="text-capitalize textSecondColor fw-bold mb-3">
               Why Book With Us?
             </h4>
@@ -512,7 +940,7 @@
                 <a href="mailTo:{{ userEmail }}">{{ userEmail }}</a>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

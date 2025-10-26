@@ -1,7 +1,17 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import {
+  CarouselComponent,
+  CarouselModule,
+  OwlOptions,
+} from 'ngx-owl-carousel-o';
 import { DataService } from '../../core/services/data.service';
 import { Itour } from '../../core/interfaces/itour';
 import {
@@ -21,6 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+declare const bootstrap: any; // لو بتستخدم Bootstrap 5 bundle من سكريبت
+
 @Component({
   selector: 'app-tour-details',
   standalone: true,
@@ -39,7 +51,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   templateUrl: './tour-details.component.html',
   styleUrl: './tour-details.component.scss',
 })
-export class TourDetailsComponent implements OnInit {
+export class TourDetailsComponent implements OnInit, AfterViewInit {
   constructor(
     private _DataService: DataService,
     private _ActivatedRoute: ActivatedRoute,
@@ -48,7 +60,24 @@ export class TourDetailsComponent implements OnInit {
     private _BookingService: BookingService,
     private sanitizer: DomSanitizer,
     @Inject(DOCUMENT) private document: Document //  controls nav scroll
-  ) { }
+  ) {}
+
+  @ViewChild('owlRef') owlRef?: CarouselComponent;
+  renderCarousel = false;
+
+  ngAfterViewInit() {
+    const el = document.getElementById('galleryModal');
+    if (!el) return;
+
+    el.addEventListener('shown.bs.modal', () => {
+      this.renderCarousel = false;
+      setTimeout(() => (this.renderCarousel = true), 0); // يجبر إعادة الإنشاء بعد الفتح
+    });
+
+    el.addEventListener('hidden.bs.modal', () => {
+      this.renderCarousel = false; // خليه يفصل لما يتقفل
+    });
+  }
 
   // start controls nav scroll
   private offsetTop = 330;

@@ -19,7 +19,7 @@ footer{
             position: absolute;
             z-index: -1;
             height: 2.5px;
-            background-color: $primary-color;
+            background-color: $secondary-color;
             bottom: 0;
         }
         &::after{
@@ -34,7 +34,7 @@ footer{
 
     ul{
         li:hover{
-            color: $primary-color;
+            color: $secondary-color;
             transform: translateX(10px);
         }
     }

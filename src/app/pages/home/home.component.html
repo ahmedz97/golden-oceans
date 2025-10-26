@@ -1,11 +1,11 @@
-<div class="topsec">
+<div class="topsec mb-5">
   <owl-carousel-o *ngIf="mainSecSlider.length > 0" [options]="mainSecOptions">
     <ng-container *ngFor="let data of mainSecSlider">
       <ng-template carouselSlide>
         <section
           [ngStyle]="{
             background:
-              'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0)), url(' +
+              'linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(' +
               data.src +
               ') center no-repeat',
             'background-size': 'cover'
@@ -13,113 +13,104 @@
           class="mainSec pb-5 position-relative z-1"
         >
           <div
-            class="container-fluid d-flex align-items-center justify-content-center"
+            class="container d-flex align-items-center justify-content-center flex-column"
           >
-            <div class="content mt-5 text-capitalize text-center text-white">
-              <h2 class="fw-bold mb-4">find your next place to visit</h2>
+            <div class="content my-5 text-capitalize text-center text-white">
+              <h2 class="mb-3">find your next place to visit</h2>
               <p>
                 discover amazing places at exclusive deals and enjoy your
                 holiday
               </p>
+            </div>
+            <!-- form search -->
+            <div class="formBox p-0 mb-md-0">
+              <form
+                [formGroup]="searchForm"
+                (ngSubmit)="onSubmit()"
+                class="row justify-content-center rounded-pill overflow-hidden"
+              >
+                <div class="col-md-4 col-sm-8 order-md-1 order-3 px-0 bg-white">
+                  <div class="text-capitalize textMainColor text-start">
+                    <select
+                      formControlName="location"
+                      class="p-2 rounded-1 text-secondary"
+                    >
+                      <option
+                        value=""
+                        disabled
+                        selected
+                        class="bg-secondary text-white"
+                      >
+                        Where would you like to go?
+                      </option>
+                      @for (des of allDestinations; track $index) {
+                      <option [value]="des.id">{{ des.title }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6 px-0 bg-white">
+                  <div class="text-capitalize textMainColor text-start">
+                    <select
+                      formControlName="type"
+                      class="p-2 rounded-1 text-secondary"
+                    >
+                      <option
+                        value=""
+                        disabled
+                        selected
+                        class="bg-secondary text-white"
+                      >
+                        Trip Type
+                      </option>
+                      @for (cat of allCategories; track $index) {
+
+                      <option [value]="cat.id">{{ cat.title }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6 px-0 bg-white">
+                  <div class="text-capitalize textMainColor text-start">
+                    <select
+                      formControlName="duration"
+                      class="p-2 py-2 text-secondary"
+                    >
+                      <option
+                        value=""
+                        disabled
+                        selected
+                        class="bg-secondary text-white"
+                      >
+                        when you go to?
+                      </option>
+                      @for (time of allDurations; track $index) {
+
+                      <option [value]="time.id">{{ time.title }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-2 col-sm-4 order-4 px-0">
+                  <div class="text-capitalize flexCenter">
+                    <button
+                      type="submit"
+                      class="mainBtn Btn flexBetween w-100 rounded-start-0"
+                    >
+                      Search<i
+                        class="fa fa-magnifying-glass-plus bgPrimaryWhiteColor textMainColor rounded-circle"
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </section>
       </ng-template>
     </ng-container>
   </owl-carousel-o>
-
-  <div class="container">
-    <!-- form search -->
-    <div class="formBox bg-white rounded-5 p-3 pb-0 sideBar mb-md-0">
-      <form
-        [formGroup]="searchForm"
-        (ngSubmit)="onSubmit()"
-        class="row g-3 p-3 align-items-center justify-content-center"
-      >
-        <div class="col-md-4">
-          <div
-            class="text-capitalize bg-secondary bg-opacity-10 textMainColor rounded-3 p-3 text-start"
-          >
-            <label><i class="fa fa-plane me-2 mb-2"></i>destinations</label>
-            <select
-              formControlName="location"
-              class="p-2 rounded-1 text-secondary border-0"
-            >
-              <option
-                value=""
-                disabled
-                selected
-                class="bg-secondary text-white"
-              >
-                Where would you like to go?
-              </option>
-              @for (des of allDestinations; track $index) {
-              <option [value]="des.id">{{ des.title }}</option>
-              }
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div
-            class="text-capitalize bg-secondary bg-opacity-10 textMainColor rounded-3 p-3 text-start"
-          >
-            <label><i class="fa fa-layer-group me-2 mb-2"></i>categories</label>
-            <select
-              formControlName="type"
-              class="p-2 rounded-1 text-secondary border-0"
-            >
-              <option
-                value=""
-                disabled
-                selected
-                class="bg-secondary text-white"
-              >
-                Trip Type
-              </option>
-              @for (cat of allCategories; track $index) {
-
-              <option [value]="cat.id">{{ cat.title }}</option>
-              }
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div
-            class="text-capitalize bg-secondary bg-opacity-10 textMainColor rounded-3 p-3 text-start"
-          >
-            <label><i class="fa fa-alarm-clock me-2 mb-2"></i>duration</label>
-            <select
-              formControlName="duration"
-              class="p-2 rounded-1 text-secondary border-0"
-            >
-              <option
-                value=""
-                disabled
-                selected
-                class="bg-secondary text-white"
-              >
-                when you go to?
-              </option>
-              @for (time of allDurations; track $index) {
-
-              <option [value]="time.id">{{ time.title }}</option>
-              }
-            </select>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="text-capitalize flexCenter">
-            <button type="submit" class="mainBtn Btn flexBetween gap-2 w-100">
-              Search<i
-                class="fa fa-magnifying-glass-plus bgPrimaryWhiteColor textMainColor rounded-circle"
-              ></i>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 </div>
 
 <app-aboutsection></app-aboutsection>
@@ -137,7 +128,13 @@
               <i class="fa fa-globe"></i> Our Packages
             </h6>
             <p class="mb-0 text-muted">
-              Embark on once-in-a-lifetime adventures with our Middle Eastern tours. From the iconic landmarks to ancient wonders and beyond, our tours are designed to immerse you in the fascinating history and vibrant cultures. You can choose the exclusivity of private excursions or the camaraderie of a small group, our tours are fully customizable to suit your preferences, ensuring an extraordinary.
+              Embark on once-in-a-lifetime adventures with our Middle Eastern
+              tours. From the iconic landmarks to ancient wonders and beyond,
+              our tours are designed to immerse you in the fascinating history
+              and vibrant cultures. You can choose the exclusivity of private
+              excursions or the camaraderie of a small group, our tours are
+              fully customizable to suit your preferences, ensuring an
+              extraordinary.
             </p>
           </div>
         </div>
@@ -145,7 +142,6 @@
 
       <div class="col-xl-4 col-lg-6 col-md-12">
         <div class="sideBar position-relative p-4 rounded-4 h-100">
-      
           <div class="iconBox-bg">
             <img src="../../../assets/image/deal.svg" alt="icon image" />
           </div>
@@ -154,7 +150,11 @@
               <i class="fa fa-ticket-alt"></i> Ticketing
             </h6>
             <p class="mb-0 text-muted">
-              Leave the hassle of ticketing and transfers to us. We book airline and train tickets effortlessly, and ensure smooth, stress-free transitions throughout your journey. We can accommodate any budget, ensuring a seamless and comfortable experience from start to finish.
+              Leave the hassle of ticketing and transfers to us. We book airline
+              and train tickets effortlessly, and ensure smooth, stress-free
+              transitions throughout your journey. We can accommodate any
+              budget, ensuring a seamless and comfortable experience from start
+              to finish.
             </p>
           </div>
         </div>
@@ -162,7 +162,6 @@
 
       <div class="col-xl-4 col-lg-6 col-md-12">
         <div class="sideBar position-relative p-4 rounded-4 h-100">
-       
           <div class="iconBox-bg">
             <img src="../../../assets/image/support.svg" alt="icon image" />
           </div>
@@ -222,7 +221,7 @@
 
     <div class="row g-3 my-5">
       @if (alltours.length) { @for (tour of alltours.slice(0,8); track $index) {
-      <div class="col-xl-3 col-lg-4 col-md-6">
+      <div class="col-xl- col-lg-4 col-md-6">
         <div class="px-2"><app-tour-cart [tour]="tour"></app-tour-cart></div>
       </div>
       } }@else {
@@ -408,7 +407,7 @@
   </div>
 </section> -->
 
-<section class="destinations my-5 py-5">
+<section class="my-5 py-5">
   <div class="container">
     <div class="secTitle text-center">
       <span
@@ -419,25 +418,79 @@
           ><i class="fa fa-plane me-2 ps-1"></i
         ></span>
 
-        travel deal
+        destinations
       </span>
-      <h2 class="my-3 textSecondColor fw-bold">
-        Our Most Popular Travel Deals
-      </h2>
+      <h2 class="my-3 textSecondColor fw-bold">Featured Destinations</h2>
     </div>
 
-    <div class="mt-5">
+    <div class="row g-3 mt-4">
+      @for (des of allDestinations.slice(0, 4); track $index) {
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <app-destination-cart [destination]="des"></app-destination-cart>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="destinations py-5">
+  <div
+    class="container-fluid px-0 d-flex align-items-center flex-wrap flex-lg-nowrap gap-4 gap-lg-0"
+  >
+    <div class="desTitle d-flex flex-column justify-content-center">
+      <h2 class="">Multi-Country Tours</h2>
+      <p>
+        Experience a journey through multiple destinations with expertly curated
+        itineraries that connect you to the best each country has to offer.
+      </p>
+      <button class="secBtn Btn">explore tour</button>
+    </div>
+
+    <div class="desTours ps-5 pe-0 py-5">
       <owl-carousel-o
         *ngIf="shuffledTours.length > 0"
         [options]="destinationOptions"
       >
         @for (tour of shuffledTours; track $index) {
         <ng-template carouselSlide>
-          <app-tour-cart [tour]="tour"></app-tour-cart>
+          <div class="my-3"><app-tour-cart [tour]="tour"></app-tour-cart></div>
         </ng-template>
         }
       </owl-carousel-o>
     </div>
+  </div>
+</section>
+
+<section
+  class="makeTrip text-center position-relative overflow-hidden bgPrimaryColor"
+>
+  <div>
+    <div class="floating_box c0"></div>
+    <div class="floating_box c1"></div>
+    <div class="floating_box c2"></div>
+    <div class="floating_box c3"></div>
+    <div class="floating_box c4"></div>
+    <div class="floating_box c5"></div>
+    <div class="floating_box c6"></div>
+    <div class="floating_box c7"></div>
+    <div class="floating_box c8"></div>
+  </div>
+
+  <div class="cards">
+    <div class="card card1"></div>
+    <div class="card card2"></div>
+    <div class="card card3"></div>
+  </div>
+
+  <div class="caption text-center text-capitalize text-white">
+    <h2>customize Your Trip From Scratch</h2>
+    <p>
+      Design every detail of your journey, from destinations and activities to
+      accommodations, to create a uniquely yours travel experience.
+    </p>
+    <button routerLink="/makeTrip" class="mainBtn Btn px-5 py-3 rounded-3">
+      plan your trip
+    </button>
   </div>
 </section>
 
@@ -479,7 +532,8 @@
       </h2>
     </div>
 
-    <div class="mt-5">
+    <!-- remore all content untill mos3ad send app reviews script -->
+    <!-- <div class="mt-5">
       <owl-carousel-o
         *ngIf="allReviews.length > 0"
         [options]="testimonialOptions"
@@ -490,9 +544,9 @@
         </ng-template>
         }
       </owl-carousel-o>
-    </div>
+    </div> -->
 
-    <h1 class="projectName text-white text-uppercase pb-3">Gots</h1>
+    <!-- <h1 class="projectName text-white text-uppercase pb-3">Gots</h1> -->
   </div>
 </section>
 

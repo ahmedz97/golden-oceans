@@ -12,9 +12,9 @@
     font-size: 16px !important;
   }
 }
-::ng-deep .mat-content {
-    flex-direction: row-reverse !important;
-}
+// ::ng-deep .mat-content {
+//     flex-direction: row-reverse !important;
+// }
 ::ng-deep .mat-expansion-panel.mat-expansion-panel {
     box-shadow: none !important;
     border: 1px solid #eee;
@@ -53,13 +53,14 @@
   }
   .dropdown-toggle::after{display: none;}
   button.Btn{
-    background-color: #fff;
-    border: 1px solid $primary-color;
-    color: $primary-color;
+    color: #fff;
+    border: 1px solid $secondary-color;
+    background-color: $secondary-color;
     transition: all 1s;
 
+    &.disabled{opacity: 0.4; cursor: not-allowed;}
+
     &:hover{
-        color: #fff;
         border: 1px solid #fff;
         background-color: $primary-color;
     }
@@ -79,10 +80,10 @@
   scroll-margin-top: 500px;
 }
 
-.controls{
+.controls , .AsideBar{
   z-index: 1030;
   position: sticky;
-  top: 110px;
+  top: 75px;
   background: #ffffff;
   width: 100%;
   // transform: translateX(-79%);
