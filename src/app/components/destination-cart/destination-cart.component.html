@@ -1,31 +1,36 @@
 <div
   role="button"
   [routerLink]="['/destination', destination.slug]"
-  class="item p-2 overflow-hidden mb-4 cPointer"
+  class="destination-card overflow-hidden rounded-5 cPointer"
 >
-  <figure class="overflow-hidden rounded-4 position-relative imgHover">
+  <figure class="overflow-hidden position-relative mb-0" style="height: 350px; border-radius: 1rem;">
     <img
-      [src]="destination.featured_image"
-      class="w-100 transition"
-      height="250px"
+      [src]="destination.featured_image || 'assets/image/Wallpaper/first.jpg'"
+      class="w-100 h-100 object-fit-cover"
       [alt]="destination.title"
       [title]="destination.title"
+      onerror="this.src='assets/image/Wallpaper/first.jpg'"
     />
+    <!-- Dark gradient overlay at bottom -->
     <div
-      class="bg-dark bg-opacity-25 position-absolute top-0 start-0 end-0 bottom-0 p-3 d-flex flex-column justify-content-end"
+      class="position-absolute bottom-0 start-0 end-0 p-4 d-flex flex-column justify-content-end"
+      style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);"
     >
-      <h5
-        [routerLink]="['/destination', destination.slug]"
-        class="text-white text-capitalize h3 fw-bold"
+      <h3
+        class="text-white text-capitalize fw-bold mb-3"
+        style="font-size: 2rem; line-height: 1.2;"
       >
         {{ destination.title }}
-      </h5>
+      </h3>
 
       <button
         [routerLink]="['/destination', destination.slug]"
-        class="secBtn Btn text-white w-75"
+        class="btn btn-outline-light rounded-pill px-4 py-2 text-capitalize w-auto"
+        style="border: 2px solid white; background: transparent; transition: all 0.3s;"
+        onmouseover="this.style.background='white'; this.style.color='#000';"
+        onmouseout="this.style.background='transparent'; this.style.color='white';"
       >
-        see more
+        See all packages
       </button>
     </div>
   </figure>

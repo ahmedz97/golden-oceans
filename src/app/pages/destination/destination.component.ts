@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DestinationCartComponent } from '../../components/destination-cart/destination-cart.component';
 import { CommonModule } from '@angular/common';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { DataService } from '../../core/services/data.service';
 import { PartnerSliderComponent } from '../../components/partner-slider/partner-slider.component';
 
@@ -13,7 +12,6 @@ import { PartnerSliderComponent } from '../../components/partner-slider/partner-
     RouterLink,
     DestinationCartComponent,
     CommonModule,
-    CarouselModule,
     PartnerSliderComponent,
   ],
   templateUrl: './destination.component.html',
@@ -30,35 +28,25 @@ export class DestinationComponent implements OnInit {
   getDestination() {
     this._DataService.getDestination().subscribe({
       next: (res) => {
-        this.allDestinations = res.data.data;
-
-        console.log('all destinations', res);
+        console.log('all destinations response:', res);
+        
+        if (res && res.data && res.data.data) {
+          // Filter to show only sub-destinations (parent_id != null)
+          const filtered = res.data.data.filter(
+            (dest: any) => dest.parent_id !== null && dest.parent_id !== undefined && dest.parent_id !== 0
+          );
+          
+          // Reverse the order of destinations
+          this.allDestinations = filtered.reverse();
+          
+          console.log('Filtered destinations (parent_id != null):', this.allDestinations.length);
+          console.log('Destinations (reversed):', this.allDestinations.map((d: any) => d.title));
+        }
       },
       error: (err) => {
         console.log(err);
+        this.allDestinations = [];
       },
     });
   }
-
-  destinationOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    autoplay: true,
-    dots: true,
-    smartSpeed: 1500,
-    margin: 10,
-    responsive: {
-      0: { items: 1 },
-      767: { items: 2 },
-      992: { items: 3 },
-      1200: { items: 4 },
-    },
-    nav: true,
-    navText: [
-      '<i class="fa fa-angle-double-left"></i>',
-      '<i class="fa fa-angle-double-right"></i>',
-    ],
-  };
 }

@@ -210,18 +210,86 @@ export class HomeComponent implements OnInit {
   }
 
   getDestination() {
+    // First, get page 1 to know how many pages exist
     this._DataService
-      .getDestination()
-      .pipe(
-        takeUntil(this.$destory), // close , clear suscripe memory on destroy
-        tap((res) => {
-          if (res) {
-            // console.log('home page -- ', res.data.data);
-            this.allDestinations = res.data.data;
+      .getDestination(undefined, 1)
+      .pipe(takeUntil(this.$destory))
+      .subscribe({
+        next: (firstPage) => {
+          console.log('First page response:', firstPage);
+          
+          if (firstPage && firstPage.data) {
+            const totalPages = firstPage.data.last_page || 1;
+            console.log('Total pages:', totalPages);
+            
+            // If only one page, process it
+            if (totalPages === 1) {
+              this.processDestinations(firstPage.data.data);
+            } else {
+              // Fetch all remaining pages
+              const pagePromises = [];
+              for (let page = 2; page <= totalPages; page++) {
+                pagePromises.push(
+                  this._DataService
+                    .getDestination(undefined, page)
+                    .pipe(takeUntil(this.$destory))
+                    .toPromise()
+                );
+              }
+              
+              Promise.all(pagePromises).then((pages) => {
+                console.log('All pages fetched:', pages.length);
+                
+                // Combine all destinations
+                let allDestinations = [...(firstPage.data.data || [])];
+                pages.forEach((page) => {
+                  if (page && page.data && page.data.data) {
+                    allDestinations = [...allDestinations, ...page.data.data];
+                  }
+                });
+                
+                console.log('Total destinations from all pages:', allDestinations.length);
+                
+                // Process all destinations
+                this.processDestinations(allDestinations);
+              }).catch((err) => {
+                console.error('Error fetching additional pages:', err);
+                // Just use what we have from page 1
+                this.processDestinations(firstPage.data.data);
+              });
+            }
           }
-        })
+        },
+        error: (err) => {
+          console.error('Home - Error loading destinations:', err);
+          this.allDestinations = [];
+        },
+      });
+  }
+
+  processDestinations(allDestinations: any[]) {
+    console.log('=== PROCESSING DESTINATIONS ===');
+    console.log('Total destinations:', allDestinations.length);
+    
+    // Filter to show only specific destinations
+    const targetDestinations = ['Aswan', 'Luxor', 'Cairo', 'Alexandria'];
+    
+    const filtered = allDestinations.filter((dest: any) => 
+      targetDestinations.some(target => 
+        dest.title.toLowerCase() === target.toLowerCase()
       )
-      .subscribe();
+    );
+    
+    console.log('Filtered destinations:', filtered.map((d: any) => d.title));
+    
+    // Store filtered destinations with placeholder images
+    this.allDestinations = filtered.map((dest: any) => ({
+      ...dest,
+      featured_image: dest.featured_image || 'assets/image/Wallpaper/first.jpg'
+    }));
+    
+    console.log('Final destinations to display:', this.allDestinations.map((d: any) => d.title));
+    console.log('=== END PROCESSING ===');
   }
 
   getCategory() {

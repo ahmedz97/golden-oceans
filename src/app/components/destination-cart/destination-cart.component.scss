@@ -1,0 +1,30 @@
+.destination-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  figure {
+    img {
+      transition: transform 0.5s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.1);
+    }
+  }
+  
+  button {
+    &:hover {
+      background: white !important;
+      color: #000 !important;
+      transform: translateX(5px);
+    }
+  }
+}
+
+::ng-deep .object-fit-cover {
+  object-fit: cover;
+}

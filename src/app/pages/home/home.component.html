@@ -423,12 +423,28 @@
       <h2 class="my-3 textSecondColor fw-bold">Featured Destinations</h2>
     </div>
 
-    <div class="row g-3 mt-4">
-      @for (des of allDestinations.slice(0, 4); track $index) {
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <app-destination-cart [destination]="des"></app-destination-cart>
-      </div>
+    <div class="row g-4 mt-4">
+      @if (allDestinations.length > 0) {
+        @for (des of allDestinations; track $index) {
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <app-destination-cart [destination]="des"></app-destination-cart>
+          </div>
+        }
+      } @else {
+        <div class="col-12 text-center">
+          <p class="text-muted">Loading destinations...</p>
+        </div>
       }
+    </div>
+
+    <!-- View All Destinations Button -->
+    <div class="text-center mt-5">
+      <button 
+        routerLink="/destination" 
+        class="mainBtn Btn px-5 py-3 rounded-6 text-uppercase">
+        View All Destinations
+               
+      </button>
     </div>
   </div>
 </section>

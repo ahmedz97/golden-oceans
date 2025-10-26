@@ -28,10 +28,13 @@ export class DataService extends BaseService {
     );
   }
 
-  getDestination(parent_id: any = 1): Observable<any> {
+  getDestination(parent_id?: any, page?: number): Observable<any> {
     let paramsId = new HttpParams();
-    if (parent_id) {
+    if (parent_id !== undefined && parent_id !== null) {
       paramsId = paramsId.set('parent_id', parent_id);
+    }
+    if (page !== undefined && page !== null) {
+      paramsId = paramsId.set('page', page.toString());
     }
 
     return this.HttpClient.get(`${this.baseUrl}/destinations`, {

@@ -20,33 +20,29 @@
 
 <section class="destinations my-5 py-5">
   <div class="container">
-    <div class="secTitle text-center">
-      <span
-        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
-      >
-        <span
-          class="bg-white textMainColor rounded-circle transition d-inline-block"
-          ><i class="fa fa-plane me-2 ps-1"></i
-        ></span>
-
-        travel deal
-      </span>
-      <h2 class="my-3 textSecondColor fw-bold">
-        Our Most Popular Travel Deals
+    <div class="secTitle text-center mb-5">
+      <h2 class="fw-bold" style="font-size: 2.5rem; color: #333;">
+        Explore Our Destinations
       </h2>
+      <p class="text-muted mt-3" style="font-size: 1.1rem;">
+        Discover amazing places around the world
+      </p>
     </div>
 
     <div class="mt-5">
-      <owl-carousel-o
-        *ngIf="allDestinations.length > 0"
-        [options]="destinationOptions"
-      >
-        @for (des of allDestinations; track $index) {
-        <ng-template carouselSlide>
-          <app-destination-cart [destination]="des"></app-destination-cart>
-        </ng-template>
-        }
-      </owl-carousel-o>
+      @if (allDestinations.length > 0) {
+        <div class="row g-4">
+          @for (des of allDestinations; track $index) {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <app-destination-cart [destination]="des"></app-destination-cart>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="text-center py-5">
+          <p class="text-muted">Loading destinations...</p>
+        </div>
+      }
     </div>
   </div>
 </section>

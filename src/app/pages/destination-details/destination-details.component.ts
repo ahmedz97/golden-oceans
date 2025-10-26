@@ -67,7 +67,12 @@ export class DestinationDetailsComponent implements OnInit {
     this._DataService.getDestination().subscribe({
       next: (res) => {
         // console.log(res.data.data);
-        this.AllDestination = res.data.data;
+        if (res && res.data && res.data.data) {
+          // Filter to show only sub-destinations (parent_id != null)
+          this.AllDestination = res.data.data.filter(
+            (dest: any) => dest.parent_id !== null && dest.parent_id !== undefined && dest.parent_id !== 0
+          );
+        }
       },
     });
   }
