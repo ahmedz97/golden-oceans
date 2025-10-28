@@ -39,10 +39,10 @@ export class AboutComponent implements OnInit {
     this._DataService.getReviews().subscribe({
       next: (res) => {
         this.allReviews = res.data.data;
-        console.log(this.allReviews);
+        // console.log(this.allReviews);
       },
       error: (err) => {
-        console.log(err);
+        // console.log(err);
       },
     });
   }

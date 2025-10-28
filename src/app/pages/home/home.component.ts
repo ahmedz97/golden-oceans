@@ -73,10 +73,9 @@ export class HomeComponent implements OnInit {
   activeDestinationTab: string = 'all';
 
   mainSecSlider: any[] = [
-    { src: '../../../assets/image/Wallpaper/first.jpg' },
+    { src: '../../../assets/image/Wallpaper/slider1.webp' },
+    { src: '../../../assets/image/Wallpaper/slider2.webp' },
     { src: '../../../assets/image/Wallpaper/Islamic.jpg' },
-    { src: '../../../assets/image/Wallpaper/Pyramids.jpg' },
-    { src: '../../../assets/image/Wallpaper/Temple.jpg' },
   ];
 
   // video
