@@ -73,22 +73,6 @@
                   </ng-template>
                 </ng-container>
               </owl-carousel-o>
-              <!-- <owl-carousel-o [options]="galleryOptions">
-                <ng-container *ngFor="let slide of tourGallery">
-                  <ng-template carouselSlide>
-                    <figure class="rounded-3 overflow-hidden imgHover">
-                      <img
-                        loading="lazy"
-                        height="400px"
-                        class="w-100"
-                        [src]="slide"
-                        [alt]="tourData?.title"
-                        [title]="tourData?.title"
-                      />
-                    </figure>
-                  </ng-template>
-                </ng-container>
-              </owl-carousel-o> -->
             </div>
           </div>
         </div>
@@ -156,22 +140,6 @@
             </div>
           </div>
         </div>
-        <!-- <owl-carousel-o [options]="galleryOptions">
-          <ng-container *ngFor="let slide of tourGallery">
-            <ng-template carouselSlide>
-              <figure class="rounded-3 overflow-hidden imgHover">
-                <img
-                  loading="lazy"
-                  height="400px"
-                  class="w-100"
-                  [src]="slide"
-                  [alt]="tourData?.title"
-                  [title]="tourData?.title"
-                />
-              </figure>
-            </ng-template>
-          </ng-container>
-        </owl-carousel-o> -->
 
         <!-- icons -->
         <div class="row g-3 mb-4 textMainColor">
@@ -257,10 +225,12 @@
 
           <!-- description & highlights -->
           <div class="anchor-section" id="description">
-            <h5 class="fw-bold textSecondColor text-capitalize">description</h5>
+            <h5 class="fw-bolder textSecondColor text-capitalize">
+              description
+            </h5>
             <div [innerHTML]="getSanitizedHtml(tourData?.overview!)"></div>
             <div class="mt-4">
-              <h5 class="fw-bold textSecondColor text-capitalize">
+              <h5 class="fw-bolder textSecondColor text-capitalize">
                 highlights
               </h5>
               <div [innerHTML]="getSanitizedHtml(tourData?.highlights!)"></div>
@@ -275,11 +245,11 @@
           >
             <div class="col-md-6">
               <h5
-                class="fw-bold pb-2 mb-2 border-bottom text-success text-capitalize"
+                class="fw-bolder pb-2 mb-2 border-bottom text-success text-capitalize"
               >
                 included
               </h5>
-              <div class="p-3 rounded-3 bg-success bg-opacity-10">
+              <div class="p-3 rounded-3">
                 <div *ngFor="let item of tourIncluded">
                   <div class="text-capitalize d-flex mb-3">
                     <i
@@ -292,11 +262,11 @@
             </div>
             <div class="col-md-6">
               <h5
-                class="fw-bold pb-2 mb-2 border-bottom text-danger text-capitalize"
+                class="fw-bolder pb-2 mb-2 border-bottom text-danger text-capitalize"
               >
                 not included
               </h5>
-              <div class="p-3 rounded-3 bg-danger bg-opacity-10">
+              <div class="p-3 rounded-3">
                 <div *ngFor="let item of tourExcluded">
                   <div class="text-capitalize d-flex mb-3">
                     <i
@@ -315,7 +285,7 @@
             id="itinerary"
             class="mb-4 pb-3 border-bottom"
           >
-            <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
+            <h5 class="fw-bolder textSecondColor text-capitalize mb-3a">
               itinerary
             </h5>
 
@@ -361,21 +331,23 @@
 
           <!-- location map -->
           <div class="anchor-section" id="map" class="mb-4 pb-3 border-bottom">
-            <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
+            <h5 class="fw-bolder textSecondColor text-capitalize mb-3a">
               location map
             </h5>
           </div>
 
           <!-- faqs -->
           <div class="anchor-section" id="faq" class="mb-4 pb-3 border-bottom">
-            <h5 class="fw-bold textSecondColor text-capitalize mb-3a">faq's</h5>
+            <h5 class="fw-bolder textSecondColor text-capitalize mb-3a">
+              faq's
+            </h5>
 
             <app-faq-content></app-faq-content>
           </div>
 
           <!-- reviews -->
           <div class="anchor-section" id="reviews" class="pb-3 border-bottom">
-            <h5 class="fw-bold textSecondColor text-capitalize mb-3a">
+            <h5 class="fw-bolder textSecondColor text-capitalize mb-3a">
               reviews
             </h5>
 
@@ -550,16 +522,19 @@
         <!-- book now -->
         <div class="anchor-section" id="book-now" class="AsideBar">
           <div class="border p-3 rounded-3 mb-4">
-            <h4 class="text-capitalize textSecondColor fw-bold mb-3">
+            <h4 class="text-capitalize textSecondColor fw-bolder mb-3">
               book this tour
             </h4>
             <h6>
-              From
-              <b class="textMainColor fs-5 ms-2">{{
-                bookingFormData.get("infants")?.value * infantPrice +
-                  bookingFormData.get("adults")?.value * adultPrice +
-                  bookingFormData.get("children")?.value * childPrice | currency
-              }}</b>
+              <b class="textMainColor fs-5 ms-2"
+                >From
+                {{
+                  bookingFormData.get("infants")?.value * infantPrice +
+                    bookingFormData.get("adults")?.value * adultPrice +
+                    bookingFormData.get("children")?.value * childPrice
+                    | currency
+                }}</b
+              >
             </h6>
             <form [formGroup]="bookingFormData">
               <mat-form-field class="w-100">
@@ -571,26 +546,19 @@
                   [matDatepicker]="picker"
                 />
                 <mat-datepicker-toggle
-                  matIconSuffix
+                  matSuffix
                   [for]="picker"
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
 
               <div
-                data-bs-auto-close="outside"
                 class="tickets dropdown-center text-capitalize p-3 border rounded-3 textSecondColor mb-3"
               >
                 <div>
-                  <label
-                    >{{
-                      bookingFormData.get("infants")?.value +
-                        bookingFormData.get("adults")?.value +
-                        bookingFormData.get("children")?.value
-                    }}
-                    guests</label
+                  <h6
+                    class="text-center text-decoration-underline textMainColor fw-bolder mb-3"
                   >
-                  <h6>
                     {{ bookingFormData.get("adults")?.value }} adults ,
                     {{ bookingFormData.get("children")?.value }} children ,
                     {{ bookingFormData.get("infants")?.value }} infants
@@ -601,13 +569,7 @@
                     class="d-flex align-items-center justify-content-between mb-2"
                   >
                     <label for="adults">
-                      <p class="pe-2 mb-1">Adults(+12years)</p>
-                      <span class="textMainColor fw-bold"
-                        >price ==> $
-                        {{
-                          bookingFormData.get("adults")?.value * adultPrice
-                        }}</span
-                      >
+                      <p class="pe-2 mb-1 textMainColor">Adults(+12years)</p>
                     </label>
                     <div
                       class="d-flex justify-content-around align-items-center"
@@ -620,7 +582,7 @@
                         [ngClass]="{
                           disabled: bookingFormData.get('adults')?.value == 0
                         }"
-                        class="secBtn Btn p-1 px-2"
+                        class="secBtn Btn p-0 px-2"
                       >
                         -
                       </button>
@@ -633,7 +595,7 @@
                           increment('adults');
                           getTourPricing(bookingFormData.get('adults')?.value)
                         "
-                        class="secBtn Btn p-1 px-2"
+                        class="secBtn Btn p-0 px-2"
                       >
                         +
                       </button>
@@ -644,13 +606,7 @@
                     class="d-flex align-items-center justify-content-between mb-2"
                   >
                     <label for="children">
-                      <p class="pe-2 mb-1">Children(2-12years)</p>
-                      <span class="textMainColor fw-bold"
-                        >price ==> $
-                        {{
-                          bookingFormData.get("children")?.value * childPrice
-                        }}
-                      </span>
+                      <p class="pe-2 mb-1 textMainColor">Children(2-12years)</p>
                     </label>
                     <div
                       class="d-flex justify-content-around align-items-center"
@@ -660,7 +616,7 @@
                           decrement('children');
                           getTourPricing(bookingFormData.get('adults')?.value)
                         "
-                        class="secBtn Btn p-1 px-2"
+                        class="secBtn Btn p-0 px-2"
                         [ngClass]="{
                           disabled: bookingFormData.get('children')?.value == 0
                         }"
@@ -680,7 +636,7 @@
                           increment('children');
                           getTourPricing(bookingFormData.get('adults')?.value)
                         "
-                        class="secBtn Btn p-1 px-2"
+                        class="secBtn Btn p-0 px-2"
                       >
                         +
                       </button>
@@ -691,13 +647,7 @@
                     class="d-flex align-items-center justify-content-between mb-2"
                   >
                     <label for="infants">
-                      <p class="pe-2 mb-1">infants(0-2years)</p>
-                      <span class="textMainColor fw-bold"
-                        >price ==> $
-                        {{
-                          bookingFormData.get("infants")?.value * infantPrice
-                        }}</span
-                      >
+                      <p class="pe-2 mb-1 textMainColor">infants(0-2years)</p>
                     </label>
                     <div
                       class="d-flex justify-content-around align-items-center"
@@ -707,7 +657,7 @@
                           decrement('infants');
                           getTourPricing(bookingFormData.get('adults')?.value)
                         "
-                        class="secBtn Btn p-1 px-2"
+                        class="secBtn Btn p-0 px-2"
                         [ngClass]="{
                           disabled: bookingFormData.get('infants')?.value == 0
                         }"
@@ -727,7 +677,7 @@
                           increment('infants');
                           getTourPricing(bookingFormData.get('adults')?.value)
                         "
-                        class="secBtn Btn p-1 px-2"
+                        class="secBtn Btn p-0 px-2"
                       >
                         +
                       </button>

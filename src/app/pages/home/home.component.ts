@@ -35,11 +35,12 @@ interface DestinationPriceMap {
     TourCartComponent,
     TeamCartComponent,
     BlogCartComponent,
-    BooknowComponent,
+    // BooknowComponent,
     // TestimonialCartComponent,
     PartnerSliderComponent,
     AboutsectionComponent,
     DestinationCartComponent,
+    TestimonialCartComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -217,11 +218,11 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (firstPage) => {
           console.log('First page response:', firstPage);
-          
+
           if (firstPage && firstPage.data) {
             const totalPages = firstPage.data.last_page || 1;
             console.log('Total pages:', totalPages);
-            
+
             // If only one page, process it
             if (totalPages === 1) {
               this.processDestinations(firstPage.data.data);
@@ -236,27 +237,32 @@ export class HomeComponent implements OnInit {
                     .toPromise()
                 );
               }
-              
-              Promise.all(pagePromises).then((pages) => {
-                console.log('All pages fetched:', pages.length);
-                
-                // Combine all destinations
-                let allDestinations = [...(firstPage.data.data || [])];
-                pages.forEach((page) => {
-                  if (page && page.data && page.data.data) {
-                    allDestinations = [...allDestinations, ...page.data.data];
-                  }
+
+              Promise.all(pagePromises)
+                .then((pages) => {
+                  console.log('All pages fetched:', pages.length);
+
+                  // Combine all destinations
+                  let allDestinations = [...(firstPage.data.data || [])];
+                  pages.forEach((page) => {
+                    if (page && page.data && page.data.data) {
+                      allDestinations = [...allDestinations, ...page.data.data];
+                    }
+                  });
+
+                  console.log(
+                    'Total destinations from all pages:',
+                    allDestinations.length
+                  );
+
+                  // Process all destinations
+                  this.processDestinations(allDestinations);
+                })
+                .catch((err) => {
+                  console.error('Error fetching additional pages:', err);
+                  // Just use what we have from page 1
+                  this.processDestinations(firstPage.data.data);
                 });
-                
-                console.log('Total destinations from all pages:', allDestinations.length);
-                
-                // Process all destinations
-                this.processDestinations(allDestinations);
-              }).catch((err) => {
-                console.error('Error fetching additional pages:', err);
-                // Just use what we have from page 1
-                this.processDestinations(firstPage.data.data);
-              });
             }
           }
         },
@@ -270,25 +276,31 @@ export class HomeComponent implements OnInit {
   processDestinations(allDestinations: any[]) {
     console.log('=== PROCESSING DESTINATIONS ===');
     console.log('Total destinations:', allDestinations.length);
-    
+
     // Filter to show only specific destinations
     const targetDestinations = ['Aswan', 'Luxor', 'Cairo', 'Alexandria'];
-    
-    const filtered = allDestinations.filter((dest: any) => 
-      targetDestinations.some(target => 
-        dest.title.toLowerCase() === target.toLowerCase()
+
+    const filtered = allDestinations.filter((dest: any) =>
+      targetDestinations.some(
+        (target) => dest.title.toLowerCase() === target.toLowerCase()
       )
     );
-    
-    console.log('Filtered destinations:', filtered.map((d: any) => d.title));
-    
+
+    console.log(
+      'Filtered destinations:',
+      filtered.map((d: any) => d.title)
+    );
+
     // Store filtered destinations with placeholder images
     this.allDestinations = filtered.map((dest: any) => ({
       ...dest,
-      featured_image: dest.featured_image || 'assets/image/Wallpaper/first.jpg'
+      featured_image: dest.featured_image || 'assets/image/Wallpaper/first.jpg',
     }));
-    
-    console.log('Final destinations to display:', this.allDestinations.map((d: any) => d.title));
+
+    console.log(
+      'Final destinations to display:',
+      this.allDestinations.map((d: any) => d.title)
+    );
     console.log('=== END PROCESSING ===');
   }
 

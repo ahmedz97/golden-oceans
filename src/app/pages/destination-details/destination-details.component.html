@@ -12,7 +12,7 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">destination details</h2>
+    <h2 class="fw-bold">{{ destinationDetails.title }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -21,7 +21,7 @@
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          destination details
+          {{ destinationDetails.title }}
         </li>
       </ol>
     </nav>
@@ -52,13 +52,13 @@
 <section class="my-5">
   <div class="container">
     <div class="row g-3">
-      <div class="col-lg-8 order-2 order-lg-1">
+      <div class="col-lg-12 order-2 order-lg-1">
         <div>
           <h5 class="fw-bold text-black text-capitalize">description</h5>
           <p [innerHTML]="destinationDetails?.description"></p>
         </div>
       </div>
-      <div class="col-lg-4 order-1 order-lg-2">
+      <!-- <div class="col-lg-4 order-1 order-lg-2">
         <div class="text-capitalize bg-white p-4 rounded-3 sideBar">
           <h5 class="pb-3 border-bottom fw-bold text-black">Information</h5>
           <ul class="list-unstyled mb-5">
@@ -85,7 +85,7 @@
             <app-social></app-social>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -113,7 +113,7 @@
 
     <!-- faqs -->
     <app-faq-content></app-faq-content>
-    <app-booknow></app-booknow>
+    <!-- <app-booknow></app-booknow> -->
   </div>
 </section>
 

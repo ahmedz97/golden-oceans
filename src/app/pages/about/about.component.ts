@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
     TeamCartComponent,
     CarouselModule,
     TestimonialCartComponent,
-    BooknowComponent,
+    // BooknowComponent,
     PartnerSliderComponent,
     CommonModule,
   ],

@@ -5,17 +5,16 @@
         border-radius:  110px 110px 110px 10px;
     }
     figcaption{
-        border-radius: 50px 50px 50px 0px;
-        width: 80%;
+        // border-radius: 20px 20px 20px 0px;
+        width: 90%;
         margin: -80px auto 0 auto;
-
     }
     ul{
         position: absolute;
-        bottom: 15px;
-        right: 60px;
+        bottom: 11px;
+        right: 25px;
         transform: translateY(85%);
-        
+
         li{
             display: flex;
                 margin-bottom: 8px;
@@ -44,10 +43,21 @@
             i{
                 background-color: $secondary-color;
             }
-        
+
         }
     }
     li:hover i{
         background-color: $secondary-color !important;
     }
+}
+
+::ng-deep .owl-nav{
+  transform: translateY(-245px) !important;
+  & .owl-prev{
+      transform: translateX(-15px) !important;
+  }
+
+  & .owl-next {
+    transform: translateX(15px) !important;
+  }
 }

@@ -30,6 +30,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
 
 declare const bootstrap: any; // لو بتستخدم Bootstrap 5 bundle من سكريبت
 
@@ -47,6 +48,7 @@ declare const bootstrap: any; // لو بتستخدم Bootstrap 5 bundle من س�
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
   ],
   templateUrl: './tour-details.component.html',
   styleUrl: './tour-details.component.scss',

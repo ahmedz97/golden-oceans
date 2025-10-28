@@ -41,14 +41,15 @@
     }
 
     ::ng-deep .owl-theme .owl-nav{
-        transform: translateY(-600px) !important;
+        transform: translateY(-400px) !important;
         & .owl-prev{
-            transform: translateX(100px) !important;
+            transform: translateX(50px) !important;
             box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.3);
         }
         & .owl-next {
-            transform: translateX(-100px) !important;
+            transform: translateX(-50px) !important;
             box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.3);
+
         }
         & [class*=owl-] {
             width: 3rem;
@@ -436,7 +437,7 @@
         }
     }
 
-  
+
 
     // Owl Carousel Navigation Positioning - Top Right
     ::ng-deep .owl-theme .owl-nav {

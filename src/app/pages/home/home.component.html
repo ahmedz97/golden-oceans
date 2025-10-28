@@ -182,231 +182,6 @@
   </div>
 </section>
 
-<!-- <section class="popTours">
-  <div class="container">
-    <div class="flexBetween flex-wrap">
-      <div class="secTitle">
-        <span
-          class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
-        >
-          <span
-            class="bg-white textMainColor rounded-circle transition d-inline-block"
-            ><i class="fa fa-plane me-2 ps-1"></i
-          ></span>
-
-          tours
-        </span>
-        <h2 class="my-3 textSecondColor fw-bold">Our Most Popular Tours</h2>
-      </div>
-
-      <div class="controls p-2 px-3">
-        <button
-          [class.active]="!activeCategoryTitle"
-          (click)="getTours()"
-          class="text-capitalize me-2 mb-2 p-2"
-        >
-          all tours
-        </button>
-        @for (cat of allCategories; track $index) {
-        <button
-          (click)="getTours(cat.title)"
-          [class.active]="activeCategoryTitle === cat.title"
-          class="text-capitalize me-2 mb-2 p-2"
-        >
-          {{ cat.title }}
-        </button>
-        }
-      </div>
-    </div>
-
-    <div class="row g-3 my-5">
-      @if (alltours.length) { @for (tour of alltours.slice(0,8); track $index) {
-      <div class="col-xl- col-lg-4 col-md-6">
-        <div class="px-2"><app-tour-cart [tour]="tour"></app-tour-cart></div>
-      </div>
-      } }@else {
-      <h1 class="text-capitalize text-danger">no tours in this category</h1>
-      }
-    </div>
-  </div>
-</section> -->
-
-<!-- <section class="video my-5 pt-5">
-  <div class="container-fluid">
-    <div class="col-lg-10 ms-lg-auto">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-5">
-          <div class="secTitle">
-            <span
-              class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
-            >
-              <span
-                class="bg-white textMainColor rounded-circle transition d-inline-block"
-                ><i class="fa fa-plane me-2 ps-1"></i
-              ></span>
-
-              our video
-            </span>
-            <h2 class="my-3 textSecondColor fw-bold">
-              Let's Check Our
-              <b class="textMainColor fw-bold">Latest Update</b> And Video
-            </h2>
-            <p class="my-3">
-              There are many variations of passages available but the majority
-              have suffered alteration in some form injected humour if you are
-              going to use passage you need sure there isn't anything look even
-              slightly believable.
-            </p>
-            <button class="mainBtn Btn">
-              learn more <i class="fa fa-arrow-right ms-2 rounded-circle"></i>
-            </button>
-          </div>
-        </div>
-        <div class="col-lg-7 pe-lg-0">
-          <div class="videoBox position-relative flexCenter rounded-start-pill">
-            <div class="ripple-wrapper">
-              <button
-                class="play-btn"
-                (click)="openVideo()"
-                data-bs-toggle="modal"
-                data-bs-target="#videoModal"
-                aria-label="Play Video"
-              >
-                ▶
-              </button>
-              <span class="ripple"></span>
-              <span class="ripple"></span>
-              <span class="ripple"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-      <div
-        class="modal fade"
-        id="videoModal"
-        tabindex="-1"
-        aria-labelledby="videoModalLabel"
-        aria-hidden="true"
-        (hidden.bs.modal)="closeVideo()"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-lg position-relative"
-        >
-          <div class="modal-content border-0 shadow-lg">
-            <div class="modal-body p-0">
-              <button
-                type="button"
-                class="btn-close bg-white position-absolute m-3 z-3"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-
-              <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
-                <iframe
-                  *ngIf="isVideoPlaying"
-                  [src]="sanitizedVideoUrl"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media"
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- <section class="offers my-5 py-5">
-  <div class="container">
-    <div class="secTitle text-center">
-      <span
-        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
-      >
-        <span
-          class="bg-white textMainColor rounded-circle transition d-inline-block"
-          ><i class="fa fa-plane me-2 ps-1"></i
-        ></span>
-
-        Offers
-      </span>
-      <h2 class="my-3 textSecondColor fw-bold">Let's Check Exclusive Offers</h2>
-    </div>
-
-    <div class="row g-3 mt-4">
-      <div class="col-lg-4 col-md-6">
-        <div class="sideBar p-1 rounded-5 overflow-hidden d-flex">
-          <figure class="mb-0 overflow-hidden me-3 flex-shrink-0">
-            <img
-              src="../../../assets/image/about 01.jpg"
-              class="w-100"
-              height="180px"
-              alt=""
-            />
-          </figure>
-          <figcaption>
-            <h5 class="textSecondColor text-capitalize">
-              get upto <span class="textMainColor">70%</span> discount!
-            </h5>
-            <p class="my-2 my-lg-3">
-              It is a long established fact that reader distracted.
-            </p>
-            <button routerLink="/tour" class="mainBtn Btn">
-              learn more <i class="fa fa-arrow-right ms-2 rounded-circle"></i>
-            </button>
-          </figcaption>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- <section class="travelDeal my-5 py-5">
-  <div class="container">
-    <div class="secTitle text-center">
-      <span
-        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
-      >
-        <span
-          class="bg-white textMainColor rounded-circle transition d-inline-block"
-          ><i class="fa fa-plane me-2 ps-1"></i
-        ></span>
-
-        travel deal
-      </span>
-      <h2 class="my-3 textSecondColor fw-bold">
-        Our Most Popular Travel Deals
-      </h2>
-    </div>
-
-    <div class="row g-3 mt-4">
-      <div class="col-lg-4 col-md-6">
-        <div class="sideBar p-2 overflow-hidden">
-          <figure class="overflow-hidden">
-            <img
-              src="../../../assets/image/about 01.jpg"
-              class="w-100"
-              height="250px"
-              alt=""
-            />
-          </figure>
-          <figcaption>
-            <h5 routerLink="" class="textSecondColor text-capitalize">
-              Explore The Beauty Of Sea
-            </h5>
-            <p class="my-2 text-capitalize">
-              from <b class="textThirdColor">$777</b>
-            </p>
-          </figcaption>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <section class="my-5 py-5">
   <div class="container">
     <div class="secTitle text-center">
@@ -424,26 +199,25 @@
     </div>
 
     <div class="row g-4 mt-4">
-      @if (allDestinations.length > 0) {
-        @for (des of allDestinations; track $index) {
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <app-destination-cart [destination]="des"></app-destination-cart>
-          </div>
-        }
-      } @else {
-        <div class="col-12 text-center">
-          <p class="text-muted">Loading destinations...</p>
-        </div>
+      @if (allDestinations.length > 0) { @for (des of allDestinations; track
+      $index) {
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <app-destination-cart [destination]="des"></app-destination-cart>
+      </div>
+      } } @else {
+      <div class="col-12 text-center">
+        <p class="text-muted">Loading destinations...</p>
+      </div>
       }
     </div>
 
     <!-- View All Destinations Button -->
     <div class="text-center mt-5">
-      <button 
-        routerLink="/destination" 
-        class="mainBtn Btn px-5 py-3 rounded-6 text-uppercase">
+      <button
+        routerLink="/destination"
+        class="mainBtn Btn px-5 py-3 rounded-6 text-uppercase"
+      >
         View All Destinations
-               
       </button>
     </div>
   </div>
@@ -453,8 +227,8 @@
   <div
     class="container-fluid px-0 d-flex align-items-center flex-wrap flex-lg-nowrap gap-4 gap-lg-0"
   >
-    <div class="desTitle   d-flex flex-column justify-content-center">
-      <h2 class="">Multi-Country Tours</h2>
+    <div class="desTitle d-flex flex-column justify-content-center">
+      <h2 class="">Multi-days Tours</h2>
       <p>
         Experience a journey through multiple destinations with expertly curated
         itineraries that connect you to the best each country has to offer.
@@ -462,14 +236,17 @@
       <button class="secBtn Btn">explore tour</button>
     </div>
 
-    <div class="desTours  z-3 ps-5 pe-0 py-5">
-      <owl-carousel-o class="m-5"
+    <div class="desTours z-3 ps-5 pe-0 py-5">
+      <owl-carousel-o
+        class="m-5"
         *ngIf="shuffledTours.length > 0"
         [options]="destinationOptions"
       >
         @for (tour of shuffledTours; track $index) {
         <ng-template carouselSlide>
-          <div class="my-3"><app-tour-cart [tour]="tour"></app-tour-cart></div>
+          <div class="my-3 ms-4">
+            <app-tour-cart [tour]="tour"></app-tour-cart>
+          </div>
         </ng-template>
         }
       </owl-carousel-o>
@@ -481,15 +258,15 @@
   class="makeTrip text-center position-relative overflow-hidden bgPrimaryColor"
 >
   <div>
-    <div class="floating_box c0"></div>
+    <div class="floating_box c0 d-none d-md-block"></div>
     <div class="floating_box c1"></div>
     <div class="floating_box c2"></div>
     <div class="floating_box c3"></div>
-    <div class="floating_box c4"></div>
+    <div class="floating_box c4 d-none d-md-block"></div>
     <div class="floating_box c5"></div>
     <div class="floating_box c6"></div>
-    <div class="floating_box c7"></div>
-    <div class="floating_box c8"></div>
+    <div class="floating_box c7 d-none d-md-block"></div>
+    <div class="floating_box c8 d-none d-md-block"></div>
   </div>
 
   <div class="cards">
@@ -510,7 +287,7 @@
   </div>
 </section>
 
-<section class="team my-5 py-5">
+<section class="team mt-5 pt-5">
   <div class="container">
     <div class="secTitle text-center">
       <span
@@ -532,7 +309,7 @@
 
 <section class="testimonial my-5 py-5">
   <div class="container">
-    <div class="secTitle text-center pt-5">
+    <div class="secTitle text-center pt-5 mb-5">
       <span
         class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
       >
@@ -543,26 +320,12 @@
 
         testmonials
       </span>
-      <h2 class="my-3 text-white fw-bold">
+      <h2 class="my-3 h5 textSecondColor fw-bold">
         What Our Customers Are Saying About Us?
       </h2>
     </div>
 
-    <!-- remore all content untill mos3ad send app reviews script -->
-    <!-- <div class="mt-5">
-      <owl-carousel-o
-        *ngIf="allReviews.length > 0"
-        [options]="testimonialOptions"
-      >
-        @for (review of allReviews; track $index) {
-        <ng-template carouselSlide>
-          <app-testimonial-cart [testimonial]="review"></app-testimonial-cart>
-        </ng-template>
-        }
-      </owl-carousel-o>
-    </div> -->
-
-    <!-- <h1 class="projectName text-white text-uppercase pb-3">Gots</h1> -->
+    <app-testimonial-cart></app-testimonial-cart>
   </div>
 </section>
 
@@ -584,13 +347,7 @@
 
     <!-- This fetches blogs and stores them -->
     <app-blog-cart (blogsLoaded)="onBlogsLoaded($event)"></app-blog-cart>
-
-    <!-- Once blogs are loaded, display sliced blogs -->
-    <!-- <div *ngIf="allBlogs.length">
-      <app-blog-cart [blogs]="allBlogs.slice(0, 3)"></app-blog-cart>
-    </div> -->
   </div>
 </section>
-
 
 <app-partner-slider></app-partner-slider>

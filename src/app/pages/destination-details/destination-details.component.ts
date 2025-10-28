@@ -16,11 +16,11 @@ import { BooknowComponent } from '../../components/booknow/booknow.component';
     RouterLink,
     CarouselModule,
     CommonModule,
-    SocialComponent,
+    // SocialComponent,
     TourCartComponent,
     FaqContentComponent,
     PartnerSliderComponent,
-    BooknowComponent,
+    // BooknowComponent,
   ],
   templateUrl: './destination-details.component.html',
   styleUrl: './destination-details.component.scss',
@@ -70,7 +70,10 @@ export class DestinationDetailsComponent implements OnInit {
         if (res && res.data && res.data.data) {
           // Filter to show only sub-destinations (parent_id != null)
           this.AllDestination = res.data.data.filter(
-            (dest: any) => dest.parent_id !== null && dest.parent_id !== undefined && dest.parent_id !== 0
+            (dest: any) =>
+              dest.parent_id !== null &&
+              dest.parent_id !== undefined &&
+              dest.parent_id !== 0
           );
         }
       },
