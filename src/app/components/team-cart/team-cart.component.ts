@@ -17,22 +17,22 @@ export class TeamCartComponent {
     },
     {
       name: 'Amira Elzayat',
-      jobTitle: 'Head of Marketing ',
+      jobTitle: 'corporate & events manager ',
       src: './assets/image/golden ocean/2.jpeg',
     },
     {
       name: 'Osama Adly',
-      jobTitle: 'operation manager',
+      jobTitle: 'tourism & planning manager',
       src: './assets/image/golden ocean/3.jpeg',
     },
     {
       name: 'Hanan Yehia',
-      jobTitle: 'reservation manager',
+      jobTitle: 'supervisor tourism counselor',
       src: './assets/image/golden ocean/4.jpeg',
     },
     {
       name: 'Moataz Mohamed Abou Dahab',
-      jobTitle: 'account manager',
+      jobTitle: 'accounting manager',
       src: './assets/image/golden ocean/5.jpeg',
     },
   ];
