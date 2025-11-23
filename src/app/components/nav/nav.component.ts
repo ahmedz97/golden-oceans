@@ -125,8 +125,8 @@ export class NavComponent implements OnInit {
   getCategories() {
     this._DataService.getCategories().subscribe({
       next: (res) => {
-        console.log(res.data.data);
         this.allCategories = res.data.data;
+        console.log('all categories', this.allCategories);
       },
       error: (err) => {
         // console.log(err);

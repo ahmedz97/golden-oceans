@@ -1,4 +1,4 @@
-<div class="topsec mb-5">
+<div class="topsec mb-5 position-relative z-1">
   <owl-carousel-o *ngIf="mainSecSlider.length > 0" [options]="mainSecOptions">
     <ng-container *ngFor="let data of mainSecSlider">
       <ng-template carouselSlide>
@@ -22,95 +22,92 @@
                 holiday
               </p>
             </div>
-            <!-- form search -->
-            <div class="formBox p-0 mb-md-0">
-              <form
-                [formGroup]="searchForm"
-                (ngSubmit)="onSubmit()"
-                class="row justify-content-center rounded-pill overflow-hidden"
-              >
-                <div class="col-md-4 col-sm-8 order-md-1 order-3 px-0 bg-white">
-                  <div class="text-capitalize textMainColor text-start">
-                    <select
-                      formControlName="location"
-                      class="p-2 rounded-1 text-secondary"
-                    >
-                      <option
-                        value=""
-                        disabled
-                        selected
-                        class="bg-secondary text-white"
-                      >
-                        Where would you like to go?
-                      </option>
-                      @for (des of allDestinations; track $index) {
-                      <option [value]="des.id">{{ des.title }}</option>
-                      }
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-6 px-0 bg-white">
-                  <div class="text-capitalize textMainColor text-start">
-                    <select
-                      formControlName="type"
-                      class="p-2 rounded-1 text-secondary"
-                    >
-                      <option
-                        value=""
-                        disabled
-                        selected
-                        class="bg-secondary text-white"
-                      >
-                        Trip Type
-                      </option>
-                      @for (cat of allCategories; track $index) {
-
-                      <option [value]="cat.id">{{ cat.title }}</option>
-                      }
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-6 px-0 bg-white">
-                  <div class="text-capitalize textMainColor text-start">
-                    <select
-                      formControlName="duration"
-                      class="p-2 py-2 text-secondary"
-                    >
-                      <option
-                        value=""
-                        disabled
-                        selected
-                        class="bg-secondary text-white"
-                      >
-                        when you go to?
-                      </option>
-                      @for (time of allDurations; track $index) {
-
-                      <option [value]="time.id">{{ time.title }}</option>
-                      }
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-2 col-sm-4 order-4 px-0">
-                  <div class="text-capitalize flexCenter">
-                    <button
-                      type="submit"
-                      class="mainBtn Btn flexBetween w-100 rounded-start-0"
-                    >
-                      Search<i
-                        class="fa fa-magnifying-glass-plus bgPrimaryWhiteColor textMainColor rounded-circle"
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
           </div>
         </section>
       </ng-template>
     </ng-container>
   </owl-carousel-o>
+
+  <!-- form search -->
+  <div class="container">
+    <div class="formBox p-0 mb-md-0 position-absolute">
+      <form
+        [formGroup]="searchForm"
+        (ngSubmit)="onSubmit()"
+        class="row justify-content-center rounded-pill overflow-hidden"
+      >
+        <div class="col-md-4 col-sm-8 order-md-1 order-3 px-0 bg-white">
+          <div class="text-capitalize textMainColor text-start">
+            <select
+              formControlName="location"
+              class="p-2 rounded-1 text-secondary"
+            >
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-secondary text-white"
+              >
+                Where would you like to go?
+              </option>
+              @for (des of allDestinations; track $index) {
+              <option [value]="des.id">{{ des.title }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 px-0 bg-white">
+          <div class="text-capitalize textMainColor text-start">
+            <select formControlName="type" class="p-2 rounded-1 text-secondary">
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-secondary text-white"
+              >
+                Trip Type
+              </option>
+              @for (cat of allCategories; track $index) {
+
+              <option [value]="cat.id">{{ cat.title }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 px-0 bg-white">
+          <div class="text-capitalize textMainColor text-start">
+            <select formControlName="duration" class="p-2 py-2 text-secondary">
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-secondary text-white"
+              >
+                when you go to?
+              </option>
+              @for (time of allDurations; track $index) {
+
+              <option [value]="time.id">{{ time.title }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2 col-sm-4 order-4 px-0">
+          <div class="text-capitalize flexCenter">
+            <button
+              type="submit"
+              class="mainBtn Btn flexBetween w-100 rounded-start-0"
+            >
+              Search<i
+                class="fa fa-magnifying-glass-plus bgPrimaryWhiteColor textMainColor rounded-circle"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <app-aboutsection></app-aboutsection>
@@ -284,26 +281,6 @@
     <button routerLink="/makeTrip" class="mainBtn Btn px-5 py-3 rounded-3">
       plan your trip
     </button>
-  </div>
-</section>
-
-<section class="team mt-5 pt-5">
-  <div class="container">
-    <div class="secTitle text-center">
-      <span
-        class="box bgMainColor text-white text-uppercase border rounded-pill p-2 transition"
-      >
-        <span
-          class="bg-white textMainColor rounded-circle transition d-inline-block"
-          ><i class="fa fa-plane me-2 ps-1"></i
-        ></span>
-
-        our team
-      </span>
-      <h2 class="my-3 textSecondColor fw-bold">Meet With Our Experts Team</h2>
-    </div>
-
-    <app-team-cart></app-team-cart>
   </div>
 </section>
 

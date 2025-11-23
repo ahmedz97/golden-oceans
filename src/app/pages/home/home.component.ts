@@ -33,7 +33,6 @@ interface DestinationPriceMap {
     ReactiveFormsModule,
     RouterLink,
     TourCartComponent,
-    TeamCartComponent,
     BlogCartComponent,
     // BooknowComponent,
     // TestimonialCartComponent,
@@ -293,7 +292,8 @@ export class HomeComponent implements OnInit {
     // Store filtered destinations with placeholder images
     this.allDestinations = filtered.map((dest: any) => ({
       ...dest,
-      featured_image: dest.featured_image || 'assets/image/Wallpaper/first.jpg',
+      featured_image:
+        dest.featured_image || 'assets/image/Wallpaper/slider1.webp',
     }));
 
     console.log(
@@ -427,7 +427,7 @@ export class HomeComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     autoplay: true,
-    dots: true,
+    dots: false,
     // navSpeed: 10000,
     margin: 20,
     items: 1,

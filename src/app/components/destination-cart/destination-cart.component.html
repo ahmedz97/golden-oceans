@@ -3,22 +3,34 @@
   [routerLink]="['/destination', destination.slug]"
   class="destination-card overflow-hidden rounded-5 cPointer"
 >
-  <figure class="overflow-hidden position-relative mb-0" style="height: 350px; border-radius: 1rem;">
+  <figure
+    class="overflow-hidden position-relative mb-0"
+    style="height: 350px; border-radius: 1rem"
+  >
     <img
-      [src]="destination.featured_image || 'assets/image/Wallpaper/first.jpg'"
+      [src]="
+        destination.featured_image || 'assets/image/Wallpaper/slider1.webp'
+      "
       class="w-100 h-100 object-fit-cover"
       [alt]="destination.title"
       [title]="destination.title"
-      onerror="this.src='assets/image/Wallpaper/first.jpg'"
+      onerror="this.src='assets/image/Wallpaper/slider1.webp'"
     />
     <!-- Dark gradient overlay at bottom -->
     <div
       class="position-absolute bottom-0 start-0 end-0 p-4 d-flex flex-column justify-content-end"
-      style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);"
+      style="
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0.4) 50%,
+          transparent 100%
+        );
+      "
     >
       <h3
         class="text-white text-capitalize fw-bold mb-3"
-        style="font-size: 2rem; line-height: 1.2;"
+        style="font-size: 2rem; line-height: 1.2"
       >
         {{ destination.title }}
       </h3>
@@ -26,7 +38,11 @@
       <button
         [routerLink]="['/destination', destination.slug]"
         class="btn btn-outline-light rounded-pill px-4 py-2 text-capitalize w-auto"
-        style="border: 2px solid white; background: transparent; transition: all 0.3s;"
+        style="
+          border: 2px solid white;
+          background: transparent;
+          transition: all 0.3s;
+        "
         onmouseover="this.style.background='white'; this.style.color='#000';"
         onmouseout="this.style.background='transparent'; this.style.color='white';"
       >

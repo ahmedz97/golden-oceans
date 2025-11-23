@@ -20,28 +20,42 @@
 
 <section class="destinations my-5 py-5">
   <div class="container">
-    <div class="secTitle text-center mb-5">
-      <h2 class="fw-bold" style="font-size: 2.5rem; color: #333;">
+    <div class="secTitle text-center mb-5 fade-in-up">
+      <span
+        class="badge bg-primary bg-opacity-10 text-primary px-4 py-2 rounded-pill mb-3"
+      >
+        <i class="bi bi-globe-americas me-2"></i>Travel Destinations
+      </span>
+      <h2 class="fw-bold display-4 mb-3" style="color: #1a1a1a">
         Explore Our Destinations
       </h2>
-      <p class="text-muted mt-3" style="font-size: 1.1rem;">
-        Discover amazing places around the world
+      <p class="text-muted fs-5 mx-auto" style="max-width: 600px">
+        Discover amazing places around the world and create unforgettable
+        memories
       </p>
     </div>
 
     <div class="mt-5">
       @if (allDestinations.length > 0) {
-        <div class="row g-4">
-          @for (des of allDestinations; track $index) {
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <app-destination-cart [destination]="des"></app-destination-cart>
-            </div>
-          }
+      <div [style.animation-delay]="1 + 's'" class="row g-4">
+        @for (des of allDestinations; track $index) {
+        <div
+          class="col-xl-3 col-lg-4 col-md-6 destination-item"
+          [style.animation-delay]="$index * 1 + 's'"
+        >
+          <app-destination-cart [destination]="des"></app-destination-cart>
         </div>
+        }
+      </div>
       } @else {
-        <div class="text-center py-5">
-          <p class="text-muted">Loading destinations...</p>
+      <div class="text-center py-5 loading-state">
+        <div class="spinner-border text-primary mb-3" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
+        <p class="text-muted fs-5">
+          Discovering amazing destinations for you...
+        </p>
+      </div>
       }
     </div>
   </div>

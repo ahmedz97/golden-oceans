@@ -17,25 +17,30 @@
 
         }
 
-        .formBox{
-            max-width: 900px ;
-            margin: 20px auto;
-            position: relative;
-            z-index: 994;
+      }
 
-          form{
-            box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.3);
-            select{
-              display: block;
-              cursor: pointer;
-              border: 1px solid #eeeeee8f;
-              width: 100%;
-              &:focus{border-color: $secondary-color ;}
-            }
+    }
 
-          }
+    .formBox{
+        max-width: 900px ;
+        margin: 20px auto !important;
+        position: relative;
+        z-index: 994;
+        bottom: 80px !important;
+        left: 30px !important;
+        right: 30px !important;
 
+
+      form{
+        box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.3);
+        select{
+          display: block;
+          cursor: pointer;
+          border: 1px solid #eeeeee8f;
+          width: 100%;
+          &:focus{border-color: $secondary-color ;}
         }
+
       }
 
     }
@@ -77,7 +82,7 @@
     }
 
     @media screen and (max-width:767px) {
-        .mainSec>div .formBox form{
+       .formBox form{
             border-radius: 11px !important;
             .mainBtn.Btn {border-radius: 0;}
         }
