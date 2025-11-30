@@ -12,16 +12,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">blog details</h2>
+    <h2 class="fw-bold">{{ "blogDetails.blogDetails" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ "nav.home" | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          blog details
+          {{ "blogDetails.blogDetails" | translate }}
         </li>
       </ol>
     </nav>
@@ -53,7 +53,7 @@
               </div>
               <div class="me-3">
                 <i class="fa fa-comment-alt me-2"></i>
-                <span>Comments ( {{ blogDetails.display_order }} )</span>
+                <span>{{ "common.comments" | translate }} ( {{ blogDetails.display_order }} )</span>
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@
         </div>
         <!-- tags -->
         <div>
-          <h5 class="pt-3 h4 fw-bold text-black mb-0">Popular Tags</h5>
+          <h5 class="pt-3 h4 fw-bold text-black mb-0">{{ "blogDetails.popularTags" | translate }}</h5>
           <div class="py-3 flexCenter justify-content-start flex-wrap gap-3">
             @for (tag of tags; track $index) {
             <button class="Btn mainBtn px-3 py-1 text-capitalize">
@@ -90,7 +90,7 @@
         </div>
         <!-- follow us -->
         <div>
-          <h5 class="pt-3 h4 fw-bold text-black mb-3">share</h5>
+          <h5 class="pt-3 h4 fw-bold text-black mb-3">{{ "blogDetails.share" | translate }}</h5>
           <div class="bgMainColor rounded-3 p-3">
             <app-social></app-social>
           </div>
@@ -151,10 +151,9 @@
 
         <!-- comment form -->
         <div class="p-sm-5 p-3 rounded-3 shadow-lg">
-          <h5 class="pb-3 fw-bold text-black">Leave A Comments</h5>
+          <h5 class="pb-3 fw-bold text-black">{{ "blogDetails.leaveComments" | translate }}</h5>
           <p>
-            Your email address will not be published. Required fields are marked
-            *
+            {{ "blogDetails.emailNotPublished" | translate }}
           </p>
           <form
             [formGroup]="writeReview"
@@ -166,7 +165,7 @@
                 <input
                   type="text"
                   formControlName="reviewer_name"
-                  placeholder="Name..."
+                  placeholder="{{ 'blogDetails.name' | translate }}"
                   class="form-control"
                 />
               </div>
@@ -175,7 +174,7 @@
               <div>
                 <input
                   type="number"
-                  placeholder="Rate..."
+                  placeholder="{{ 'blogDetails.rate' | translate }}"
                   class="form-control"
                   formControlName="rate"
                 />
@@ -184,7 +183,7 @@
             <div class="col-12">
               <div>
                 <textarea
-                  placeholder="Message..."
+                  placeholder="{{ 'blogDetails.message' | translate }}"
                   class="form-control"
                   name="message"
                   rows="5"
@@ -197,7 +196,7 @@
                 type="submit"
                 class="mainBtn Btn flexCenter gap-2 mx-2 mb-2"
               >
-                send comment
+                {{ "blogDetails.sendComment" | translate }}
                 <i
                   class="fa fa-arrow-right fa-rotate-by bgPrimaryWhiteColor rounded-circle overflow-hidden"
                 ></i>
@@ -225,7 +224,7 @@
           </div> -->
 
           <div class="text-capitalize p-4 rounded-3 sideBar mb-4">
-            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">Categories</h5>
+            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">{{ "blogDetails.categories" | translate }}</h5>
             <ul class="list-unstyled categoryList">
               @for (item of blogCategories; track $index) {
               <li
@@ -246,7 +245,7 @@
           </div>
 
           <div class="sideBar mb-4 p-4 rounded-3">
-            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">Recent News</h5>
+            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">{{ "blogDetails.recentNews" | translate }}</h5>
 
             @for (item of blogs.slice(-2); track $index) {
             <div [routerLink]="['/blog', item.slug]" class="d-flex mt-3">
@@ -274,14 +273,14 @@
           </div>
 
           <div class="sideBar p-4 rounded-3 my-4">
-            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">follow us</h5>
+            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">{{ "blogDetails.followUs" | translate }}</h5>
             <div class="bgMainColor rounded-3 p-3">
               <app-social></app-social>
             </div>
           </div>
 
           <div class="sideBar p-4 rounded-3 my-4">
-            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">Popular Tags</h5>
+            <h5 class="headTitle pb-2 mb-2 fw-bold text-black">{{ "blogDetails.popularTags" | translate }}</h5>
             <div
               class="py-3 flexCenter justify-content-start flex-wrap gap-2 row-gap-3"
             >

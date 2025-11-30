@@ -1,9 +1,9 @@
 <div class="fixed-top bg-transparent">
   <!-- Main Navbar -->
-  <nav class="navbar navbar-expand-lg whiteNav">
+  <nav class="navbar navbar-expand-lg whiteNav flex-nowrap">
     <div class="container-fluid">
       <!-- Logo Section -->
-      <div routerLink="/" class="navbar-brand cPointer">
+      <div routerLink="/" class="navbar-brand cPointer flex-shrink-0">
         <img
           src="../../../assets/image/golden ocean/Artboard 2.png"
           [alt]="siteTitle"
@@ -13,7 +13,7 @@
       </div>
 
       <!-- Navigation Links (Desktop) -->
-      <div class="navbar-nav mx-auto d-none d-lg-flex">
+      <div class="navbar-nav mx-auto d-none d-lg-flex flex-wrap">
         <ng-container *ngFor="let link of navigationLinks">
           <a
             [routerLink]="link.path"
@@ -21,7 +21,7 @@
             [routerLinkActiveOptions]="{ exact: link.path === '/' }"
             class="nav-link px-1 mx-2 text-white position-relative"
           >
-            {{ link.label }}
+            {{ link.label | translate }}
           </a>
 
           <!-- Dropdown categories -->
@@ -33,10 +33,12 @@
                 [routerLink]="['/tour']"
                 routerLinkActive="active fw-bold"
                 class="d-block text-capitalize"
-                >tours</span
+                >{{ "nav.tours" | translate }}</span
               >
               <ul class="dropdown-menu border-0 shadow">
-                <li *ngFor="let cat of allCategories">
+                @for (cat of allCategories; track $index) { @if (cat.tours_count
+                !== 0) {
+                <li>
                   <a
                     class="dropdown-item"
                     [routerLink]="['/tour']"
@@ -46,10 +48,12 @@
                     {{ cat.title }}
                   </a>
                 </li>
+                } }
               </ul>
             </div>
           </ng-container>
 
+          <!-- Destinations Dropdown -->
           <ng-container *ngIf="link.path === '/' && allDestinations?.length">
             <div
               class="nav-link px-1 mx-2 text-white position-relative dropdown custom-dropdown"
@@ -58,16 +62,15 @@
                 [routerLink]="['/destination']"
                 routerLinkActive="active fw-bold"
                 class="d-block"
-                >Destinations</span
+                >{{ "nav.destinations" | translate }}</span
               >
               <ul class="dropdown-menu border-0 shadow">
-                <li
-                  *ngFor="let dest of allDestinations"
-                  class="dropdown-submenu"
-                >
+                @for (dest of allDestinations; track $index) { @if
+                (dest.tours_count !== 0) {
+                <li class="dropdown-submenu">
                   <!-- ✅ if egypt-->
+                  <!-- *ngIf="!isEgypt(dest)" -->
                   <a
-                    *ngIf="!isEgypt(dest)"
                     class="dropdown-item"
                     [routerLink]="['/destination', dest.slug]"
                     routerLinkActive="active fw-bold"
@@ -76,7 +79,7 @@
                   </a>
 
                   <!-- ✅ if not egypt submenu -->
-                  <ng-container *ngIf="isEgypt(dest)">
+                  <!-- <ng-container *ngIf="isEgypt(dest)">
                     <a
                       [routerLink]="['/destination', dest.slug]"
                       class="dropdown-item dropdown-toggle cPointer"
@@ -95,8 +98,9 @@
                         </a>
                       </li>
                     </ul>
-                  </ng-container>
+                  </ng-container> -->
                 </li>
+                } }
               </ul>
             </div>
           </ng-container>
@@ -111,7 +115,7 @@
               routerLink="/signup"
               routerLinkActive="textSecondColor"
               class="fa fa-circle-user textMainColor me-2 fw-bold cPointer"
-              title="Sign up now"
+              [title]="'nav.signUpNow' | translate"
             ></i>
 
             <!-- <i
@@ -125,7 +129,7 @@
               class="me-2 cPointer"
               routerLink="/cart"
               routerLinkActive="textSecondColor"
-              title="Tours cart"
+              [title]="'nav.toursCart' | translate"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +227,7 @@
               routerLink="/profile"
               routerLinkActive="textSecondColor"
               class="fa fa-address-book textMainColor me-2 fw-bold cPointer"
-              title="My profile"
+              [title]="'nav.myProfile' | translate"
             ></i>
           </div>
 
@@ -235,9 +239,24 @@
             class="p-1 py-2 rounded-2 text-capitalize border-0 text-dark cPointer bg-transparent"
           >
             <!-- <option readonly disabled>Select Language</option> -->
-            <option class="text-dark" selected value="en">english</option>
-            <option class="text-dark" value="it">italy</option>
-            <option class="text-dark" value="fr">france</option>
+            <option class="text-dark" selected value="en">
+              {{ "nav.english" | translate }}
+            </option>
+            <option class="text-dark" value="fr">
+              {{ "nav.french" | translate }}
+            </option>
+            <option class="text-dark" value="it">
+              {{ "nav.italian" | translate }}
+            </option>
+            <option class="text-dark" value="gr">
+              {{ "nav.german" | translate }}
+            </option>
+            <option class="text-dark" value="es">
+              {{ "nav.spanish" | translate }}
+            </option>
+            <option class="text-dark" value="pr">
+              {{ "nav.portuguese" | translate }}
+            </option>
           </select>
         </div>
 
@@ -246,7 +265,7 @@
           routerLink="/makeTrip"
           class="mainBtn Btn d-none d-lg-flex align-items-center gap-2 mx-2"
         >
-          make trip
+          {{ "nav.makeTrip" | translate }}
           <!-- <i
             class="fas fa-plane-up fa-rotate-by bgPrimaryWhiteColor rounded-circle overflow-hidden"
           ></i> -->
@@ -301,7 +320,7 @@
             [routerLinkActiveOptions]="{ exact: link.path === '/' }"
             class="nav-link px-1 mx-2 text-dark position-relative"
           >
-            {{ link.label }}
+            {{ link.label | translate }}
           </a>
 
           <!-- Dropdown categories -->
@@ -313,7 +332,7 @@
                 [routerLink]="['/tour']"
                 routerLinkActive="active fw-bold"
                 class="d-block text-capitalize"
-                >tours</span
+                >{{ "nav.tours" | translate }}</span
               >
               <ul class="dropdown-menu border-0 shadow">
                 <li *ngFor="let cat of allCategories">
@@ -335,17 +354,19 @@
             <div
               class="nav-link px-1 mx-2 text-dark position-relative dropdown custom-dropdown"
             >
-              <span [routerLink]="['/destination']" class="d-block"
-                >Destinations</span
+              <span
+                [routerLink]="['/destination']"
+                routerLinkActive="active fw-bold"
+                class="d-block"
+                >{{ "nav.destinations" | translate }}</span
               >
               <ul class="dropdown-menu border-0 shadow">
-                <li
-                  *ngFor="let dest of allDestinations"
-                  class="dropdown-submenu"
-                >
+                @for (dest of allDestinations; track $index) { @if
+                (dest.tours_count !== 0) {
+                <li class="dropdown-submenu">
                   <!-- ✅ if egypt-->
+                  <!-- *ngIf="!isEgypt(dest)" -->
                   <a
-                    *ngIf="!isEgypt(dest)"
                     class="dropdown-item"
                     [routerLink]="['/destination', dest.slug]"
                     routerLinkActive="active fw-bold"
@@ -354,10 +375,9 @@
                   </a>
 
                   <!-- ✅ if not egypt submenu -->
-                  <ng-container *ngIf="isEgypt(dest)">
+                  <!-- <ng-container *ngIf="isEgypt(dest)">
                     <a
                       [routerLink]="['/destination', dest.slug]"
-                      routerLinkActive="active fw-bold"
                       class="dropdown-item dropdown-toggle cPointer"
                     >
                       {{ dest.title }}
@@ -367,15 +387,16 @@
                         <a
                           class="dropdown-item"
                           [routerLink]="['/tour']"
-                          [queryParams]="{ type: cat.id }"
                           routerLinkActive="active fw-bold"
+                          [queryParams]="{ type: cat.id }"
                         >
                           {{ cat.title }}
                         </a>
                       </li>
                     </ul>
-                  </ng-container>
+                  </ng-container> -->
                 </li>
+                } }
               </ul>
             </div>
           </ng-container>
@@ -389,21 +410,21 @@
           routerLink="/signup"
           routerLinkActive="textSecondColor"
           class="fa fa-circle-user textMainColor me-2 fw-bold cPointer"
-          title="Sign up now"
+          [title]="'nav.signUpNow' | translate"
         ></i>
 
         <i
           routerLink="/cart"
           routerLinkActive="textSecondColor"
           class="fa fa-pen-to-square textMainColor me-2 fw-bold cPointer"
-          title="Tours cart"
+          [title]="'nav.toursCart' | translate"
         ></i>
 
         <i
           routerLink="/profile"
           routerLinkActive="textSecondColor"
           class="fa fa-address-book textMainColor me-2 fw-bold cPointer"
-          title="My profile"
+          [title]="'nav.myProfile' | translate"
         ></i>
       </div>
 
@@ -412,16 +433,32 @@
         name="language"
         id="language"
         (change)="onLangChange($event)"
-        class="p-2 m-2 rounded-2 text-capitalize border cPointer w-100"
+        class="p-1 py-2 rounded-2 text-capitalize border-0 text-dark cPointer bg-transparent"
       >
-        <option readonly disabled>Select Language</option>
-        <option value="en">english</option>
-        <option value="ar">arabic</option>
+        <!-- <option readonly disabled>Select Language</option> -->
+        <option class="text-dark" selected value="en">
+          {{ "nav.english" | translate }}
+        </option>
+        <option class="text-dark" value="fr">
+          {{ "nav.french" | translate }}
+        </option>
+        <option class="text-dark" value="it">
+          {{ "nav.italian" | translate }}
+        </option>
+        <option class="text-dark" value="gr">
+          {{ "nav.german" | translate }}
+        </option>
+        <option class="text-dark" value="es">
+          {{ "nav.spanish" | translate }}
+        </option>
+        <option class="text-dark" value="pr">
+          {{ "nav.portuguese" | translate }}
+        </option>
       </select>
       <button
         class="mainBtn Btn w-100 d-flex align-items-center justify-content-center gap-2"
       >
-        make a trip
+        {{ "nav.makeATrip" | translate }}
         <!-- <i
           class="fas fa-map-marker-alt fa-rotate-by textMainColor bgPrimaryWhiteColor rounded-circle overflow-hidden"
         ></i> -->

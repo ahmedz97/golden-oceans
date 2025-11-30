@@ -19,6 +19,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/services/data.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { TourCartComponent } from '../../components/tour-cart/tour-cart.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -32,6 +34,7 @@ import { TourCartComponent } from '../../components/tour-cart/tour-cart.componen
     ReactiveFormsModule,
     CarouselModule,
     TourCartComponent,
+    TranslateModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
@@ -45,7 +48,9 @@ export class ProfileComponent implements OnInit {
     private _ProfileService: ProfileService,
     private _Router: Router,
     private toaster: ToastrService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService,
+    private translate: TranslateService
   ) {}
   updateProfile!: FormGroup;
   updateImage!: FormGroup;
@@ -63,28 +68,41 @@ export class ProfileComponent implements OnInit {
   selectedTab: string = 'dashboard';
 
   ngOnInit(): void {
-    this.showCountries();
-    this.profileMe();
-    this.updateProfile = new FormGroup({
-      name: new FormControl(''),
-      password: new FormControl(''),
-      password_confirmation: new FormControl(''),
-      phone: new FormControl(''),
-      // email: new FormControl(''),
-      nationality: new FormControl(''),
-    });
-    this.updateImage = new FormGroup({
-      image: new FormControl(''),
-    });
-    this.transferLoyaltyCreditForm = new FormGroup({
-      recipient_email: new FormControl(''),
-      points: new FormControl(''),
-      notes: new FormControl(''),
-    });
+    // Check if user is logged in
+    const token = localStorage.getItem('accessToken');
 
-    this.getListCart();
-    this.getFav();
-    this.getLoyaltyCredit();
+    if (token) {
+      this.showCountries();
+      this.profileMe();
+      this.updateProfile = new FormGroup({
+        name: new FormControl(''),
+        password: new FormControl(''),
+        password_confirmation: new FormControl(''),
+        phone: new FormControl(''),
+        // email: new FormControl(''),
+        nationality: new FormControl(''),
+      });
+      this.updateImage = new FormGroup({
+        image: new FormControl(''),
+      });
+      this.transferLoyaltyCreditForm = new FormGroup({
+        recipient_email: new FormControl(''),
+        points: new FormControl(''),
+        notes: new FormControl(''),
+      });
+
+      this.getListCart();
+      this.getFav();
+      this.getLoyaltyCredit();
+    } else {
+      // Show error message using translation
+      this.translate
+        .get('messages.mustBeLoggedIn')
+        .subscribe((message: string) => {
+          this.toaster.error(message);
+        });
+      this._Router.navigate(['/login']);
+    }
   }
 
   // عند الاختيار

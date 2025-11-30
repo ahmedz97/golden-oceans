@@ -8,7 +8,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DataService } from '../../core/services/data.service';
 
 @Component({
@@ -21,14 +21,24 @@ import { DataService } from '../../core/services/data.service';
 export class NavComponent implements OnInit {
   constructor(
     private _DataService: DataService,
+    private translate: TranslateService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    // Initialize translation service
+    if (isPlatformBrowser(this.platformId)) {
+      const savedLang = localStorage.getItem('language') || 'en';
+      this.translate.use(savedLang);
+    } else {
+      this.translate.setDefaultLang('en');
+      this.translate.use('en');
+    }
+  }
 
   navigationLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/blog', label: 'Blogs' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/', label: 'nav.home' },
+    { path: '/about', label: 'nav.about' },
+    { path: '/blog', label: 'nav.blogs' },
+    { path: '/contact', label: 'nav.contact' },
   ];
 
   isSidebarOpen = false;
@@ -55,6 +65,7 @@ export class NavComponent implements OnInit {
   categoriesByDest: Record<string, any[]> = {};
 
   ngOnInit(): void {
+    this.applyLanguageSettings();
     this.getDestination();
     this.getSettings();
     this.getCategories();

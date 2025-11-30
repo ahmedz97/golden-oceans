@@ -2,12 +2,12 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">not found page</h2>
+    <h2 class="fw-bold">{{ "notFound.notFoundPage" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item mainBtn Btn">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >go to Home</a
+            >{{ "notFound.goToHome" | translate }}</a
           >
         </li>
       </ol>

@@ -36,8 +36,22 @@ export function app(): express.Express {
         publicPath: browserDistFolder,
         providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
       })
-      .then((html) => res.send(html))
-      .catch((err) => next(err));
+      .then((html) => {
+        // Log the route for debugging
+        console.log(`✅ Rendered route: ${originalUrl}`);
+        
+        // Check if it's a 404 page (optional: you can set status code)
+        if (html.includes('not found page') || html.includes('undraw_page-not-found')) {
+          console.log(`⚠️  404 Page rendered for: ${originalUrl}`);
+          res.status(404); // Set proper HTTP status
+        }
+        
+        res.send(html);
+      })
+      .catch((err) => {
+        console.error(`❌ Error rendering ${originalUrl}:`, err);
+        next(err);
+      });
   });
 
   return server;
@@ -50,6 +64,11 @@ function run(): void {
   const server = app();
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`\nTest these URLs:`);
+    console.log(`  ✓ http://localhost:${port}/`);
+    console.log(`  ✓ http://localhost:${port}/about`);
+    console.log(`  ✗ http://localhost:${port}/fsdfsd (should show 404)`);
+    console.log(`  ✗ http://localhost:${port}/random-path (should show 404)`);
   });
 }
 

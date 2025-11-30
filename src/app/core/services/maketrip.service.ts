@@ -10,7 +10,7 @@ export class MaketripService extends BaseService {
   sendDataTrip(tripData: object): Observable<any> {
     return this.HttpClient.post(`${this.baseUrl}/custom/trips`, tripData);
   }
-  getDestination(parent_id: any = 1): Observable<any> {
+  getDestination(parent_id?: any): Observable<any> {
     let paramsId = new HttpParams();
     if (parent_id) {
       paramsId = paramsId.set('parent_id', parent_id);

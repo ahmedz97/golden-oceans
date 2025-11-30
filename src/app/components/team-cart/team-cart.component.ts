@@ -16,10 +16,11 @@ export class TeamCartComponent {
       src: './assets/image/golden ocean/1.jpeg',
     },
     {
-      name: 'Amira Elzayat',
-      jobTitle: 'corporate & events manager ',
-      src: './assets/image/golden ocean/2.jpeg',
+      name: 'Moataz Mohamed Abou Dahab',
+      jobTitle: 'accounting manager',
+      src: './assets/image/golden ocean/5.jpeg',
     },
+
     {
       name: 'Osama Adly',
       jobTitle: 'tourism & planning manager',
@@ -31,9 +32,9 @@ export class TeamCartComponent {
       src: './assets/image/golden ocean/4.jpeg',
     },
     {
-      name: 'Moataz Mohamed Abou Dahab',
-      jobTitle: 'accounting manager',
-      src: './assets/image/golden ocean/5.jpeg',
+      name: 'Amira Elzayat',
+      jobTitle: 'corporate & events manager ',
+      src: './assets/image/golden ocean/2.jpeg',
     },
   ];
 
@@ -42,7 +43,7 @@ export class TeamCartComponent {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    autoplay: false,
+    autoplay: true,
     dots: false,
     smartSpeed: 2000,
     margin: 30,

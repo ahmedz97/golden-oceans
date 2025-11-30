@@ -4,15 +4,14 @@
       <div class="col-xl-3 col-md-6">
         <div class="logoSide">
           <img
-            src="../../../assets/image/golden ocean/white_logo-removebg-preview.png"
+            [src]="
+              footerLogo ||
+              '../../../assets/image/golden ocean/white_logo-removebg-preview.png'
+            "
             width="200px"
             height="90px"
-            alt="logo name"
+            alt="footer logo"
           />
-          <p class="my-4">
-            We are many variations of passages available but the majority have
-            suffer alteration in some form by injected.
-          </p>
 
           <div class="mb-3 d-flex">
             <i
@@ -47,7 +46,7 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              our company
+              {{ 'footer.ourCompany' | translate }}
             </h4>
           </div>
           <ul class="list-unstyled">
@@ -56,21 +55,21 @@
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>about us </span>
+              <span>{{ 'about.aboutUs' | translate }}</span>
             </li>
             <li
               routerLink="/contact"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>contact us </span>
+              <span>{{ 'contact.contactUs' | translate }}</span>
             </li>
             <li
               routerLink="/blog"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>our blog </span>
+              <span>{{ 'footer.ourBlog' | translate }}</span>
             </li>
           </ul>
         </div>
@@ -79,7 +78,7 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              other services
+              {{ 'footer.otherServices' | translate }}
             </h4>
           </div>
           <ul class="list-unstyled">
@@ -88,14 +87,14 @@
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>rewards program </span>
+              <span>{{ 'footer.rewardsProgram' | translate }}</span>
             </li>
             <li
               routerLink="/"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>partners </span>
+              <span>{{ 'footer.partners' | translate }}</span>
             </li>
           </ul>
         </div>
@@ -104,7 +103,7 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              help center
+              {{ 'footer.helpCenter' | translate }}
             </h4>
           </div>
           <ul class="list-unstyled">
@@ -113,14 +112,14 @@
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>acount </span>
+              <span>{{ 'footer.account' | translate }}</span>
             </li>
             <li
               routerLink="/faq"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>FAQ's </span>
+              <span>{{ 'footer.faqs' | translate }}</span>
             </li>
           </ul>
         </div>
@@ -129,24 +128,24 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              newsletter
+              {{ 'footer.newsletter' | translate }}
             </h4>
           </div>
           <p class="my-3">
-            Subscribe Our Newsletter To Get Latest Update And News
+            {{ 'footer.newsletterDesc' | translate }}
           </p>
           <form>
             <input
               type="email"
-              placeholder="Your Email"
+              placeholder="{{ 'footer.yourEmail' | translate }}"
               class="form-control rounded-3 mb-3 p-2"
             />
             <button class="secBtn Btn w-100 rounded-3">
-              subscribe now
+              {{ 'footer.subscribeNow' | translate }}
               <i class="fa-regular fa-paper-plane ms-2 rounded-circle"></i>
             </button>
             <p class="my-1">
-              <i class="fa fa-lock"></i> Your information is safe with us.
+              <i class="fa fa-lock"></i> {{ 'footer.infoSafe' | translate }}
             </p>
           </form>
         </div>
@@ -154,9 +153,9 @@
     </div>
     <div class="flexBetween flex-wrap py-3 border-top">
       <h6 class="text-white text-capitalize">
-        © Copyright 2025
-        <a href="" class="fw-bold textSecondColor">perfect solutions 4u</a>
-        All Rights Reserved.
+        {{ 'footer.copyrightText' | translate }}
+        <a href="" class="fw-bold textSecondColor">{{ 'footer.perfectSolutions' | translate }}</a>
+        {{ 'footer.allRightsReserved' | translate }}
       </h6>
       <app-social></app-social>
     </div>

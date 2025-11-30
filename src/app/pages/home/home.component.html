@@ -16,10 +16,9 @@
             class="container d-flex align-items-center justify-content-center flex-column"
           >
             <div class="content my-5 text-capitalize text-center text-white">
-              <h2 class="mb-3">find your next place to visit</h2>
+              <h2 class="mb-3">{{ "home.findNextPlace" | translate }}</h2>
               <p>
-                discover amazing places at exclusive deals and enjoy your
-                holiday
+                {{ "home.discoverAmazing" | translate }}
               </p>
             </div>
           </div>
@@ -48,7 +47,7 @@
                 selected
                 class="bg-secondary text-white"
               >
-                Where would you like to go?
+                {{ "home.whereToGo" | translate }}
               </option>
               @for (des of allDestinations; track $index) {
               <option [value]="des.id">{{ des.title }}</option>
@@ -65,7 +64,7 @@
                 selected
                 class="bg-secondary text-white"
               >
-                Trip Type
+                {{ "home.tripType" | translate }}
               </option>
               @for (cat of allCategories; track $index) {
 
@@ -83,7 +82,7 @@
                 selected
                 class="bg-secondary text-white"
               >
-                when you go to?
+                {{ "home.whenYouGo" | translate }}
               </option>
               @for (time of allDurations; track $index) {
 
@@ -99,7 +98,8 @@
               type="submit"
               class="mainBtn Btn flexBetween w-100 rounded-start-0"
             >
-              Search<i
+              {{ "home.search" | translate
+              }}<i
                 class="fa fa-magnifying-glass-plus bgPrimaryWhiteColor textMainColor rounded-circle"
               ></i>
             </button>
@@ -122,16 +122,10 @@
           </div>
           <div class="content-overlay">
             <h6 class="textSecondColor text-capitalize fw-bold h5 mb-3">
-              <i class="fa fa-globe"></i> Our Packages
+              <i class="fa fa-globe"></i> {{ "home.ourPackages" | translate }}
             </h6>
             <p class="mb-0 text-muted">
-              Embark on once-in-a-lifetime adventures with our Middle Eastern
-              tours. From the iconic landmarks to ancient wonders and beyond,
-              our tours are designed to immerse you in the fascinating history
-              and vibrant cultures. You can choose the exclusivity of private
-              excursions or the camaraderie of a small group, our tours are
-              fully customizable to suit your preferences, ensuring an
-              extraordinary.
+              {{ "home.ourPackagesDesc" | translate }}
             </p>
           </div>
         </div>
@@ -144,14 +138,11 @@
           </div>
           <div class="content-overlay">
             <h6 class="textSecondColor text-capitalize fw-bold h5 mb-3">
-              <i class="fa fa-ticket-alt"></i> Ticketing
+              <i class="fa fa-ticket-alt"></i>
+              {{ "home.ticketing" | translate }}
             </h6>
             <p class="mb-0 text-muted">
-              Leave the hassle of ticketing and transfers to us. We book airline
-              and train tickets effortlessly, and ensure smooth, stress-free
-              transitions throughout your journey. We can accommodate any
-              budget, ensuring a seamless and comfortable experience from start
-              to finish.
+              {{ "home.ticketingDesc" | translate }}
             </p>
           </div>
         </div>
@@ -164,13 +155,11 @@
           </div>
           <div class="content-overlay">
             <h6 class="textSecondColor text-capitalize fw-bold h5 mb-3">
-              <i class="fa fa-headset"></i> 24/7 Customer Service
+              <i class="fa fa-headset"></i>
+              {{ "home.customerService" | translate }}
             </h6>
             <p class="mb-0 text-muted">
-              We're here for you around the clock! Our dedicated support team
-              assists travelers before, during, and after their trips—ensuring
-              peace of mind and quick solutions for any travel need, anytime,
-              anywhere.
+              {{ "home.customerServiceDesc" | translate }}
             </p>
           </div>
         </div>
@@ -190,9 +179,11 @@
           ><i class="fa fa-plane me-2 ps-1"></i
         ></span>
 
-        destinations
+        {{ "home.destinations" | translate }}
       </span>
-      <h2 class="my-3 textSecondColor fw-bold">Featured Destinations</h2>
+      <h2 class="my-3 textSecondColor fw-bold">
+        {{ "home.featuredDestinations" | translate }}
+      </h2>
     </div>
 
     <div class="row g-4 mt-4">
@@ -203,7 +194,7 @@
       </div>
       } } @else {
       <div class="col-12 text-center">
-        <p class="text-muted">Loading destinations...</p>
+        <p class="text-muted">{{ "home.loadingDestinations" | translate }}</p>
       </div>
       }
     </div>
@@ -214,7 +205,7 @@
         routerLink="/destination"
         class="mainBtn Btn px-5 py-3 rounded-6 text-uppercase"
       >
-        View All Destinations
+        {{ "home.viewAllDestinations" | translate }}
       </button>
     </div>
   </div>
@@ -225,12 +216,11 @@
     class="container-fluid px-0 d-flex align-items-center flex-wrap flex-lg-nowrap gap-4 gap-lg-0"
   >
     <div class="desTitle d-flex flex-column justify-content-center">
-      <h2 class="">Multi-days Tours</h2>
+      <h2 class="">{{ "home.multiDaysTours" | translate }}</h2>
       <p>
-        Experience a journey through multiple destinations with expertly curated
-        itineraries that connect you to the best each country has to offer.
+        {{ "home.multiDaysToursDesc" | translate }}
       </p>
-      <button class="secBtn Btn">explore tour</button>
+      <button class="secBtn Btn">{{ "home.exploreTour" | translate }}</button>
     </div>
 
     <div class="desTours z-3 ps-5 pe-0 py-5">
@@ -273,13 +263,12 @@
   </div>
 
   <div class="caption text-center text-capitalize text-white">
-    <h2>customize Your Trip From Scratch</h2>
+    <h2>{{ "home.customizeTrip" | translate }}</h2>
     <p>
-      Design every detail of your journey, from destinations and activities to
-      accommodations, to create a uniquely yours travel experience.
+      {{ "home.customizeTripDesc" | translate }}
     </p>
     <button routerLink="/makeTrip" class="mainBtn Btn px-5 py-3 rounded-3">
-      plan your trip
+      {{ "home.planYourTrip" | translate }}
     </button>
   </div>
 </section>
@@ -295,10 +284,10 @@
           ><i class="fa fa-plane me-2 ps-1"></i
         ></span>
 
-        testmonials
+        {{ "home.testimonials" | translate }}
       </span>
       <h2 class="my-3 h5 textSecondColor fw-bold">
-        What Our Customers Are Saying About Us?
+        {{ "home.customersAreSaying" | translate }}
       </h2>
     </div>
 
@@ -317,9 +306,11 @@
           ><i class="fa fa-plane me-2 ps-1"></i
         ></span>
 
-        our blog
+        {{ "home.ourBlog" | translate }}
       </span>
-      <h2 class="my-3 textSecondColor fw-bold">Our Latest Blog & News</h2>
+      <h2 class="my-3 textSecondColor fw-bold">
+        {{ "home.latestBlogNews" | translate }}
+      </h2>
     </div>
 
     <!-- This fetches blogs and stores them -->

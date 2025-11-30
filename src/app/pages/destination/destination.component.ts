@@ -4,6 +4,7 @@ import { DestinationCartComponent } from '../../components/destination-cart/dest
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PartnerSliderComponent } from '../../components/partner-slider/partner-slider.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-destination',
@@ -13,6 +14,7 @@ import { PartnerSliderComponent } from '../../components/partner-slider/partner-
     DestinationCartComponent,
     CommonModule,
     PartnerSliderComponent,
+    TranslateModule,
   ],
   templateUrl: './destination.component.html',
   styleUrl: './destination.component.scss',

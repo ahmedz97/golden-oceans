@@ -25,11 +25,11 @@
         <div class="py-2 border-bottom flexBetween flex-wrap">
           <span class="me-3 textSecondColor">
             <i class="fa-regular fa-user-circle me-1 textMainColor"></i>
-            By Alicia Davis
+            {{ "common.by" | translate }} Alicia Davis
           </span>
           <span class="me-3 textSecondColor">
             <i class="fa-regular fa-comments me-1 textMainColor"></i>
-            {{ blog.display_order }} Comments
+            {{ blog.display_order }} {{ "common.comments" | translate }}
           </span>
         </div>
         <h5
@@ -39,7 +39,7 @@
           {{ blog.title }}
         </h5>
         <button [routerLink]="['/blog', blog.slug]" class="mainBtn Btn">
-          read more <i class="fa fa-arrow-right ms-1 rounded-circle"></i>
+          {{ "common.readMore" | translate }} <i class="fa fa-arrow-right ms-1 rounded-circle"></i>
         </button>
       </figcaption>
     </div>

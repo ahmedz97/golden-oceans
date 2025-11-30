@@ -12,16 +12,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">log in</h2>
+    <h2 class="fw-bold">{{ 'auth.login' | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ 'nav.home' | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          log in
+          {{ 'auth.login' | translate }}
         </li>
       </ol>
     </nav>
@@ -40,7 +40,7 @@
             width="200px"
             height="70px"
           />
-          <p class="fs-5">Create your Gots account</p>
+          <p class="fs-5">{{ 'auth.createAccount' | translate }}</p>
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="handleLoginForm()" class="">
@@ -48,14 +48,14 @@
             <label
               for="email"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >email address</label
+              >{{ 'auth.emailAddress' | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="email"
                 id="email"
                 formControlName="email"
-                placeholder="Your Email "
+                placeholder="{{ 'contact.yourEmail' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa-regular fa-envelope textMainColor"></i>
@@ -69,7 +69,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="loginForm.get('email')?.getError('required')"
-                >email required</span
+                >{{ 'auth.emailRequired' | translate }}</span
               >
             </div>
           </div>
@@ -78,14 +78,14 @@
             <label
               for="password"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >password</label
+              >{{ 'auth.password' | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="password"
                 id="password"
                 formControlName="password"
-                placeholder="Your Password "
+                placeholder="{{ 'auth.password' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa fa-lock textMainColor"></i>
@@ -99,7 +99,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="loginForm.get('password')?.getError('required')"
-                >password required</span
+                >{{ 'auth.passwordRequired' | translate }}</span
               >
             </div>
           </div>
@@ -109,7 +109,7 @@
             routerLink="/forgetPassword"
             class="my-2 textMainColor fw-bold cPointer text-capitalize"
           >
-            forget password ?
+            {{ 'auth.forgetPassword' | translate }}
           </p>
 
           <button
@@ -124,14 +124,14 @@
             <i
               class="fa fa-paper-plane mx-2 border-0 bg-transparent text-white"
             ></i>
-            log in
+            {{ 'auth.login' | translate }}
           </button>
         </form>
         <div></div>
         <p class="my-2 text-center">
-          Don't have an account?
+          {{ 'auth.dontHaveAccount' | translate }}
           <span routerLink="/signup" class="textMainColor fw-bold cPointer"
-            >Sign Up.</span
+            >{{ 'auth.signUp' | translate }}.</span
           >
         </p>
       </div>

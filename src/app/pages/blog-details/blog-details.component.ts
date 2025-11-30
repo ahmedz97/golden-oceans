@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog-details',
@@ -18,8 +19,8 @@ import { ToastrService } from 'ngx-toastr';
     RouterLink,
     CommonModule,
     SocialComponent,
-    RouterLink,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.scss',

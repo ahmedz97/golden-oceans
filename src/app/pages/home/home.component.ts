@@ -19,6 +19,7 @@ import { PartnerSliderComponent } from '../../components/partner-slider/partner-
 import { AboutsectionComponent } from '../../components/aboutsection/aboutsection.component';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { DestinationCartComponent } from '../../components/destination-cart/destination-cart.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface DestinationPriceMap {
   [title: string]: number;
@@ -40,6 +41,7 @@ interface DestinationPriceMap {
     AboutsectionComponent,
     DestinationCartComponent,
     TestimonialCartComponent,
+    TranslateModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -89,7 +91,7 @@ export class HomeComponent implements OnInit {
     this.getCategory();
     this.getDurations();
     this.getTours();
-    this.getTestimonials();
+    // this.getTestimonials();
     this.searchForm = new FormGroup({
       location: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required),
@@ -360,17 +362,17 @@ export class HomeComponent implements OnInit {
   }
 
   // testimonial
-  getTestimonials() {
-    this._DataService.getReviews().subscribe({
-      next: (res) => {
-        this.allReviews = res.data.data;
-        console.log(this.allReviews);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // getTestimonials() {
+  //   this._DataService.getReviews().subscribe({
+  //     next: (res) => {
+  //       this.allReviews = res.data.data;
+  //       console.log(this.allReviews);
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 
   onBlogsLoaded(blogs: any[]) {
     this.allBlogs = blogs;

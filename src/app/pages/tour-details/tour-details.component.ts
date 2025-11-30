@@ -360,7 +360,11 @@ export class TourDetailsComponent implements OnInit, AfterViewInit {
     if (this.tourData?.id) {
       this._DataService.getReviews(this.tourData.id).subscribe({
         next: (response) => {
-          // console.log(response.data.data);
+          console.log(
+            'Reviews for tour ID:',
+            this.tourData?.id,
+            response.data.data
+          );
           this.tourReviews = response.data.data;
         },
         error: (err) => {

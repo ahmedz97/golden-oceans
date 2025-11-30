@@ -12,16 +12,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">sign up</h2>
+    <h2 class="fw-bold">{{ "auth.signUp" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ "nav.home" | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          sign up
+          {{ "auth.signUp" | translate }}
         </li>
       </ol>
     </nav>
@@ -40,7 +40,7 @@
             width="200px"
             height="70px"
           />
-          <p class="fs-5">Create your Gots account</p>
+          <p class="fs-5">{{ "auth.createAccount" | translate }}</p>
         </div>
 
         <form
@@ -52,14 +52,14 @@
             <label
               for="name"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >full name</label
+              >{{ "auth.fullName" | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="text"
                 id="name"
                 formControlName="name"
-                placeholder="Your Name "
+                placeholder="{{ 'contact.yourName' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa-regular fa-user textMainColor"></i>
@@ -74,7 +74,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="registerForm.get('name')?.getError('required')"
-                >name required</span
+                >{{ "auth.nameRequired" | translate }}</span
               >
             </div>
           </div>
@@ -82,14 +82,14 @@
             <label
               for="email"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >email address</label
+              >{{ "auth.emailAddress" | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="email"
                 id="email"
                 formControlName="email"
-                placeholder="Your Email "
+                placeholder="{{ 'contact.yourEmail' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa-regular fa-envelope textMainColor"></i>
@@ -103,7 +103,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="registerForm.get('email')?.getError('required')"
-                >email required</span
+                >{{ "auth.emailRequired" | translate }}</span
               >
             </div>
           </div>
@@ -112,14 +112,14 @@
             <label
               for="password"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >password</label
+              >{{ "auth.password" | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="password"
                 id="password"
                 formControlName="password"
-                placeholder="Your Password "
+                placeholder="{{ 'auth.password' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa fa-lock textMainColor"></i>
@@ -133,7 +133,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="registerForm.get('password')?.getError('required')"
-                >password required</span
+                >{{ "auth.passwordRequired" | translate }}</span
               >
             </div>
           </div>
@@ -142,14 +142,14 @@
             <label
               for="password_confirmation"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >password_confirmation</label
+              >{{ "auth.passwordConfirmation" | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="password"
                 id="password_confirmation"
                 formControlName="password_confirmation"
-                placeholder="Your Password Confirmation "
+                placeholder="{{ 'auth.passwordConfirmation' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa fa-lock textMainColor"></i>
@@ -168,7 +168,7 @@
                     .get('password_confirmation')
                     ?.getError('required')
                 "
-                >password_confirmation not matched
+                >{{ "auth.passwordNotMatched" | translate }}
               </span>
             </div>
           </div>
@@ -177,14 +177,14 @@
             <label
               for="phone"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >phone number</label
+              >{{ "auth.phoneNumber" | translate }}</label
             >
             <div class="item position-relative">
               <input
                 type="tel"
                 id="phone"
                 formControlName="phone"
-                placeholder="Your Phone "
+                placeholder="{{ 'contact.yourPhone' | translate }}"
                 class="form-control p-2 ps-5 rounded-3"
               />
               <i class="fa fa-phone textMainColor"></i>
@@ -198,7 +198,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="registerForm.get('phone')?.getError('required')"
-                >phone required</span
+                >{{ "auth.phoneRequired" | translate }}</span
               >
             </div>
           </div>
@@ -207,7 +207,7 @@
             <label
               for="birthdate"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >birth date</label
+              >{{ "auth.birthDate" | translate }}</label
             >
             <div class="item position-relative">
               <input
@@ -216,7 +216,7 @@
                 formControlName="birthdate"
                 class="form-control p-2 ps-5 rounded-3"
                 [class.filled]="!!registerForm.get('birthdate')?.value"
-                [attr.data-placeholder]="'Birth date'"
+                [attr.data-placeholder]="'auth.birthDate' | translate"
               />
 
               <i class="fa-regular fa-calendar-alt textMainColor"></i>
@@ -230,7 +230,7 @@
               class="alert alert-danger mt-2"
             >
               <span *ngIf="registerForm.get('birthDate')?.getError('required')"
-                >birthDate required</span
+                >{{ "auth.birthDateRequired" | translate }}</span
               >
             </div>
           </div>
@@ -239,7 +239,7 @@
             <label
               for="nationality"
               class="textSecondColor text-capitalize fw-bold mb-2"
-              >nationality</label
+              >{{ "auth.nationality" | translate }}</label
             >
 
             <div class="item">
@@ -250,7 +250,7 @@
                 class="form-control text-capitalize"
               >
                 <option value="" class="bg-body-secondary" selected disabled>
-                  select your nationality
+                  {{ "auth.selectYourNationality" | translate }}
                 </option>
                 @for (city of countryList; track $index) {
                 <option [value]="city.name">{{ city.name }}</option>
@@ -267,7 +267,7 @@
             >
               <span
                 *ngIf="registerForm.get('nationality')?.getError('required')"
-                >nationality required</span
+                >{{ "auth.nationalityRequired" | translate }}</span
               >
             </div>
           </div>
@@ -284,13 +284,13 @@
             <i
               class="fa fa-paper-plane mx-2 border-0 bg-transparent text-white"
             ></i>
-            sign up
+            {{ "auth.signUp" | translate }}
           </button>
         </form>
         <p class="my-2 text-center">
-          Already have an account?
+          {{ "auth.alreadyHaveAccount" | translate }}
           <span routerLink="/login" class="textMainColor fw-bold cPointer"
-            >Login</span
+            >{{ "auth.login" | translate }}</span
           >
           .
         </p>

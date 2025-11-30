@@ -2,16 +2,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">my Profile</h2>
+    <h2 class="fw-bold">{{ "profile.myProfile" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ "nav.home" | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          my Profile
+          {{ "profile.myProfile" | translate }}
         </li>
       </ol>
     </nav>
@@ -25,7 +25,7 @@
         <div class="border specialBorder bg-white p-3">
           <div class="imgBox mx-auto">
             <ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
-              <ngx-dropzone-label>Upload Your Image</ngx-dropzone-label>
+              <ngx-dropzone-label>{{ "profile.uploadYourImage" | translate }}</ngx-dropzone-label>
 
               @for (file of files(); track file) {
               <ngx-dropzone-image-preview
@@ -71,7 +71,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'dashboard'"
                 [class.text-white]="selectedTab === 'dashboard'"
-                >dashboard</span
+                >{{ "profile.dashboard" | translate }}</span
               >
             </li>
             <li
@@ -89,7 +89,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'myProfile'"
                 [class.text-white]="selectedTab === 'myProfile'"
-                >my profile</span
+                >{{ "profile.myProfile" | translate }}</span
               >
             </li>
             <li
@@ -107,7 +107,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'myBooking'"
                 [class.text-white]="selectedTab === 'myBooking'"
-                >my booking</span
+                >{{ "profile.myBooking" | translate }}</span
               >
             </li>
             <li
@@ -125,7 +125,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'myCredit'"
                 [class.text-white]="selectedTab === 'myCredit'"
-                >my credit</span
+                >{{ "profileExtended.myCredit" | translate }}</span
               >
             </li>
             <li
@@ -143,7 +143,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'myWishlist'"
                 [class.text-white]="selectedTab === 'myWishlist'"
-                >my wishlist</span
+                >{{ "profileExtended.myWishlist" | translate }}</span
               >
             </li>
             <li
@@ -161,7 +161,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'setting'"
                 [class.text-white]="selectedTab === 'setting'"
-                >settings</span
+                >{{ "profileExtended.settings" | translate }}</span
               >
             </li>
             <li
@@ -180,7 +180,7 @@
               <span
                 [class.textSecondColor]="selectedTab !== 'logout'"
                 [class.text-white]="selectedTab === 'logout'"
-                >logout</span
+                >{{ "profile.logout" | translate }}</span
               >
             </li>
           </ul>
@@ -194,7 +194,7 @@
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
                   <b class="fs-3">{{ tourCart.length }}</b>
-                  <p class="mb-1 text-capitalize">total booking</p>
+                  <p class="mb-1 text-capitalize">{{ "profileExtended.totalBooking" | translate }}</p>
                 </div>
                 <div class="iconBox m-0 bg-transparent text-danger">
                   <i class="fa fa-shopping-cart"></i>
@@ -205,7 +205,7 @@
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
                   <b class="fs-3">{{ favList.length }}</b>
-                  <p class="mb-1 text-capitalize">favorite tour</p>
+                  <p class="mb-1 text-capitalize">{{ "profileExtended.favoriteTour" | translate }}</p>
                 </div>
                 <div class="iconBox m-0 bg-white text-danger">
                   <i class="fa fa-heart-circle-plus"></i>
@@ -216,7 +216,7 @@
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
                   <b class="fs-3">{{ loyaltyCredit?.points || 0 }}</b>
-                  <p class="mb-1 text-capitalize">total points</p>
+                  <p class="mb-1 text-capitalize">{{ "profileExtended.totalPoints" | translate }}</p>
                 </div>
                 <div class="iconBox m-0 bg-white text-danger">
                   <i class="fa fa-coins"></i>
@@ -229,21 +229,21 @@
           <div
             class="p-4 border sideBar rounded-3 textSecondColor text-capitalize"
           >
-            <h5 class="fw-bold mb-3 pb-3 border-bottom">profile info</h5>
+            <h5 class="fw-bold mb-3 pb-3 border-bottom">{{ "profileExtended.profileInfo" | translate }}</h5>
 
-            <p><b class="me-5">Full Name:</b> {{ profilemeData.name }}</p>
-            <p><b class="me-5">Email:</b> {{ profilemeData.email }}</p>
-            <p><b class="me-5">Phone:</b>{{ profilemeData.phone }}</p>
+            <p><b class="me-5">{{ "profileExtended.fullName" | translate }}</b> {{ profilemeData.name }}</p>
+            <p><b class="me-5">{{ "profileExtended.email" | translate }}</b> {{ profilemeData.email }}</p>
+            <p><b class="me-5">{{ "profileExtended.phone" | translate }}</b>{{ profilemeData.phone }}</p>
             <!-- <p><b class="me-5">Address:</b>New York, USA</p> -->
             <p>
-              <b class="me-5">Nationality:</b>{{ profilemeData.nationality }}
+              <b class="me-5">{{ "profileExtended.nationality" | translate }}</b>{{ profilemeData.nationality }}
             </p>
             <p>
-              <b class="me-5">Birth Date:</b
+              <b class="me-5">{{ "profileExtended.birthDate" | translate }}</b
               >{{ profilemeData.birthdate | date }}
             </p>
             <p>
-              <b class="me-5">Join Date:</b
+              <b class="me-5">{{ "profileExtended.joinDate" | translate }}</b
               >{{ profilemeData.created_at | date }}
             </p>
           </div>
@@ -251,7 +251,7 @@
           <div
             class="p-4 border sideBar rounded-3 textSecondColor text-capitalize"
           >
-            <h5 class="fw-bold mb-3 pb-3 border-bottom">credit info</h5>
+            <h5 class="fw-bold mb-3 pb-3 border-bottom">{{ "profileExtended.creditInfo" | translate }}</h5>
 
             <form
               [formGroup]="transferLoyaltyCreditForm"
@@ -261,14 +261,14 @@
                 <label
                   for="recipient_email"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >recipient email</label
+                  >{{ "profileExtended.recipientEmail" | translate }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="email"
                     id="recipient_email"
                     formControlName="recipient_email"
-                    placeholder="Your Email "
+                    placeholder="{{ 'contact.yourEmail' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-file-signature textMainColor"></i>
@@ -278,14 +278,14 @@
                 <label
                   for="points"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >points</label
+                  >{{ "profileExtended.points" | translate }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="number"
                     id="points"
                     formControlName="points"
-                    placeholder="Enter Your points "
+                    placeholder="{{ 'profileExtended.enterYourPoints' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-file-signature textMainColor"></i>
@@ -295,13 +295,13 @@
                 <label
                   for="notes"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >notes</label
+                  >{{ "checkout.notes" | translate }}</label
                 >
                 <div class="item position-relative">
                   <textarea
                     id="notes"
                     formControlName="notes"
-                    placeholder="add notes ... "
+                    placeholder="{{ 'profileExtended.addNotes' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   ></textarea>
                   <i class="fa fa-file-signature textMainColor"></i>
@@ -309,7 +309,7 @@
               </div>
 
               <button type="submit" class="mainBtn Btn">
-                transfer loyalty points
+                {{ "profileExtended.transferLoyaltyPoints" | translate }}
               </button>
             </form>
           </div>
@@ -320,23 +320,23 @@
               <app-tour-cart [tour]="cart.tour"></app-tour-cart>
               <div class="text-capitalize textSecondColor mt-4">
                 <h6>
-                  guest:
+                  {{ "profileExtended.guest" | translate }}
                   <b *ngIf="cart.adults" class="textMainColor"
-                    >{{ cart.adults }} adults</b
+                    >{{ cart.adults }} {{ "profileExtended.adults" | translate }}</b
                   >
                   ,<b *ngIf="cart.children" class="textMainColor"
-                    >{{ cart.children }} children</b
+                    >{{ cart.children }} {{ "profileExtended.children" | translate }}</b
                   >
                   ,<b *ngIf="cart.infants" class="textMainColor"
-                    >{{ cart.infants }} infants</b
+                    >{{ cart.infants }} {{ "profileExtended.infants" | translate }}</b
                   >
                 </h6>
                 <h6>
-                  total price :
+                  {{ "profileExtended.totalPrice" | translate }}
                   <b class="textMainColor">{{ cart.totalPrice | currency }}</b>
                 </h6>
                 <h6>
-                  booking date :<b class="textMainColor">{{
+                  {{ "profileExtended.bookingDate" | translate }}<b class="textMainColor">{{
                     cart.start_date | date
                   }}</b>
                 </h6>
@@ -345,7 +345,7 @@
             }
           </owl-carousel-o>
           }@else {
-          <h2 class="text-danger text-capitalize">no tour in booking cart</h2>
+          <h2 class="text-danger text-capitalize">{{ "profileExtended.noTourInBookingCart" | translate }}</h2>
           } } @if (selectedTab==='myWishlist') { @if (haveData) {
           <owl-carousel-o [options]="bookingOptions">
             @for (cart of favList; track $index) {
@@ -355,7 +355,7 @@
             }
           </owl-carousel-o>
           }@else {
-          <h2 class="text-danger text-capitalize">no tour in wishlist</h2>
+          <h2 class="text-danger text-capitalize">{{ "profileExtended.noTourInWishlist" | translate }}</h2>
           } } @if (selectedTab==='setting') {
           <form
             [formGroup]="updateProfile"
@@ -367,14 +367,14 @@
                 <label
                   for="name"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >full name</label
+                  >{{ "profileExtended.fullNameLabel" | translate }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="text"
                     id="name"
                     formControlName="name"
-                    placeholder="Your Full Name "
+                    placeholder="{{ 'profileExtended.yourFullName' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-file-signature textMainColor"></i>
@@ -387,14 +387,14 @@
                   for="phone"
                   class="textSecondColor text-capitalize fw-bold mb-2"
                 >
-                  phone</label
+                  {{ "profileExtended.phoneLabel" | translate }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="tel"
                     id="phone"
                     formControlName="phone"
-                    placeholder="Your phone "
+                    placeholder="{{ 'profileExtended.yourPhone' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-phone-volume textMainColor"></i>
@@ -406,14 +406,14 @@
                 <label
                   for="password"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >password</label
+                  >{{ "profileExtended.password" | translate }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="password"
                     id="password"
                     formControlName="password"
-                    placeholder="Your Password "
+                    placeholder="{{ 'profileExtended.yourPassword' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-lock textMainColor"></i>
@@ -425,14 +425,14 @@
                 <label
                   for="password_confirmation"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >password_confirmation</label
+                  >{{ "profileExtended.passwordConfirmation" | translate }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="password"
                     id="password_confirmation"
                     formControlName="password_confirmation"
-                    placeholder="Your Password Confirmation "
+                    placeholder="{{ 'profileExtended.yourPasswordConfirmation' | translate }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-lock textMainColor"></i>
@@ -444,7 +444,7 @@
                 <label
                   for="nationality"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >nationality</label
+                  >{{ "profileExtended.nationalityLabel" | translate }}</label
                 >
                 <div class="item position-relative">
                   <select
@@ -453,7 +453,7 @@
                     class="form-control p-2 ps-5 rounded-3"
                   >
                     <option value="" hidden disabled selected>
-                      select your nationality
+                      {{ "profileExtended.selectYourNationality" | translate }}
                     </option>
                     @for (item of countriesList; track $index) {
 
@@ -467,7 +467,7 @@
 
             <div>
               <button type="submit" class="Btn mainBtn">
-                update profile info
+                {{ "profileExtended.updateProfileInfo" | translate }}
               </button>
             </div>
           </form>

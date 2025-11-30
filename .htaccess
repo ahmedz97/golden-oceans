@@ -1,0 +1,16 @@
+# Proxy all requests to Node.js server
+<IfModule mod_proxy.c>
+  RewriteEngine On
+  
+  # Don't proxy real files
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # Proxy to Node.js server (change port if needed)
+  RewriteRule ^(.*)$ http://localhost:4000/$1 [P,L]
+</IfModule>
+
+# If mod_proxy is not available, return error
+<IfModule !mod_proxy.c>
+  ErrorDocument 503 "Node.js server is required"
+</IfModule>

@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { BookingService } from '../../core/services/booking.service';
 import { ToastrService } from 'ngx-toastr';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { AuthService } from '../../core/services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-checkout',
@@ -29,6 +31,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
     MatRadioModule,
     ReactiveFormsModule,
     CarouselModule,
+    TranslateModule,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
@@ -37,23 +40,44 @@ export class CheckoutComponent {
   constructor(
     private _BookingService: BookingService,
     private toaster: ToastrService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService,
+    private router: Router,
+    private translate: TranslateService
   ) {}
+
+  isLoggedIn = this.authService.isLoggedIn; // this will be used in the template to check if the user is logged in
 
   checkoutData: object = {};
   countries: any[] = [];
   tourCart: any[] = [];
   haveData: boolean = false;
+  couponApplied: boolean = false;
+  couponDiscount: number = 0;
+  couponData: any = null;
 
   ngOnInit(): void {
-    this._BookingService.getCountries().subscribe({
-      next: (response) => {
-        // console.log(response.data);
-        this.countries = response.data;
-      },
-    });
-    this.getListCart();
-    this.getLoyaltyCredit();
+    // Check if user is logged in
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+      this._BookingService.getCountries().subscribe({
+        next: (response) => {
+          // console.log(response.data);
+          this.countries = response.data;
+        },
+      });
+      this.getListCart();
+      this.getLoyaltyCredit();
+    } else {
+      // Show error message using translation
+      this.translate
+        .get('messages.mustBeLoggedIn')
+        .subscribe((message: string) => {
+          this.toaster.error(message);
+        });
+      this.router.navigate(['/login']);
+    }
   }
 
   checkoutForm: FormGroup = new FormGroup({
@@ -62,7 +86,7 @@ export class CheckoutComponent {
     phone: new FormControl(''),
     email: new FormControl(''),
     country: new FormControl(''),
-    state: new FormControl(''),
+    // state: new FormControl(''),
     payment_method: new FormControl(''),
     notes: new FormControl(''),
     currency_id: new FormControl(1),
@@ -77,54 +101,17 @@ export class CheckoutComponent {
 
     // if form is valid === true
     if (this.checkoutForm.valid) {
-      this._BookingService
-        .getCoupon(this.checkoutForm.get('coupon_id')?.value)
-        .subscribe({
-          next: (cResponse) => {
-            console.log(cResponse);
-            this.toaster.success(cResponse.message);
-            // after coupon code is tammmam check other data and send it
-            this._BookingService.sendCheckoutData(this.checkoutData).subscribe({
-              next: (response) => {
-                console.log(response);
-                this.toaster.success(response.message);
-              },
-              error: (err) => {
-                console.log(err);
-                this.toaster.error(err.error.message);
-              },
-            });
-          },
-          error: (cError) => {
-            console.log(cError);
-            this.toaster.error(cError.error.message);
-          },
-        });
+      this._BookingService.sendCheckoutData(this.checkoutData).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.toaster.success(response.message);
+        },
+        error: (err) => {
+          console.log(err);
+          this.toaster.error(err.error.message);
+        },
+      });
     }
-
-    // this._BookingService.sendCheckoutData(this.checkoutData).subscribe({
-    //   next: (response) => {
-    //     // console.log(response);
-    //     this.toaster.success(response.message);
-    //     // if form is valid === true
-    //     if (response.status) {
-    //       this._BookingService
-    //         .getCoupon(this.checkoutForm.get('coupon_id')?.value)
-    //         .subscribe({
-    //           next: (cResponse) => {
-    //             // console.log(cResponse);
-    //           },
-    //           error: (cError) => {
-    //             // console.log(cError);
-    //           },
-    //         });
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     this.toaster.error(err.error.message);
-    //   },
-    // });
 
     // this.checkoutForm.reset();
   }
@@ -223,6 +210,55 @@ export class CheckoutComponent {
 
   getTotalPrice(): number {
     return this.tourCart.reduce((sum, cart) => sum + cart.totalPrice, 0);
+  }
+
+  applyCoupon(): void {
+    const couponCode = this.checkoutForm.get('coupon_id')?.value;
+
+    if (!couponCode || couponCode.trim() === '') {
+      this.toaster.error('Please enter a coupon code');
+      return;
+    }
+
+    this._BookingService.getCoupon(couponCode).subscribe({
+      next: (cResponse) => {
+        console.log(cResponse);
+        this.couponApplied = true;
+        this.couponData = cResponse.data;
+
+        // Calculate discount based on coupon type (percentage or fixed amount)
+        const totalPrice = this.getTotalPrice();
+        if (this.couponData.type === 'percentage') {
+          this.couponDiscount = (totalPrice * this.couponData.value) / 100;
+        } else {
+          this.couponDiscount = this.couponData.value;
+        }
+
+        this.toaster.success(
+          cResponse.message || 'Coupon applied successfully!'
+        );
+      },
+      error: (cError) => {
+        console.log(cError);
+        this.couponApplied = false;
+        this.couponDiscount = 0;
+        this.couponData = null;
+        this.toaster.error(cError.error.message || 'Invalid coupon code');
+      },
+    });
+
+    this.checkoutForm.get('coupon_id')?.reset();
+  }
+
+  getTotalPriceAfterCouponCode(): number {
+    const totalPrice = this.getTotalPrice();
+
+    if (this.couponApplied && this.couponDiscount > 0) {
+      const finalPrice = totalPrice - this.couponDiscount;
+      return finalPrice > 0 ? finalPrice : 0;
+    }
+
+    return totalPrice;
   }
 
   ordersOptions: OwlOptions = {

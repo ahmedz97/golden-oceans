@@ -8,6 +8,7 @@ import { DataService } from '../../core/services/data.service';
 import { BooknowComponent } from '../../components/booknow/booknow.component';
 import { PartnerSliderComponent } from '../../components/partner-slider/partner-slider.component';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about',
@@ -21,6 +22,7 @@ import { CommonModule } from '@angular/common';
     // BooknowComponent,
     PartnerSliderComponent,
     CommonModule,
+    TranslateModule,
   ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
@@ -31,21 +33,21 @@ export class AboutComponent implements OnInit {
   allReviews: any[] = [];
 
   ngOnInit(): void {
-    this.getTestimonials();
+    // this.getTestimonials();
   }
 
   // testimonial
-  getTestimonials() {
-    this._DataService.getReviews().subscribe({
-      next: (res) => {
-        this.allReviews = res.data.data;
-        // console.log(this.allReviews);
-      },
-      error: (err) => {
-        // console.log(err);
-      },
-    });
-  }
+  // getTestimonials() {
+  //   this._DataService.getReviews().subscribe({
+  //     next: (res) => {
+  //       this.allReviews = res.data.data;
+  //       // console.log(this.allReviews);
+  //     },
+  //     error: (err) => {
+  //       // console.log(err);
+  //     },
+  //   });
+  // }
 
   testimonialOptions: OwlOptions = {
     loop: true,

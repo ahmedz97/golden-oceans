@@ -8,6 +8,7 @@ import { TourCartComponent } from '../../components/tour-cart/tour-cart.componen
 import { FaqContentComponent } from '../../components/faq-content/faq-content.component';
 import { PartnerSliderComponent } from '../../components/partner-slider/partner-slider.component';
 import { BooknowComponent } from '../../components/booknow/booknow.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-destination-details',
@@ -20,6 +21,7 @@ import { BooknowComponent } from '../../components/booknow/booknow.component';
     TourCartComponent,
     FaqContentComponent,
     PartnerSliderComponent,
+    TranslateModule,
     // BooknowComponent,
   ],
   templateUrl: './destination-details.component.html',

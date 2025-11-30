@@ -2,16 +2,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">contact us</h2>
+    <h2 class="fw-bold">{{ 'contact.contactUs' | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ 'nav.home' | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          contact us
+          {{ 'contact.contactUs' | translate }}
         </li>
       </ol>
     </nav>
@@ -32,7 +32,7 @@
               ></i>
               <div>
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
-                  Office Address
+                  {{ 'contact.officeAddress' | translate }}
                 </h6>
                 <p class="mb-1">{{ userAddress }}</p>
               </div>
@@ -44,14 +44,21 @@
               ></i>
               <div>
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
-                  call us
+                  {{ 'contact.callUs' | translate }}
                 </h6>
                 <div class="mb-1">
                   <a href="tel:{{ phoneNumber }}" class="d-block mb-1">{{
                     phoneNumber
                   }}</a>
-                  <a href="tel:0422454484" class="d-block mb-1">Ahmed – 0422 454 484</a>
-                  <a href="tel:0434133646" class="d-block">Libby – 0434 133 646</a>
+                  <a href="tel:{{ whatsappNumber }}" class="d-block mb-1">{{
+                    whatsappNumber
+                  }}</a>
+                  <!-- <a href="tel:0422454484" class="d-block mb-1"
+                    >Ahmed – 0422 454 484</a
+                  >
+                  <a href="tel:0434133646" class="d-block"
+                    >Libby – 0434 133 646</a
+                  > -->
                 </div>
               </div>
             </li>
@@ -62,7 +69,7 @@
               ></i>
               <div>
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
-                  email us
+                  {{ 'contact.emailUs' | translate }}
                 </h6>
                 <a href="mailTo:{{ userEmail }}" class="d-block mb-1">{{
                   userEmail
@@ -76,9 +83,15 @@
               ></i>
               <div>
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
-                  visit us
+                  {{ 'contact.reviewUs' | translate }}
                 </h6>
-                <a href="https://www.goldenoceantrvl.com" target="_blank" class="d-block mb-1">www.goldenoceantrvl.com</a>
+                <a
+                  href="https://www.google.com.eg/search?sxsrf=AE3TifOtdr0U-NnL1K_8tPQS9GNxjtLUkQ:1764509005180&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E4dQ6tHviAO_MO5RVhyBWWL9GW5FsA6WqKauRDipO-PgzQq0_EKuGJ-ojqnjHxZ3lxU56fncs5CGgJnJODQrSW85H7jHfSpBQxiVuTB56bsbRGfEljugB_RIrLbSP-UHUJFNFJA%3D&q=Golden+Ocean+Travel+Service+%22GOTS%22+%D8%A7%D9%84%D9%85%D8%B1%D8%A7%D8%AC%D8%B9%D8%A7%D8%AA#lrd=0x145847655238678d:0x97e9238e398fe44a,3"
+                  target="_blank"
+                  class="d-block mb-1"
+                >
+                  {{ 'contact.googleReviews' | translate }}
+                </a>
               </div>
             </li>
 
@@ -88,9 +101,9 @@
               ></i>
               <div>
                 <h6 class="textSecondColor text-capitalize h5 fw-bold mb-2">
-                  open time
+                  {{ 'contact.openTime' | translate }}
                 </h6>
-                <p class="mb-1">Mon - Sat (10.00AM - 05.30PM)</p>
+                <p class="mb-1">{{ openTime }}</p>
               </div>
             </li>
           </ul>
@@ -98,9 +111,11 @@
       </div>
       <div class="col-lg-8 align-self-center">
         <div class="bg-white rounded-3 p-4 sideBar">
-          <h5 class="text-capitalize textSecondColor fw-bold mb-3">get in touch</h5>
+          <h5 class="text-capitalize textSecondColor fw-bold mb-3">
+            {{ 'contact.getInTouch' | translate }}
+          </h5>
           <p class="text-muted mb-4">
-            Ready to embark on your next adventure? Contact us today to start planning your dream getaway. Our dedicated team is here to guide you every step of the way, ensuring a seamless and unforgettable travel experience. Experience the world with us and create memories that will last a lifetime. Let us turn your travel dreams into reality!
+            {{ 'contact.contactDesc' | translate }}
           </p>
 
           <form
@@ -114,7 +129,7 @@
                   type="text"
                   formControlName="name"
                   class="form-control p-2 rounded-3"
-                  placeholder="Your Name"
+                  placeholder="{{ 'contact.yourName' | translate }}"
                 />
               </div>
             </div>
@@ -124,7 +139,7 @@
                   type="email"
                   formControlName="email"
                   class="form-control p-2 rounded-3"
-                  placeholder="Your Email"
+                  placeholder="{{ 'contact.yourEmail' | translate }}"
                 />
               </div>
             </div>
@@ -134,7 +149,7 @@
                   type="tel"
                   formControlName="phone"
                   class="form-control p-2 rounded-3"
-                  placeholder="Your Phone"
+                  placeholder="{{ 'contact.yourPhone' | translate }}"
                 />
               </div>
             </div>
@@ -144,7 +159,7 @@
                   type="text"
                   formControlName="subject"
                   class="form-control p-2 rounded-3"
-                  placeholder="Your Sebject"
+                  placeholder="{{ 'contact.yourSubject' | translate }}"
                 />
               </div>
             </div>
@@ -155,7 +170,7 @@
                   class="form-control p-2 rounded-3"
                 >
                   <option value="" class="bg-dark" disabled>
-                    Select Your Country
+                    {{ 'contact.selectYourCountry' | translate }}
                   </option>
                   <option *ngFor="let item of countryList" [value]="item.name">
                     {{ item.name }}
@@ -169,14 +184,14 @@
                   rows="5"
                   formControlName="message"
                   class="form-control p-2 rounded-3"
-                  placeholder="Write Your Message"
+                  placeholder="{{ 'contact.writeYourMessage' | translate }}"
                 ></textarea>
               </div>
             </div>
 
             <div>
               <button type="submit" class="mainBtn Btn">
-                send message
+                {{ 'contact.sendMessage' | translate }}
                 <i
                   class="fa fa-paper-plane fa-rotate-by rounded-circle ms-2"
                 ></i>
@@ -191,6 +206,13 @@
 
 <section class="my-5 pt-5">
   <div class="container-fluid">
+    <a
+      class="text-dark fw-bold"
+      href="https://www.google.com/maps/place/Golden+Ocean+Travel+Service+%22GOTS%22/@29.9702053,31.2501009,17z/data=!3m1!4b1!4m6!3m5!1s0x145847655238678d:0x97e9238e398fe44a!8m2!3d29.9702053!4d31.247526!16s%2Fg%2F11ykkg3944?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
+      target="_blank"
+      >{{ 'contact.viewInGoogleMaps' | translate }}</a
+    >
+
     <iframe
       *ngIf="userLocation"
       [src]="userLocation | safeUrl"

@@ -12,6 +12,7 @@ import { DataService } from '../../core/services/data.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TourCartComponent } from '../../components/tour-cart/tour-cart.component';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 type FilterKey =
   | 'selectedTripType'
@@ -32,6 +33,7 @@ type FilterKey =
     NgxPaginationModule,
     TourCartComponent,
     PaginationComponent,
+    TranslateModule,
   ],
   templateUrl: './tour.component.html',
   styleUrl: './tour.component.scss',

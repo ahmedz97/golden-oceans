@@ -12,16 +12,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">my cart</h2>
+    <h2 class="fw-bold">{{ "cart.myCart" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ "nav.home" | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          my cart
+          {{ "cart.myCart" | translate }}
         </li>
       </ol>
     </nav>
@@ -33,7 +33,7 @@
     @for (tour of tourCart; track $index) {
     <div class="row align-items-center g-3 mt-4 p-3 border specialBorder">
       <h5 class="fw-bold text-capitalize h3 text-black">
-        tour ({{ $index + 1 }})
+        {{ "cart.tour" | translate }} ({{ $index + 1 }})
       </h5>
       <div class="col-md-3 flex-shrink-0">
         <figure class="specialBorder overflow-hidden imgHover">
@@ -61,13 +61,13 @@
           <div class="flexBetween text-capitalize">
             <div>
               <p class="mb-0">
-                Reservation: {{ tour.start_date | date : "dd/MM/yyyy" }}
+                {{ "cart.reservation" | translate }}: {{ tour.start_date | date : "dd/MM/yyyy" }}
               </p>
               <p class="mb-0">
-                guests: @if (tour.adults>0) {
-                {{ tour.adults }} Adults } @if (tour.children>0) {
-                {{ tour.children }} Children } @if (tour.infants>0) {
-                {{ tour.infants }} infants }
+                {{ "cart.guests" | translate }}: @if (tour.adults>0) {
+                {{ tour.adults }} {{ "cart.adults" | translate }} } @if (tour.children>0) {
+                {{ tour.children }} {{ "cart.children" | translate }} } @if (tour.infants>0) {
+                {{ tour.infants }} {{ "cart.infants" | translate }} }
               </p>
             </div>
             <span
@@ -84,19 +84,19 @@
         (click)="clearCart()"
         class="btn btn-danger rounded-pill text-capitalize py-2"
       >
-        clear cart
+        {{ "cart.clearCart" | translate }}
       </button>
       <button
         [routerLink]="['/checkout']"
         class="mainBtn Btn flexCenter gap-2 m-2 mb-2"
       >
-        checkout
+        {{ "cart.checkout" | translate }}
       </button>
     </div>
   </div>
   <ng-container *ngIf="!haveData">
     <p class="text-capitalize text-danger fs-1 text-center">
-      no cart avaliable
+      {{ "cart.noCartAvailable" | translate }}
     </p>
   </ng-container>
 </section>

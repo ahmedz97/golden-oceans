@@ -23,9 +23,14 @@ export class AppComponent implements OnInit {
   title = 'tavelo';
 
   constructor(public translate: TranslateService) {
+    // Set default language
+    translate.setDefaultLang('en');
+
     if (typeof window !== 'undefined') {
       const langCode = localStorage.getItem('language') || 'en';
-      // translate.use(langCode);
+      translate.use(langCode);
+    } else {
+      translate.use('en');
     }
   }
 

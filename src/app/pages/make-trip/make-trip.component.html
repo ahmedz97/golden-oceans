@@ -2,16 +2,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">make your trip</h2>
+    <h2 class="fw-bold">{{ "makeTrip.makeYourTrip" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ "nav.home" | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          make your trip
+          {{ "makeTrip.makeYourTrip" | translate }}
         </li>
       </ol>
     </nav>
@@ -24,11 +24,13 @@
       <!-- Step 1: Choose Destinations -->
       <mat-step class="flyBtnsBox" [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Choose Your Destinations</ng-template>
+          <ng-template matStepLabel>{{
+            "makeTrip.chooseDestinations" | translate
+          }}</ng-template>
           <div class="row gy-3 gx-4 my-4 chooseDestination">
             <div
               class="js-check col-lg-4 col-md-6"
-              *ngFor="let destination of destinationList.reverse()"
+              *ngFor="let destination of destinationList"
             >
               <input
                 type="radio"
@@ -65,7 +67,9 @@
             </div>
           </div>
           <div class="text-center my-4 flyBtns">
-            <button class="mainBtn Btn px-4" matStepperNext>Next</button>
+            <button class="mainBtn Btn px-4" matStepperNext>
+              {{ "makeTrip.next" | translate }}
+            </button>
           </div>
         </form>
       </mat-step>
@@ -73,7 +77,9 @@
       <!-- Step 2: Pickup Travel Dates -->
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Pickup Travel Dates</ng-template>
+          <ng-template matStepLabel>{{
+            "makeTrip.pickupTravelDates" | translate
+          }}</ng-template>
           <div class="row g-3 my-4">
             <div class="col-lg-5">
               <mat-radio-group
@@ -81,12 +87,12 @@
                 aria-label="Pickup Travel Dates"
                 formControlName="type"
               >
-                <mat-radio-button checked value="exact_time"
-                  >I know the exact dates</mat-radio-button
-                >
-                <mat-radio-button value="approx_time"
-                  >I have approximate dates.</mat-radio-button
-                >
+                <mat-radio-button checked value="exact_time">{{
+                  "makeTrip.knowExactDates" | translate
+                }}</mat-radio-button>
+                <mat-radio-button value="approx_time">{{
+                  "makeTrip.approximateDates" | translate
+                }}</mat-radio-button>
               </mat-radio-group>
             </div>
             <div
@@ -97,7 +103,7 @@
                 appearance="outline"
                 class="w-100 date-range-field"
               >
-                <mat-label>Select a date range</mat-label>
+                <mat-label>{{ "makeTrip.selectDateRange" | translate }}</mat-label>
                 <mat-date-range-input
                   [formGroup]="secondFormGroup"
                   [rangePicker]="picker"
@@ -106,14 +112,14 @@
                     matStartDate
                     matInput
                     formControlName="start_date"
-                    placeholder="Start date"
+                    placeholder="{{ 'makeTrip.startDate' | translate }}"
                     class="date-input"
                   />
                   <input
                     matEndDate
                     matInput
                     formControlName="end_date"
-                    placeholder="End date"
+                    placeholder="{{ 'makeTrip.endDate' | translate }}"
                     class="date-input"
                   />
                 </mat-date-range-input>
@@ -131,7 +137,7 @@
             >
               <div class="d-flex justify-content-between">
                 <mat-form-field>
-                  <mat-label>Select Month</mat-label>
+                  <mat-label>{{ "makeTrip.selectMonth" | translate }}</mat-label>
                   <mat-select formControlName="month">
                     <mat-option
                       *ngFor="let month of monthList; let i = index"
@@ -144,8 +150,12 @@
             </div>
           </div>
           <div class="d-flex justify-content-between">
-            <button class="mainBtn Btn px-4" matStepperPrevious>Back</button>
-            <button class="mainBtn Btn px-4" matStepperNext>Next</button>
+            <button class="mainBtn Btn px-4" matStepperPrevious>
+              {{ "makeTrip.back" | translate }}
+            </button>
+            <button class="mainBtn Btn px-4" matStepperNext>
+              {{ "makeTrip.next" | translate }}
+            </button>
           </div>
         </form>
       </mat-step>
@@ -153,11 +163,13 @@
       <!-- Step 3: Submit -->
       <mat-step class="flyBtnsBox" [stepControl]="submitFormGroup">
         <form [formGroup]="submitFormGroup">
-          <ng-template matStepLabel>Complete Below Data</ng-template>
+          <ng-template matStepLabel>{{
+            "makeTrip.completeData" | translate
+          }}</ng-template>
           <div class="row g-3 my-4">
             <div class="col-md-3">
               <mat-form-field class="w-100">
-                <mat-label>First name</mat-label>
+                <mat-label>{{ "makeTrip.firstName" | translate }}</mat-label>
                 <input
                   type="text"
                   matInput
@@ -169,7 +181,7 @@
             </div>
             <div class="col-md-3">
               <mat-form-field class="w-100">
-                <mat-label>Last name</mat-label>
+                <mat-label>{{ "makeTrip.lastName" | translate }}</mat-label>
                 <input
                   type="text"
                   matInput
@@ -181,7 +193,7 @@
             </div>
             <div class="col-md-6">
               <mat-form-field class="w-100">
-                <mat-label>Email</mat-label>
+                <mat-label>{{ "makeTrip.email" | translate }}</mat-label>
                 <input
                   type="email"
                   matInput
@@ -193,7 +205,7 @@
             </div>
             <div class="col-md-6">
               <mat-form-field class="w-100">
-                <mat-label>Nationality</mat-label>
+                <mat-label>{{ "auth.nationality" | translate }}</mat-label>
                 <mat-select formControlName="nationality">
                   <mat-option
                     *ngFor="let item of countriesList"
@@ -205,7 +217,7 @@
             </div>
             <div class="col-md-6">
               <mat-form-field class="w-100">
-                <mat-label>Phone number</mat-label>
+                <mat-label>{{ "auth.phoneNumber" | translate }}</mat-label>
                 <input
                   type="tel"
                   matInput
@@ -217,7 +229,7 @@
             </div>
             <div class="col-md-6">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Min Budget</mat-label>
+                <mat-label>{{ "makeTrip.minBudget" | translate }}</mat-label>
                 <input
                   matInput
                   type="number"
@@ -228,7 +240,7 @@
             </div>
             <div class="col-md-6">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Max Budget</mat-label>
+                <mat-label>{{ "makeTrip.maxBudget" | translate }}</mat-label>
                 <input
                   matInput
                   type="number"
@@ -245,13 +257,15 @@
                   formControlName="flight_offer"
                   class="me-3"
                 />
-                <label for="flight_offer">Add flight offer</label>
+                <label for="flight_offer">{{
+                  "makeTrip.addFlightOffer" | translate
+                }}</label>
               </div>
             </div>
           </div>
           <div class="row g-3 my-3">
             <div class="col-md-4">
-              <label>Adults ( +12 )</label>
+              <label>{{ "makeTrip.adults" | translate }}</label>
               <div
                 class="content border rounded-3 d-flex justify-content-around align-items-center p-2"
               >
@@ -266,7 +280,7 @@
               </div>
             </div>
             <div class="col-md-4">
-              <label>Children ( 2 to 11 )</label>
+              <label>{{ "makeTrip.children" | translate }}</label>
               <div
                 class="content border rounded-3 d-flex justify-content-around align-items-center p-2"
               >
@@ -287,7 +301,7 @@
               </div>
             </div>
             <div class="col-md-4">
-              <label>Infants ( 0 to 2 )</label>
+              <label>{{ "makeTrip.infants" | translate }}</label>
               <div
                 class="content border rounded-3 d-flex justify-content-around align-items-center p-2"
               >
@@ -303,19 +317,23 @@
             </div>
           </div>
           <mat-form-field appearance="fill" class="w-100 mt-3">
-            <mat-label>Notes</mat-label>
+            <mat-label>{{ "makeTrip.notes" | translate }}</mat-label>
             <textarea
               matInput
               formControlName="additional_notes"
               rows="3"
-              placeholder="Add any notes here"
+              placeholder="{{ 'makeTrip.addNotesHere' | translate }}"
             ></textarea>
           </mat-form-field>
           <div class="d-flex justify-content-between mt-4 flyBtns">
-            <button class="mainBtn Btn px-4" matStepperPrevious>Back</button>
-            <button (click)="submitForm()" class="mainBtn Btn">Inquire</button>
+            <button class="mainBtn Btn px-4" matStepperPrevious>
+              {{ "makeTrip.back" | translate }}
+            </button>
+            <button (click)="submitForm()" class="mainBtn Btn">
+              {{ "makeTrip.inquire" | translate }}
+            </button>
             <button class="mainBtn Btn px-4" (click)="stepper.reset()">
-              Reset
+              {{ "makeTrip.reset" | translate }}
             </button>
           </div>
         </form>

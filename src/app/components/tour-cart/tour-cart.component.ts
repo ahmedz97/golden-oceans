@@ -32,10 +32,10 @@ export class TourCartComponent implements OnInit {
       this.favouriteIds = favs ? JSON.parse(favs) : [];
     }
     // Remove SSR warning as it's expected behavior during server-side rendering
-    
+
     // Fetch reviews for this tour
     if (this.tour?.id) {
-      this.getTourReviews();
+      // this.getTourReviews();
     }
   }
 
@@ -76,38 +76,42 @@ export class TourCartComponent implements OnInit {
     });
   }
 
-  getTourReviews(): void {
-    if (this.tour?.id) {
-      this._DataService.getReviews(this.tour.id).subscribe({
-        next: (response) => {
-          this.tourReviews = response.data.data || [];
-        },
-        error: (err) => {
-          console.error('Error fetching reviews:', err);
-          this.tourReviews = [];
-        }
-      });
-    }
-  }
+  // getTourReviews(): void {
+  //   if (this.tour?.id) {
+  //     this._DataService.getReviews(this.tour.id).subscribe({
+  //       next: (response) => {
+  //         this.tourReviews = response.data.data || [];
+  //       },
+  //       error: (err) => {
+  //         console.error('Error fetching reviews:', err);
+  //         this.tourReviews = [];
+  //       }
+  //     });
+  //   }
+  // }
 
   getAverageRating(): number {
     if (this.tourReviews.length === 0) {
       return this.tour?.rate || 0;
     }
-    
-    const totalRating = this.tourReviews.reduce((sum, review) => sum + (review.rate || 0), 0);
+
+    const totalRating = this.tourReviews.reduce(
+      (sum, review) => sum + (review.rate || 0),
+      0
+    );
     return totalRating / this.tourReviews.length;
   }
 
   getReviewQualityText(): string {
-    const reviewCount = this.tourReviews.length || this.tour?.reviews_number || 0;
-    
+    const reviewCount =
+      this.tourReviews.length || this.tour?.reviews_number || 0;
+
     if (reviewCount === 0) {
       return 'New Tour';
     }
-    
+
     const averageRating = this.getAverageRating();
-    
+
     if (averageRating >= 4.5) {
       return 'Excellent';
     } else if (averageRating >= 4.0) {
@@ -131,11 +135,15 @@ export class TourCartComponent implements OnInit {
     if (this.tour?.destinationsTitle) {
       return this.tour.destinationsTitle;
     }
-    
-    if (this.tour?.destinations && Array.isArray(this.tour.destinations) && this.tour.destinations.length > 0) {
+
+    if (
+      this.tour?.destinations &&
+      Array.isArray(this.tour.destinations) &&
+      this.tour.destinations.length > 0
+    ) {
       return this.tour.destinations.map((dest: any) => dest.title).join(', ');
     }
-    
+
     return 'Destination not specified';
   }
 }

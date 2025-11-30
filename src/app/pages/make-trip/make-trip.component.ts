@@ -23,6 +23,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-make-trip',
@@ -38,6 +39,7 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
+    TranslateModule,
   ],
   providers: [
     {
@@ -85,7 +87,7 @@ export class MakeTripComponent implements OnInit {
 
     this._MaketripService.getDestination().subscribe({
       next: (response) => {
-        this.destinationList = response.data.data;
+        this.destinationList = response.data.data.reverse() || [];
         // console.log(this.destinationList);
       },
       error: (err) => {

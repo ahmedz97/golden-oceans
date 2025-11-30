@@ -2,16 +2,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">tour search</h2>
+    <h2 class="fw-bold">{{ "tour.tourSearch" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >Home</a
+            >{{ "nav.home" | translate }}</a
           >
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          tour search
+          {{ "tour.tourSearch" | translate }}
         </li>
       </ol>
     </nav>
@@ -27,7 +27,9 @@
         >
           <!-- category -->
           <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">tour category</h4>
+            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
+              {{ "tour.tourCategory" | translate }}
+            </h4>
             <div
               *ngFor="let type of allCategories"
               class="flexBetween listFilter p-1 rounded-2"
@@ -47,12 +49,14 @@
 
           <!-- price -->
           <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">tour price</h4>
+            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
+              {{ "tour.tourPrice" | translate }}
+            </h4>
             <div>
               <p class="mb-0 text-capitalize">
-                price from:
+                {{ "tour.priceFrom" | translate }}
                 <span class="textMainColor"> {{ minBudget | currency }} </span>
-                to:
+                {{ "tour.to" | translate }}
                 <span class="textMainColor"> {{ maxBudget | currency }} </span>
               </p>
 
@@ -75,7 +79,9 @@
 
           <!-- duartion -->
           <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">tour duration</h4>
+            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
+              {{ "tour.tourDuration" | translate }}
+            </h4>
             <div
               *ngFor="let d of allDurations"
               class="flexBetween listFilter p-1 rounded-2"
@@ -93,7 +99,9 @@
 
           <!-- destination -->
           <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">tour duration</h4>
+            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
+              {{ "tour.tourDuration" | translate }}
+            </h4>
             <div
               *ngFor="let dest of allDestinations"
               class="flexBetween listFilter p-2 rounded-2"
@@ -120,7 +128,7 @@
             class="flexBetween flex-wrap p-3 py-2 sideBar rounded-3 bg-white"
           >
             <h6 class="textSecondColor fw-bold mb-0">
-              {{ filteredTours.length }} Results Found
+              {{ filteredTours.length }} {{ "tour.resultsFound" | translate }}
             </h6>
             <!-- style toggle -->
             <div>
@@ -150,19 +158,23 @@
               (change)="onSortChange($event)"
               class="text-capitalize form-control wfit"
             >
-              <option value="" selected disabled>-- Sort By --</option>
-              <option value="recent">Most Recent</option>
-              <option value="seller">Most Seller</option>
-              <option value="priceLowToHigh">Price: Low to High</option>
-              <option value="priceHighToLow">Price: High to Low</option>
+              <option value="" selected disabled>
+                {{ "tour.sortBy" | translate }}
+              </option>
+              <option value="recent">{{ "tour.mostRecent" | translate }}</option>
+              <option value="seller">{{ "tour.mostSeller" | translate }}</option>
+              <option value="priceLowToHigh">
+                {{ "tour.priceLowToHigh" | translate }}
+              </option>
+              <option value="priceHighToLow">
+                {{ "tour.priceHighToLow" | translate }}
+              </option>
             </select>
           </div>
 
-          <div class="row g-4 my-3">
+          <div class="row g-3 gx-4 my-0">
             <div
-              [ngClass]="
-                layoutType === 'grid' ? 'col-xl-6 col-lg-12 col-md-6' : 'col-12'
-              "
+              [ngClass]="layoutType === 'grid' ? 'col-xl-4 col-md-6' : 'col-12'"
               *ngFor="
                 let tour of filteredTours
                   | paginate
@@ -184,7 +196,7 @@
 
           @if (filteredTours.length==0) {
           <p class="text-capitalize text-danger fs-2 text-center">
-            no data matched
+            {{ "tour.noDataMatched" | translate }}
           </p>
           } @else {
           <app-pagination

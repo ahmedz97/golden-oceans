@@ -68,7 +68,10 @@ export class DataService extends BaseService {
   }
 
   getReviews(tourId?: number): Observable<any> {
-    const params = tourId ? { tour_id: tourId.toString() } : undefined;
+    let params = new HttpParams();
+    if (tourId !== undefined && tourId !== null) {
+      params = params.set('tour_id', tourId.toString());
+    }
     return this.HttpClient.get(`${this.baseUrl}/tour-reviews`, { params });
   }
 
