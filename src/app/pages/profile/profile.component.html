@@ -6,9 +6,9 @@
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >{{ "nav.home" | translate }}</a
-          >
+          <a [routerLink]="['/']" class="text-decoration-none text-white">{{
+            "nav.home" | translate
+          }}</a>
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
           {{ "profile.myProfile" | translate }}
@@ -25,9 +25,11 @@
         <div class="border specialBorder bg-white p-3">
           <div class="imgBox mx-auto">
             <ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
-              <ngx-dropzone-label>{{ "profile.uploadYourImage" | translate }}</ngx-dropzone-label>
-
-              @for (file of files(); track file) {
+              @if (!files().length && !updateImage.get('image')?.value) {
+              <ngx-dropzone-label>{{
+                "profile.uploadYourImage" | translate
+              }}</ngx-dropzone-label>
+              } @for (file of files(); track file) {
               <ngx-dropzone-image-preview
                 [file]="file"
                 [removable]="true"
@@ -35,6 +37,26 @@
                 class="dz-thumb"
               >
               </ngx-dropzone-image-preview>
+              } @if (!files().length && updateImage.get('image')?.value) {
+              <div
+                class="dz-thumb position-relative"
+                style="display: inline-block"
+              >
+                <img
+                  [src]="updateImage.get('image')?.value"
+                  alt="Profile Image"
+                  style="max-width: 100%; max-height: 200px; border-radius: 4px"
+                />
+                <button
+                  type="button"
+                  (click)="onRemoveExistingImage()"
+                  class="btn btn-sm btn-danger position-absolute"
+                  style="top: 5px; right: 5px"
+                  title="Remove image"
+                >
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
               }
             </ngx-dropzone>
 
@@ -194,7 +216,22 @@
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
                   <b class="fs-3">{{ tourCart.length }}</b>
-                  <p class="mb-1 text-capitalize">{{ "profileExtended.totalBooking" | translate }}</p>
+                  <p class="mb-1 text-capitalize">
+                    {{ "profileExtended.totalTourInCart" | translate }}
+                  </p>
+                </div>
+                <div class="iconBox m-0 bg-transparent text-danger">
+                  <i class="fa fa-clipboard-list"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 specialBorder border flexBetween">
+                <div class="textSecondColor">
+                  <b class="fs-3">{{ bookings.length }}</b>
+                  <p class="mb-1 text-capitalize">
+                    {{ "profileExtended.totalBooking" | translate }}
+                  </p>
                 </div>
                 <div class="iconBox m-0 bg-transparent text-danger">
                   <i class="fa fa-shopping-cart"></i>
@@ -205,7 +242,9 @@
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
                   <b class="fs-3">{{ favList.length }}</b>
-                  <p class="mb-1 text-capitalize">{{ "profileExtended.favoriteTour" | translate }}</p>
+                  <p class="mb-1 text-capitalize">
+                    {{ "profileExtended.favoriteTour" | translate }}
+                  </p>
                 </div>
                 <div class="iconBox m-0 bg-white text-danger">
                   <i class="fa fa-heart-circle-plus"></i>
@@ -216,7 +255,9 @@
               <div class="p-3 specialBorder border flexBetween">
                 <div class="textSecondColor">
                   <b class="fs-3">{{ loyaltyCredit?.points || 0 }}</b>
-                  <p class="mb-1 text-capitalize">{{ "profileExtended.totalPoints" | translate }}</p>
+                  <p class="mb-1 text-capitalize">
+                    {{ "profileExtended.totalPoints" | translate }}
+                  </p>
                 </div>
                 <div class="iconBox m-0 bg-white text-danger">
                   <i class="fa fa-coins"></i>
@@ -229,14 +270,26 @@
           <div
             class="p-4 border sideBar rounded-3 textSecondColor text-capitalize"
           >
-            <h5 class="fw-bold mb-3 pb-3 border-bottom">{{ "profileExtended.profileInfo" | translate }}</h5>
+            <h5 class="fw-bold mb-3 pb-3 border-bottom">
+              {{ "profileExtended.profileInfo" | translate }}
+            </h5>
 
-            <p><b class="me-5">{{ "profileExtended.fullName" | translate }}</b> {{ profilemeData.name }}</p>
-            <p><b class="me-5">{{ "profileExtended.email" | translate }}</b> {{ profilemeData.email }}</p>
-            <p><b class="me-5">{{ "profileExtended.phone" | translate }}</b>{{ profilemeData.phone }}</p>
+            <p>
+              <b class="me-5">{{ "profileExtended.fullName" | translate }}</b>
+              {{ profilemeData.name }}
+            </p>
+            <p>
+              <b class="me-5">{{ "profileExtended.email" | translate }}</b>
+              {{ profilemeData.email }}
+            </p>
+            <p>
+              <b class="me-5">{{ "profileExtended.phone" | translate }}</b
+              >{{ profilemeData.phone }}
+            </p>
             <!-- <p><b class="me-5">Address:</b>New York, USA</p> -->
             <p>
-              <b class="me-5">{{ "profileExtended.nationality" | translate }}</b>{{ profilemeData.nationality }}
+              <b class="me-5">{{ "profileExtended.nationality" | translate }}</b
+              >{{ profilemeData.nationality }}
             </p>
             <p>
               <b class="me-5">{{ "profileExtended.birthDate" | translate }}</b
@@ -251,7 +304,9 @@
           <div
             class="p-4 border sideBar rounded-3 textSecondColor text-capitalize"
           >
-            <h5 class="fw-bold mb-3 pb-3 border-bottom">{{ "profileExtended.creditInfo" | translate }}</h5>
+            <h5 class="fw-bold mb-3 pb-3 border-bottom">
+              {{ "profileExtended.creditInfo" | translate }}
+            </h5>
 
             <form
               [formGroup]="transferLoyaltyCreditForm"
@@ -285,7 +340,9 @@
                     type="number"
                     id="points"
                     formControlName="points"
-                    placeholder="{{ 'profileExtended.enterYourPoints' | translate }}"
+                    placeholder="{{
+                      'profileExtended.enterYourPoints' | translate
+                    }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-file-signature textMainColor"></i>
@@ -313,40 +370,40 @@
               </button>
             </form>
           </div>
-          } @if (selectedTab==='myBooking') { @if (haveData) {
+          } @if (selectedTab==='myBooking') { @if (bookings.length > 0) {
           <owl-carousel-o [options]="bookingOptions">
-            @for (cart of tourCart; track $index) {
+            @for (tour of bookings; track $index) {
             <ng-template carouselSlide>
-              <app-tour-cart [tour]="cart.tour"></app-tour-cart>
-              <div class="text-capitalize textSecondColor mt-4">
-                <h6>
-                  {{ "profileExtended.guest" | translate }}
-                  <b *ngIf="cart.adults" class="textMainColor"
-                    >{{ cart.adults }} {{ "profileExtended.adults" | translate }}</b
-                  >
-                  ,<b *ngIf="cart.children" class="textMainColor"
-                    >{{ cart.children }} {{ "profileExtended.children" | translate }}</b
-                  >
-                  ,<b *ngIf="cart.infants" class="textMainColor"
-                    >{{ cart.infants }} {{ "profileExtended.infants" | translate }}</b
-                  >
-                </h6>
-                <h6>
-                  {{ "profileExtended.totalPrice" | translate }}
-                  <b class="textMainColor">{{ cart.totalPrice | currency }}</b>
-                </h6>
-                <h6>
-                  {{ "profileExtended.bookingDate" | translate }}<b class="textMainColor">{{
-                    cart.start_date | date
+              <div class="p-3 specialBorder border text-capitalize text-dark">
+                <h3>
+                  tour name: <b class="textMainColor">{{ tour.tour_name }}</b>
+                </h3>
+                <p>
+                  total price:
+                  <b class="textMainColor">{{ tour.total_price | currency }}</b>
+                </p>
+                <p>
+                  created at:
+                  <b class="textMainColor text-nowrap">{{
+                    tour.created_at | date
                   }}</b>
-                </h6>
+                </p>
+                <p>
+                  status: <b class="textMainColor">{{ tour.status }}</b>
+                </p>
+                <p>
+                  payment method:
+                  <b class="textMainColor">{{ tour.payment_method }}</b>
+                </p>
               </div>
             </ng-template>
             }
           </owl-carousel-o>
           }@else {
-          <h2 class="text-danger text-capitalize">{{ "profileExtended.noTourInBookingCart" | translate }}</h2>
-          } } @if (selectedTab==='myWishlist') { @if (haveData) {
+          <h2 class="text-danger text-capitalize">
+            {{ "profileExtended.noTourInBookingCart" | translate }}
+          </h2>
+          } } @if (selectedTab==='myWishlist') { @if (favList.length > 0) {
           <owl-carousel-o [options]="bookingOptions">
             @for (cart of favList; track $index) {
             <ng-template carouselSlide>
@@ -355,7 +412,9 @@
             }
           </owl-carousel-o>
           }@else {
-          <h2 class="text-danger text-capitalize">{{ "profileExtended.noTourInWishlist" | translate }}</h2>
+          <h2 class="text-danger text-capitalize">
+            {{ "profileExtended.noTourInWishlist" | translate }}
+          </h2>
           } } @if (selectedTab==='setting') {
           <form
             [formGroup]="updateProfile"
@@ -374,7 +433,9 @@
                     type="text"
                     id="name"
                     formControlName="name"
-                    placeholder="{{ 'profileExtended.yourFullName' | translate }}"
+                    placeholder="{{
+                      'profileExtended.yourFullName' | translate
+                    }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-file-signature textMainColor"></i>
@@ -413,7 +474,9 @@
                     type="password"
                     id="password"
                     formControlName="password"
-                    placeholder="{{ 'profileExtended.yourPassword' | translate }}"
+                    placeholder="{{
+                      'profileExtended.yourPassword' | translate
+                    }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-lock textMainColor"></i>
@@ -425,14 +488,18 @@
                 <label
                   for="password_confirmation"
                   class="textSecondColor text-capitalize fw-bold mb-2"
-                  >{{ "profileExtended.passwordConfirmation" | translate }}</label
+                  >{{
+                    "profileExtended.passwordConfirmation" | translate
+                  }}</label
                 >
                 <div class="item position-relative">
                   <input
                     type="password"
                     id="password_confirmation"
                     formControlName="password_confirmation"
-                    placeholder="{{ 'profileExtended.yourPasswordConfirmation' | translate }}"
+                    placeholder="{{
+                      'profileExtended.yourPasswordConfirmation' | translate
+                    }}"
                     class="form-control p-2 ps-5 rounded-3"
                   />
                   <i class="fa fa-lock textMainColor"></i>

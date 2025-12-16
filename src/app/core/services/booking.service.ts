@@ -32,6 +32,10 @@ export class BookingService extends BaseService {
     return this.HttpClient.get(`${this.baseUrl}/coupons/${code}/validate`);
   }
 
+  getBookings(): Observable<any> {
+    return this.HttpClient.get(`${this.baseUrl}/bookings`);
+  }
+
   sendCheckoutData(checkoutData: object): Observable<any> {
     return this.HttpClient.post(`${this.baseUrl}/bookings`, checkoutData);
   }

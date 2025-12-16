@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
   profilemeData: any = {};
   loyaltyCredit: any = { points: 0 };
   uploadedImageMassage: string = '';
-
+  bookings: any[] = [];
   readonly files = signal<File[]>([]);
 
   selectedTab: string = 'dashboard';
@@ -94,6 +94,7 @@ export class ProfileComponent implements OnInit {
       this.getListCart();
       this.getFav();
       this.getLoyaltyCredit();
+      this.getBookings();
     } else {
       // Show error message using translation
       this.translate
@@ -122,6 +123,15 @@ export class ProfileComponent implements OnInit {
     // (اختياري) تقدر تستدعي API لحذف الصورة من السيرفر لو عندك endpoint لذلك
   }
 
+  // Remove existing image from URL
+  onRemoveExistingImage() {
+    this.updateImage.patchValue({
+      image: '',
+    });
+    this.profilemeData.image = '';
+    this.cdr.detectChanges();
+  }
+
   uploadImage(file: File): void {
     const userImage = new FormData();
     userImage.append('image', file);
@@ -130,22 +140,91 @@ export class ProfileComponent implements OnInit {
       next: (res) => {
         console.log('Uploaded ✅', res);
         this.toaster.success('Profile image updated');
-        // this.updateImage.patchValue({
-        //   image: res.data.image,
-        // });
+        const imageUrl = res.data.image;
+        this.updateImage.patchValue({
+          image: imageUrl,
+        });
+        // Update profile data to persist the image
+        this.profilemeData.image = imageUrl;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Upload error ❌', err);
         this.toaster.error(err?.error?.message || 'Upload failed');
         this.uploadedImageMassage = err?.error?.message || 'Upload failed';
+        // Remove file from dropzone on error
+        this.files.set([]);
+        this.cdr.detectChanges();
       },
     });
   }
 
   getListCart(): void {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        location: 'profile.component.ts:146',
+        message: 'getListCart entry',
+        data: {},
+        timestamp: Date.now(),
+        sessionId: 'debug-session',
+        runId: 'run1',
+        hypothesisId: 'A',
+      }),
+    }).catch(() => {});
+    // #endregion
     this._BookingService.getCartList().subscribe({
       next: (response) => {
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:149',
+              message: 'getListCart response received',
+              data: {
+                responseDataExists: !!response.data,
+                responseDataType: Array.isArray(response.data)
+                  ? 'array'
+                  : typeof response.data,
+                responseDataLength: Array.isArray(response.data)
+                  ? response.data.length
+                  : 'N/A',
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'C',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
         this.tourCart = response.data;
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:151',
+              message: 'tourCart assigned BEFORE length check',
+              data: {
+                tourCartLength: this.tourCart.length,
+                tourCartIsArray: Array.isArray(this.tourCart),
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'A',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
         if (this.tourCart.length === 0) {
           this.haveData = false;
           console.log(this.tourCart);
@@ -160,9 +239,122 @@ export class ProfileComponent implements OnInit {
           this.haveData = true;
           console.log(this.tourCart);
         }
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:163',
+              message: 'tourCart assigned AFTER processing',
+              data: {
+                tourCartLength: this.tourCart.length,
+                changeDetectionCalled: true,
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'A',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
+        // Trigger change detection for OnPush strategy
+        this.cdr.detectChanges();
       },
       error: (err) => {
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:165',
+              message: 'getListCart error',
+              data: { error: err?.message || 'unknown' },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'C',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
         console.log(err);
+      },
+    });
+  }
+
+  getBookings(): void {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        location: 'profile.component.ts:171',
+        message: 'getBookings entry',
+        data: {},
+        timestamp: Date.now(),
+        sessionId: 'debug-session',
+        runId: 'run1',
+        hypothesisId: 'A',
+      }),
+    }).catch(() => {});
+    // #endregion
+    this._BookingService.getBookings().subscribe({
+      next: (response) => {
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:174',
+              message: 'getBookings response received',
+              data: {
+                responseDataExists: !!response.data,
+                responseDataDataExists: !!response.data?.data,
+                responseDataDataLength: Array.isArray(response.data?.data)
+                  ? response.data.data.length
+                  : 'N/A',
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'C',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
+        console.log(response.data.data);
+        this.bookings = response.data.data;
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:176',
+              message: 'bookings assigned',
+              data: {
+                bookingsLength: this.bookings.length,
+                bookingsIsArray: Array.isArray(this.bookings),
+                changeDetectionCalled: true,
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'A',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
+        // Trigger change detection for OnPush strategy
+        this.cdr.detectChanges();
       },
     });
   }
@@ -206,6 +398,17 @@ export class ProfileComponent implements OnInit {
           birthdate: this.profilemeData.birthdate?.split('T')[0],
           nationality: this.profilemeData.nationality,
         });
+
+        // Set image in form
+        if (this.profilemeData.image) {
+          this.updateImage.patchValue({
+            image: this.profilemeData.image,
+          });
+          // Image will be displayed directly from URL in the template
+          // No need to convert to File object (avoids CORS issues)
+        }
+
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
@@ -252,8 +455,48 @@ export class ProfileComponent implements OnInit {
   };
 
   getFav(): void {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        location: 'profile.component.ts:264',
+        message: 'getFav entry',
+        data: {},
+        timestamp: Date.now(),
+        sessionId: 'debug-session',
+        runId: 'run1',
+        hypothesisId: 'A',
+      }),
+    }).catch(() => {});
+    // #endregion
     this._DataService.getWishlist().subscribe({
       next: (response) => {
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:267',
+              message: 'getFav response received',
+              data: {
+                hasToken: !!localStorage.getItem('accessToken'),
+                responseDataExists: !!response.data,
+                responseDataDataExists: !!response.data?.data,
+                responseDataDataLength: Array.isArray(response.data?.data)
+                  ? response.data.data.length
+                  : 'N/A',
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'C',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
         if (localStorage.getItem('accessToken')) {
           this.favList = response.data.data;
           console.log(response.data.data);
@@ -265,9 +508,51 @@ export class ProfileComponent implements OnInit {
             console.log(response.data.data);
             this.favList = response.data.data;
           }
+          // #region agent log
+          fetch(
+            'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                location: 'profile.component.ts:277',
+                message: 'favList assigned',
+                data: {
+                  favListLength: this.favList.length,
+                  favListIsArray: Array.isArray(this.favList),
+                  changeDetectionCalled: true,
+                },
+                timestamp: Date.now(),
+                sessionId: 'debug-session',
+                runId: 'run1',
+                hypothesisId: 'A',
+              }),
+            }
+          ).catch(() => {});
+          // #endregion
+          // Trigger change detection for OnPush strategy
+          this.cdr.detectChanges();
         }
       },
       error: (err) => {
+        // #region agent log
+        fetch(
+          'http://127.0.0.1:7243/ingest/fac1b97a-8f9a-4c6b-b088-6ca686e5c437',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              location: 'profile.component.ts:280',
+              message: 'getFav error',
+              data: { error: err?.message || 'unknown' },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'C',
+            }),
+          }
+        ).catch(() => {});
+        // #endregion
         // this.toaster.error(err.error.message, 'you must login first');
       },
     });

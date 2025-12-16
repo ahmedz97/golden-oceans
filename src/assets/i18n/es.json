@@ -327,6 +327,7 @@
   },
   "profileExtended": {
     "totalBooking": "reservas totales",
+    "totalTourInCart": "tours totales en el carrito",
     "favoriteTour": "tour favorito",
     "totalPoints": "puntos totales",
     "profileInfo": "información de perfil",
