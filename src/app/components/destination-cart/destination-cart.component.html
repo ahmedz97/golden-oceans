@@ -8,9 +8,7 @@
     style="height: 350px; border-radius: 1rem"
   >
     <img
-      [src]="
-        destination.featured_image || 'assets/image/Wallpaper/slider1.webp'
-      "
+      [src]="destination.featured_image"
       class="w-100 h-100 object-fit-cover"
       [alt]="destination.title"
       [title]="destination.title"
@@ -37,7 +35,7 @@
 
       <button
         [routerLink]="['/destination', destination.slug]"
-        class="btn btn-outline-light rounded-pill px-4 py-2 text-capitalize w-auto"
+        class="btn btn-outline-light rounded-pill px-3 py-2 text-capitalize w-auto"
         style="
           border: 2px solid white;
           background: transparent;

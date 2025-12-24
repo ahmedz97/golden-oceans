@@ -15,7 +15,7 @@
 
           <div class="mb-3 d-flex">
             <i
-              class="fa fa-headphones-alt me-3 text-white bgSecondColor flexCenter"
+              class="fa fa-headphones-alt me-3 text-white bgSecondColor flexCenter flex-shrink-0"
             ></i>
             <a
               href="tel:{{ phoneNumber }}"
@@ -25,7 +25,7 @@
           </div>
           <div class="mb-3 d-flex">
             <i
-              class="fa fa-location-dot me-3 text-white bgSecondColor flexCenter"
+              class="fa fa-location-dot me-3 text-white bgSecondColor flexCenter flex-shrink-0"
             ></i>
             <a href="{{ userLocation }}" target="_blank" class="text-white">{{
               userAddress
@@ -33,7 +33,7 @@
           </div>
           <div class="mb-3 d-flex">
             <i
-              class="fa fa-envelopes-bulk me-3 text-white bgSecondColor flexCenter"
+              class="fa fa-envelopes-bulk me-3 text-white bgSecondColor flexCenter flex-shrink-0"
             ></i>
             <a href="mailTo:{{ userEmail }}" class="text-white">{{
               userEmail
@@ -46,7 +46,7 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              {{ 'footer.ourCompany' | translate }}
+              {{ "footer.ourCompany" | translate }}
             </h4>
           </div>
           <ul class="list-unstyled">
@@ -55,21 +55,21 @@
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'about.aboutUs' | translate }}</span>
+              <span>{{ "about.aboutUs" | translate }}</span>
             </li>
             <li
               routerLink="/contact"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'contact.contactUs' | translate }}</span>
+              <span>{{ "contact.contactUs" | translate }}</span>
             </li>
             <li
               routerLink="/blog"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'footer.ourBlog' | translate }}</span>
+              <span>{{ "footer.ourBlog" | translate }}</span>
             </li>
           </ul>
         </div>
@@ -78,7 +78,7 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              {{ 'footer.otherServices' | translate }}
+              {{ "footer.otherServices" | translate }}
             </h4>
           </div>
           <ul class="list-unstyled">
@@ -87,14 +87,14 @@
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'footer.rewardsProgram' | translate }}</span>
+              <span>{{ "footer.rewardsProgram" | translate }}</span>
             </li>
             <li
               routerLink="/"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'footer.partners' | translate }}</span>
+              <span>{{ "footer.partners" | translate }}</span>
             </li>
           </ul>
         </div>
@@ -103,7 +103,7 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              {{ 'footer.helpCenter' | translate }}
+              {{ "footer.helpCenter" | translate }}
             </h4>
           </div>
           <ul class="list-unstyled">
@@ -112,14 +112,14 @@
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'footer.account' | translate }}</span>
+              <span>{{ "footer.account" | translate }}</span>
             </li>
             <li
               routerLink="/faq"
               class="text-capitalize mb-2 text-white transition"
             >
               <i class="fa fa-angle-double-right me-2 textSecondColor"></i>
-              <span>{{ 'footer.faqs' | translate }}</span>
+              <span>{{ "footer.faqs" | translate }}</span>
             </li>
           </ul>
         </div>
@@ -128,11 +128,11 @@
         <div>
           <div class="footerTitle">
             <h4 class="pb-3 mb-4 fw-bold position-relative z-1 text-capitalize">
-              {{ 'footer.newsletter' | translate }}
+              {{ "footer.newsletter" | translate }}
             </h4>
           </div>
           <p class="my-3">
-            {{ 'footer.newsletterDesc' | translate }}
+            {{ "footer.newsletterDesc" | translate }}
           </p>
           <form>
             <input
@@ -141,11 +141,11 @@
               class="form-control rounded-3 mb-3 p-2"
             />
             <button class="secBtn Btn w-100 rounded-3">
-              {{ 'footer.subscribeNow' | translate }}
+              {{ "footer.subscribeNow" | translate }}
               <i class="fa-regular fa-paper-plane ms-2 rounded-circle"></i>
             </button>
             <p class="my-1">
-              <i class="fa fa-lock"></i> {{ 'footer.infoSafe' | translate }}
+              <i class="fa fa-lock"></i> {{ "footer.infoSafe" | translate }}
             </p>
           </form>
         </div>
@@ -153,9 +153,11 @@
     </div>
     <div class="flexBetween flex-wrap py-3 border-top">
       <h6 class="text-white text-capitalize">
-        {{ 'footer.copyrightText' | translate }}
-        <a href="" class="fw-bold textSecondColor">{{ 'footer.perfectSolutions' | translate }}</a>
-        {{ 'footer.allRightsReserved' | translate }}
+        {{ "footer.copyrightText" | translate }}
+        <a href="" class="fw-bold textSecondColor">{{
+          "footer.perfectSolutions" | translate
+        }}</a>
+        {{ "footer.allRightsReserved" | translate }}
       </h6>
       <app-social></app-social>
     </div>

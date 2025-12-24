@@ -6,9 +6,9 @@
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >{{ "nav.home" | translate }}</a
-          >
+          <a [routerLink]="['/']" class="text-decoration-none text-white">{{
+            "nav.home" | translate
+          }}</a>
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
           {{ "tour.tourSearch" | translate }}
@@ -25,101 +25,176 @@
         <div
           class="sideBar p-3 rounded-3 bg-white text-capitalize textSecondColor"
         >
-          <!-- category -->
-          <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
-              {{ "tour.tourCategory" | translate }}
-            </h4>
-            <div
-              *ngFor="let type of allCategories"
-              class="flexBetween listFilter p-1 rounded-2"
-            >
-              <mat-checkbox
-                class="cPointer"
-                [checked]="isChecked('selectedTripType', type.id)"
-                (change)="toggle('selectedTripType', type.id, $event.checked)"
+          <mat-accordion [multi]="false">
+            <!-- category -->
+            <mat-expansion-panel class="mb-3 rounded-3">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <div
+                    class="d-flex justify-content-between align-items-center w-100"
+                  >
+                    <h4 class="h5 fw-bold mb-0">
+                      {{ "tour.tourCategory" | translate }}
+                    </h4>
+                    <i
+                      class="fa-solid fa-trash cPointer text-danger ms-2"
+                      (click)="clearFilter('selectedTripType', $event)"
+                      [title]="'Clear category filter'"
+                      *ngIf="selectedTripType"
+                    ></i>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-radio-group
+                [(ngModel)]="selectedTripType"
+                (change)="onRadioChange('selectedTripType', $event)"
               >
-                {{ type.title }}
-              </mat-checkbox>
-              <span class="flexCenter rounded-circle">{{
-                type.tours_count
-              }}</span>
-            </div>
-          </div>
+                <div
+                  *ngFor="let type of allCategories"
+                  class="flexBetween listFilter p-1 rounded-2"
+                >
+                  <mat-radio-button
+                    class="cPointer"
+                    [value]="type.slug || type.id"
+                  >
+                    {{ type.title }}
+                  </mat-radio-button>
+                  <span class="flexCenter rounded-circle">{{
+                    type.tours_count
+                  }}</span>
+                </div>
+              </mat-radio-group>
+            </mat-expansion-panel>
 
-          <!-- price -->
-          <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
-              {{ "tour.tourPrice" | translate }}
-            </h4>
-            <div>
-              <p class="mb-0 text-capitalize">
-                {{ "tour.priceFrom" | translate }}
-                <span class="textMainColor"> {{ minBudget | currency }} </span>
-                {{ "tour.to" | translate }}
-                <span class="textMainColor"> {{ maxBudget | currency }} </span>
-              </p>
+            <!-- price -->
+            <mat-expansion-panel class="mb-3 rounded-3" [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <div
+                    class="d-flex justify-content-between align-items-center w-100"
+                  >
+                    <h4 class="h5 fw-bold mb-0">
+                      {{ "tour.tourPrice" | translate }}
+                    </h4>
+                    <i
+                      class="fa-solid fa-trash cPointer text-danger ms-2"
+                      (click)="clearPriceFilter($event)"
+                      [title]="'Clear price filter'"
+                      *ngIf="minBudget > 0 || maxBudget < 5000"
+                    ></i>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div>
+                <p class="mb-0 text-capitalize">
+                  {{ "tour.priceFrom" | translate }}
+                  <span class="textMainColor">
+                    {{ minBudget | currency }}
+                  </span>
+                  {{ "tour.to" | translate }}
+                  <span class="textMainColor">
+                    {{ maxBudget | currency }}
+                  </span>
+                </p>
 
-              <mat-slider class="w-100 mainSliderColor" [min]="0" [max]="9000">
-                <input
-                  [(ngModel)]="minBudget"
-                  name="minBudget"
-                  matSliderStartThumb
-                  (change)="filterTours()"
-                />
-                <input
-                  [(ngModel)]="maxBudget"
-                  name="maxBudget"
-                  matSliderEndThumb
-                  (change)="filterTours()"
-                />
-              </mat-slider>
-            </div>
-          </div>
+                <mat-slider
+                  class="w-100 mainSliderColor"
+                  [min]="0"
+                  [max]="9000"
+                >
+                  <input
+                    [(ngModel)]="minBudget"
+                    name="minBudget"
+                    matSliderStartThumb
+                    (change)="filterTours()"
+                  />
+                  <input
+                    [(ngModel)]="maxBudget"
+                    name="maxBudget"
+                    matSliderEndThumb
+                    (change)="filterTours()"
+                  />
+                </mat-slider>
+              </div>
+            </mat-expansion-panel>
 
-          <!-- duartion -->
-          <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
-              {{ "tour.tourDuration" | translate }}
-            </h4>
-            <div
-              *ngFor="let d of allDurations"
-              class="flexBetween listFilter p-1 rounded-2"
-            >
-              <mat-checkbox
-                class="cPointer"
-                [checked]="isChecked('selectedDuration', d.id)"
-                (change)="toggle('selectedDuration', d.id, $event.checked)"
+            <!-- duration -->
+            <mat-expansion-panel class="mb-3 rounded-3">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <div
+                    class="d-flex justify-content-between align-items-center w-100"
+                  >
+                    <h4 class="h5 fw-bold mb-0">
+                      {{ "tour.tourDuration" | translate }}
+                    </h4>
+                    <i
+                      class="fa-solid fa-trash cPointer text-danger ms-2"
+                      (click)="clearFilter('selectedDuration', $event)"
+                      [title]="'Clear duration filter'"
+                      *ngIf="selectedDuration"
+                    ></i>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-radio-group
+                [(ngModel)]="selectedDuration"
+                (change)="onRadioChange('selectedDuration', $event)"
               >
-                {{ d.title }}
-              </mat-checkbox>
-              <span class="flexCenter rounded-circle">{{ d.tours_count }}</span>
-            </div>
-          </div>
+                <div
+                  *ngFor="let d of allDurations"
+                  class="flexBetween listFilter p-1 rounded-2"
+                >
+                  <mat-radio-button class="cPointer" [value]="d.slug || d.id">
+                    {{ d.title }}
+                  </mat-radio-button>
+                  <span class="flexCenter rounded-circle">{{
+                    d.tours_count
+                  }}</span>
+                </div>
+              </mat-radio-group>
+            </mat-expansion-panel>
 
-          <!-- destination -->
-          <div class="mb-4">
-            <h4 class="h5 fw-bold pb-3 border-bottom mb-3">
-              {{ "tour.tourDuration" | translate }}
-            </h4>
-            <div
-              *ngFor="let dest of allDestinations"
-              class="flexBetween listFilter p-2 rounded-2"
-            >
-              <mat-checkbox
-                class="cPointer"
-                [checked]="isChecked('selectedDestination', dest.id)"
-                (change)="
-                  toggle('selectedDestination', dest.id, $event.checked)
-                "
+            <!-- destination -->
+            <mat-expansion-panel class="mb-3 rounded-3">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <div
+                    class="d-flex justify-content-between align-items-center w-100"
+                  >
+                    <h4 class="h5 fw-bold mb-0">
+                      {{ "destination.destinations" | translate }}
+                    </h4>
+                    <i
+                      class="fa-solid fa-trash cPointer text-danger ms-2"
+                      (click)="clearFilter('selectedDestination', $event)"
+                      [title]="'Clear destination filter'"
+                      *ngIf="selectedDestination"
+                    ></i>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-radio-group
+                [(ngModel)]="selectedDestination"
+                (change)="onRadioChange('selectedDestination', $event)"
               >
-                {{ dest.title }}
-              </mat-checkbox>
-              <span class="flexCenter text-white rounded-circle">{{
-                dest.tours_count
-              }}</span>
-            </div>
-          </div>
+                <div
+                  *ngFor="let dest of allDestinations"
+                  class="flexBetween listFilter p-2 rounded-2"
+                >
+                  <mat-radio-button
+                    class="cPointer"
+                    [value]="dest.slug || dest.id"
+                  >
+                    {{ dest.title }}
+                  </mat-radio-button>
+                  <span class="flexCenter text-white rounded-circle">{{
+                    dest.tours_count
+                  }}</span>
+                </div>
+              </mat-radio-group>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
       </div>
       <div class="col-xl-9 col-lg-8">
@@ -132,6 +207,19 @@
             </h6>
             <!-- style toggle -->
             <div>
+              <!-- Clear all filters button -->
+              <i
+                class="fa-solid fa-trash cPointer text-danger fs-5"
+                (click)="clearAllFilters($event)"
+                [title]="'Clear all filters'"
+                *ngIf="
+                  selectedTripType ||
+                  selectedDestination ||
+                  selectedDuration ||
+                  minBudget > 0 ||
+                  maxBudget < 5000
+                "
+              ></i>
               <i
                 class="fa-regular fa-table-cells mx-1 fs-5 fw-bold cPointer rounded-2"
                 [ngClass]="{
@@ -161,8 +249,12 @@
               <option value="" selected disabled>
                 {{ "tour.sortBy" | translate }}
               </option>
-              <option value="recent">{{ "tour.mostRecent" | translate }}</option>
-              <option value="seller">{{ "tour.mostSeller" | translate }}</option>
+              <option value="recent">
+                {{ "tour.mostRecent" | translate }}
+              </option>
+              <option value="seller">
+                {{ "tour.mostSeller" | translate }}
+              </option>
               <option value="priceLowToHigh">
                 {{ "tour.priceLowToHigh" | translate }}
               </option>

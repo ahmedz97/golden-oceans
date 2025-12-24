@@ -26,7 +26,7 @@
         margin: 20px auto !important;
         position: relative;
         z-index: 994;
-        bottom: 80px !important;
+        bottom: 110px !important;
         left: 30px !important;
         right: 30px !important;
 
@@ -440,54 +440,105 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
-    }
 
-
-
-    // Owl Carousel Navigation Positioning - Top Right
-    ::ng-deep .owl-theme .owl-nav {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        margin: 0;
-        z-index: 10;
-        display: flex;
-        gap: 10px;
-        transform: translateY(-200%) !important;
-
-        .owl-prev,.owl-next{
-          transform: translateY(0%) !important;
-          width: 50px;
-          height: 50px;
-          background: $secondary-color !important;
-          border: 2px solid $secondary-color !important;
-          color: white !important;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(219, 159, 62, 0.3);
-          &:hover {
-                background: $primary-color !important;
-                border-color: $primary-color !important;
-                color: white !important;
-                box-shadow: 0 6px 20px rgba(219, 159, 62, 0.4);
+        @media screen and (max-width: 992px) {
+            width: 80%;
+            padding: 50px;
+            h2{
+                font-size: 2rem;
             }
-
-            &:focus {
-                outline: none;
-                box-shadow: 0 0 0 3px rgba(219, 159, 62, 0.3);
+            p{
+                font-size: 1rem;
+            }
+            button{
+                font-size: 1rem;
             }
         }
-    }
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            padding: 50px;
+            h2{
+                font-size: 2rem;
+            }
+            p{
+                font-size: 1rem;
+            }
+            button{
+                font-size: 1rem;
+            }
+        }
+        @media screen and (max-width: 576px) {
+            h2{
+                font-size: 1.5rem;
+            }
+            p{
+                font-size: 0.8rem;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            h2{
+                font-size: 1.2rem;
+            }
+            p{
+                font-size: 0.6rem;
+            }
+        }
+  }
 
-    // Hide default owl dots if needed
-    ::ng-deep .owl-theme .owl-dots {
-        display: none;
+  @media screen and (max-width: 992px) {
+    .desTours {
+      margin-left: 0px;
+      width: 95%;
+      padding-top: 0 !important;
     }
+  }
+
+  // Owl Carousel Navigation Positioning - Top Right
+  ::ng-deep .owl-theme .owl-nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      margin: 0;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      transform: translateY(-200%) !important;
+
+      .owl-prev,.owl-next{
+        transform: translateY(0%) !important;
+        width: 50px;
+        height: 50px;
+        background: $secondary-color !important;
+        border: 2px solid $secondary-color !important;
+        color: white !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(219, 159, 62, 0.3);
+        &:hover {
+              background: $primary-color !important;
+              border-color: $primary-color !important;
+              color: white !important;
+              box-shadow: 0 6px 20px rgba(219, 159, 62, 0.4);
+          }
+
+          &:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px rgba(219, 159, 62, 0.3);
+          }
+      }
+  }
+
+  // Hide default owl dots if needed
+  ::ng-deep .owl-theme .owl-dots {
+      display: none;
+  }
 }
+
+
 
 .makeTrip{
     background: #fbae1e;
@@ -623,23 +674,5 @@
 }
 
 
-@media (max-width: 992px) {
-    .destinations {
-
-
-        .desTitle {
-          width: 100%;
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
-        .desTours {
-margin-left: 0px;
-width: 95%;
-padding-top: 0 !important;
-        }
-    }
-}
 
 

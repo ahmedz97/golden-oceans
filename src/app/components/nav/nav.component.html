@@ -31,7 +31,7 @@
             >
               <span
                 [routerLink]="['/tour']"
-                routerLinkActive="active fw-bold"
+                routerLinkActive="active fw-bold cPointer"
                 class="d-block text-capitalize"
                 >{{ "nav.tours" | translate }}</span
               >
@@ -43,7 +43,7 @@
                     class="dropdown-item"
                     [routerLink]="['/tour']"
                     routerLinkActive="active fw-bold"
-                    [queryParams]="{ type: cat.id }"
+                    [queryParams]="{ type: cat.slug }"
                   >
                     {{ cat.title }}
                   </a>
@@ -60,7 +60,7 @@
             >
               <span
                 [routerLink]="['/destination']"
-                routerLinkActive="active fw-bold"
+                routerLinkActive="active fw-bold cPointer"
                 class="d-block"
                 >{{ "nav.destinations" | translate }}</span
               >
@@ -330,7 +330,7 @@
             >
               <span
                 [routerLink]="['/tour']"
-                routerLinkActive="active fw-bold"
+                routerLinkActive="active fw-bold cPointer"
                 class="d-block text-capitalize"
                 >{{ "nav.tours" | translate }}</span
               >
@@ -340,7 +340,7 @@
                     class="dropdown-item"
                     [routerLink]="['/tour']"
                     routerLinkActive="active fw-bold"
-                    [queryParams]="{ type: cat.id }"
+                    [queryParams]="{ type: cat.slug }"
                   >
                     {{ cat.title }}
                   </a>
@@ -356,7 +356,7 @@
             >
               <span
                 [routerLink]="['/destination']"
-                routerLinkActive="active fw-bold"
+                routerLinkActive="active fw-bold cPointer"
                 class="d-block"
                 >{{ "nav.destinations" | translate }}</span
               >

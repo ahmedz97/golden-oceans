@@ -4,17 +4,17 @@
   span{
     width: 25px;
     height: 25px;
-    border:1px solid $primary-color;
-    color: $primary-color;
+    border:1px solid $primary-color !important;
+    color: $primary-color !important;
     transition: all 1s;
 }
 
   &:hover{
-
-    background-color: $primary-white-color;
+    background-color: $secondary-color;
+    color: white !important;
     span{
-      color: $secondary-color;
-      border:1px solid $secondary-color;
+      color: white !important;
+      border:1px solid white !important;
     }
   }
 }

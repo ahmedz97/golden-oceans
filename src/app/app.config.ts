@@ -20,13 +20,18 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { provideNgxCountAnimations } from 'ngx-count-animation';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import {
+  HashLocationStrategy,
+  isPlatformBrowser,
+  LocationStrategy,
+} from '@angular/common';
 import { API_ROOT, ACCESS_TOKEN_GETTER, LANGUAGE_GETTER } from './core/tokens';
 import { HttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideRouter(
       routes,
       withEnabledBlockingInitialNavigation(),

@@ -2,16 +2,16 @@
   <div
     class="text-capitalize text-white fw-bold h-100 flexCenter justify-content-end pb-5 mb-5 flex-column"
   >
-    <h2 class="fw-bold">{{ 'about.aboutUs' | translate }}</h2>
+    <h2 class="fw-bold">{{ "about.aboutUs" | translate }}</h2>
     <nav style="--bs-breadcrumb-divider: '✈️'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a [routerLink]="['/']" class="text-decoration-none text-white"
-            >{{ 'nav.home' | translate }}</a
-          >
+          <a [routerLink]="['/']" class="text-decoration-none text-white">{{
+            "nav.home" | translate
+          }}</a>
         </li>
         <li class="breadcrumb-item active text-white" aria-current="page">
-          {{ 'about.aboutUs' | translate }}
+          {{ "about.aboutUs" | translate }}
         </li>
       </ol>
     </nav>
@@ -20,7 +20,7 @@
 
 <app-aboutsection></app-aboutsection>
 
-<section class="features my-5 py-5">
+<section class="features my-5">
   <div class="container">
     <div class="secTitle text-center">
       <span
@@ -30,9 +30,11 @@
           class="bg-white textMainColor rounded-circle transition d-inline-block"
           ><i class="fa fa-star me-2 ps-1"></i
         ></span>
-        {{ 'about.ourFeatures' | translate }}
+        {{ "about.ourFeatures" | translate }}
       </span>
-      <h2 class="my-3 textSecondColor fw-bold">{{ 'about.whyChoose' | translate }}</h2>
+      <h2 class="my-3 textSecondColor fw-bold">
+        {{ "about.whyChoose" | translate }}
+      </h2>
     </div>
 
     <div class="row g-4 my-5">
@@ -45,10 +47,10 @@
           </div>
           <div class="ms-3">
             <h6 class="textSecondColor text-capitalize fw-bold mb-3">
-              {{ 'about.ourMission' | translate }}
+              {{ "about.ourMission" | translate }}
             </h6>
             <p class="mb-0 text-muted">
-              {{ 'about.missionDesc' | translate }}
+              {{ "about.missionDesc" | translate }}
             </p>
           </div>
         </div>
@@ -63,10 +65,10 @@
           </div>
           <div class="ms-3">
             <h6 class="textSecondColor text-capitalize fw-bold mb-3">
-              {{ 'about.ourVision' | translate }}
+              {{ "about.ourVision" | translate }}
             </h6>
             <p class="mb-0 text-muted">
-              {{ 'about.visionDesc' | translate }}
+              {{ "about.visionDesc" | translate }}
             </p>
           </div>
         </div>
@@ -74,11 +76,13 @@
     </div>
 
     <div class="text-center mt-4">
-      <button routerLink="/tour" class="mainBtn Btn">{{ 'about.exploreOurTours' | translate }}</button>
+      <button routerLink="/tour" class="mainBtn Btn">
+        {{ "about.exploreOurTours" | translate }}
+      </button>
     </div>
   </div>
 </section>
-<section class="team my-5 py-5">
+<section class="team pt-5">
   <div class="container">
     <div class="secTitle text-center mb-5">
       <span
@@ -89,11 +93,13 @@
           ><i class="fa fa-users me-2 ps-1"></i
         ></span>
 
-        {{ 'about.ourTeam' | translate }}
+        {{ "about.ourTeam" | translate }}
       </span>
-      <h2 class="my-3 textSecondColor fw-bold">{{ 'about.meetExperts' | translate }}</h2>
+      <h2 class="my-3 textSecondColor fw-bold">
+        {{ "about.meetExperts" | translate }}
+      </h2>
       <p class="text-muted mx-auto" style="max-width: 600px">
-        {{ 'about.expertTeamDesc' | translate }}
+        {{ "about.expertTeamDesc" | translate }}
       </p>
     </div>
 
@@ -101,7 +107,7 @@
   </div>
 </section>
 
-<section class="testimonial my-5 py-5">
+<section class="testimonial mb-5 pb-5">
   <div class="container">
     <div class="secTitle text-center pt-5">
       <span
@@ -112,10 +118,10 @@
           ><i class="fa fa-star me-2 ps-1"></i
         ></span>
 
-        {{ 'home.testimonials' | translate }}
+        {{ "home.testimonials" | translate }}
       </span>
       <h2 class="my-3 text-white fw-bold">
-        {{ 'home.customersAreSaying' | translate }}
+        {{ "home.customersAreSaying" | translate }}
       </h2>
     </div>
 

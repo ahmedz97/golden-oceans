@@ -27,7 +27,7 @@ export class FooterComponent {
   getSettings(): void {
     this._DataService.getSetting().subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res.data);
 
         const fLogo = res.data.find(
           (item: any) => item.option_key === 'footer_logo'

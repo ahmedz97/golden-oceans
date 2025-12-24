@@ -438,6 +438,8 @@ export class HomeComponent implements OnInit {
       '<i class="fa fa-angle-left"></i>',
       '<i class="fa fa-angle-right"></i>',
     ],
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
     // autoplaySpeed: 1500,
     smartSpeed: 1500, // = navSpeed , autoplaySpeed
   };

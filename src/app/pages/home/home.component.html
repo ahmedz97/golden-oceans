@@ -213,7 +213,7 @@
 
 <section class="destinations py-5">
   <div
-    class="container-fluid px-0 d-flex align-items-center flex-wrap flex-lg-nowrap gap-4 gap-lg-0"
+    class="container-fluid px-0 d-flex align-items-center justify-content-center justify-content-lg-start flex-wrap flex-lg-nowrap gap-4 gap-lg-0"
   >
     <div class="desTitle d-flex flex-column justify-content-center">
       <h2 class="">{{ "home.multiDaysTours" | translate }}</h2>
@@ -223,7 +223,7 @@
       <button class="secBtn Btn">{{ "home.exploreTour" | translate }}</button>
     </div>
 
-    <div class="desTours z-3 ps-5 pe-0 py-5">
+    <div class="desTours z-3 ps-lg-5 pe-0 pt-5 mt-5">
       <owl-carousel-o
         class="m-5"
         *ngIf="shuffledTours.length > 0"
